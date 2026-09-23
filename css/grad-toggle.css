@@ -1,0 +1,285 @@
+/*
+  Graduation-mode toggle: rebuilt per the approved "toggle switch" redesign
+  (Default state.svg / Pressed state.svg) — a pill label next to a real
+  sliding track/knob switch, replacing the previous full-pill wipe-fill.
+  --toggle-gold is the exact gold sampled from the reference SVGs (#FFC72B),
+  kept local to this component rather than swapped for the site's
+  --color-gold (#FFC627) — the two are a hair apart and the SVGs are the
+  source of truth for this component.
+*/
+
+/* ---------- Fixed overlay bar (page integration, not part of the reference file) ---------- */
+.grad-toggle-bar {
+  /*
+    position: fixed, not sticky — a sticky element still reserves its own
+    height in normal flow (padding + pill height), which was rendering as a
+    visible gap between the header and the hero. Fixed removes it from flow
+    entirely so it overlays the hero with zero layout footprint, while still
+    tracking --header-height for its vertical position on every scroll.
+  */
+  position: fixed;
+  top: var(--header-height, 0px);
+  left: 0;
+  right: 0;
+  z-index: 90;
+  /* Transparent on purpose — the pill floats over whatever content is
+     scrolled beneath it (hero photo, dark footer, etc.), it isn't its own
+     opaque bar/strip. The pill's own box-shadow gives it definition. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  /* "Gap between global header and toggle" per the approved spec: 20px by
+     default, shrinking to 16px on hover (toggled via .is-hovered — the pill
+     is the hover target, but pointer-events:none on the rest of this bar
+     means the bar itself can't be :hover'd directly, so JS mirrors the
+     pill's hover/focus state onto this class). */
+  padding-top: 20px;
+  padding-bottom: var(--space-3);
+  transition: padding-top var(--duration-medium) var(--ease-standard);
+  /* Transparent strip spans the full width, but only the pill itself (and
+     nothing in the empty space around it) should intercept clicks. */
+  pointer-events: none;
+}
+
+.grad-toggle-bar.is-hovered {
+  padding-top: 16px;
+}
+
+.grad-toggle-bar .pill-outer {
+  pointer-events: auto;
+}
+
+/*
+  Carried over from the previous toggle: no toggle on mobile, since
+  graduation-effects.js auto-drops the balloons there instead (kept in sync
+  with MOBILE_BREAKPOINT_PX in that file). This bar-hiding rule is page
+  integration, not part of the extracted reference component.
+*/
+@media (max-width: 768px) {
+  .grad-toggle-bar {
+    display: none;
+  }
+}
+
+/*
+  ---------- Toggle switch component ----------
+  Dimensions lifted directly from the reference SVGs: 57px-tall white pill,
+  85x50 track, 42px knob (4px inset all round). Both reference states share
+  identical geometry — only color/position change between them — so a single
+  set of rules handles both, gated on .pill-outer.on.
+*/
+.pill-outer {
+  --toggle-gold: #ffc72b;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  height: 57px;
+  /* Right padding matches the Pressed state.svg measurement (~6px from the
+     track's right edge to the pill's) — used for both states so the pill's
+     JS-computed fixed width (see mode-toggle.js) always has enough room for
+     it, rather than the .on state alone needing more than was budgeted. */
+  padding: 0 6px 0 20px;
+  border-radius: 999px;
+  background: var(--color-white);
+  /* 1px stroke around the pill (default state only — .on below replaces this
+     with its own gold ring) as a box-shadow layer rather than a real
+     `border`, so it doesn't eat into the padding box the JS width math
+     already accounts for. */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), 0 0 0 1px var(--color-gray-300);
+  cursor: pointer;
+  transition: transform var(--duration-medium) var(--ease-standard),
+    box-shadow var(--duration-medium) var(--ease-standard);
+}
+
+/* Hover/focus lift — the header-gap shrink (16px vs. the default 20px) is
+   handled in the bar's own rules above, mirrored onto .is-hovered by JS. */
+.pill-outer:hover,
+.pill-outer:focus-visible {
+  transform: translateY(-2px);
+}
+
+/* on = toggled/committed state: steady gold ring + glow (from the reference's
+   drop-shadow filter), no pulse — the wiggling icon carries the "look at me"
+   job in the off state instead. */
+.pill-outer.on {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), 0 0 0 2px var(--toggle-gold),
+    0 0 20px rgba(255, 199, 43, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill-outer,
+  .pill-outer:hover,
+  .pill-outer:focus-visible {
+    transition: box-shadow var(--duration-medium) var(--ease-standard);
+    transform: none;
+  }
+}
+
+.pill-label {
+  font-weight: bold;
+  font-size: 16px;
+  white-space: nowrap;
+  color: var(--color-near-black);
+  transition: opacity 0.2s ease;
+}
+
+.pill-track {
+  /* Anchors the track to the pill's right edge regardless of which label is
+     showing — without this, the label/track flex `gap` is fixed at 16px and
+     the pill's own fixed (JS-set) width dumps its leftover space *after* the
+     track instead, so the shorter "Feeling festive?" label left a much
+     bigger (and inconsistent) right-hand gap than the longer "Congrats
+     graduate!" label did. margin-left: auto makes that leftover space widen
+     the label-to-track gap instead, so the track-to-edge gap is always
+     exactly the pill's own padding-right. */
+  margin-left: auto;
+  position: relative;
+  flex-shrink: 0;
+  width: 85px;
+  height: 50px;
+  border-radius: 999px;
+  background: var(--color-gray-300);
+  overflow: hidden;
+}
+
+/* Gray -> gold wipe, left to right: a gold layer scaled in from the left
+   edge, rather than animating background-color (which can't sweep
+   directionally on its own). */
+.track-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--toggle-gold);
+  border-radius: inherit;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.6s var(--ease-standard);
+}
+
+.pill-outer.on .track-fill {
+  transform: scaleX(1);
+}
+
+.pill-knob {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--color-white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: left 0.6s var(--ease-standard);
+}
+
+/* 85 (track) - 42 (knob) - 4 (inset, both sides) */
+.pill-outer.on .pill-knob {
+  left: 39px;
+}
+
+.knob-icon {
+  position: absolute;
+  transition: opacity var(--duration-medium) var(--ease-standard);
+}
+
+.knob-icon--confetti {
+  color: #747474;
+  opacity: 1;
+  animation: grad-toggle-wiggle 1s linear infinite;
+}
+
+.knob-icon--cap {
+  color: var(--color-near-black);
+  opacity: 0;
+}
+
+.pill-outer.on .knob-icon--confetti {
+  opacity: 0;
+}
+
+.pill-outer.on .knob-icon--cap {
+  opacity: 1;
+}
+
+/* Four points instead of two so the swing eases through center on its way
+   between extremes (closer to a real sine wave) rather than snapping
+   direction at the two peaks. */
+@keyframes grad-toggle-wiggle {
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill-label,
+  .track-fill,
+  .pill-knob,
+  .knob-icon {
+    transition: none;
+  }
+
+  .knob-icon--confetti {
+    animation: none;
+  }
+}
+
+/* tooltip: position:fixed so JS can place it relative to the cursor, not the pill. */
+.tooltip {
+  position: fixed;
+  background: var(--color-near-black);
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 0;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 1000;
+  top: 0;
+  left: 0; /* JS sets the real position */
+}
+
+.tooltip.visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tooltip {
+    transition: none;
+  }
+}
+
+/*
+  .sr-note from the reference component is unused here — the status text now
+  uses this project's existing .visually-hidden utility (base.css) instead,
+  per feedback to remove the visible micro-copy while keeping the aria-live
+  announcement for screen readers.
+*/
+
+#measurer {
+  position: absolute;
+  visibility: hidden;
+  white-space: nowrap;
+  top: -9999px;
+  left: -9999px;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}

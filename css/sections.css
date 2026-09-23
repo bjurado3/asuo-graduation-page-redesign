@@ -1,0 +1,424 @@
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  color: var(--color-white);
+  overflow: hidden;
+  /* Confirmed: fixed height of 476px (not aspect-ratio scaled with width). */
+  width: 100%;
+  height: 476px;
+  /* Pins .hero__content (the only in-flow child) to the bottom of the box. */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__media img,
+.hero__media .placeholder-box {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* subject sits right-of-center in the source crop; keep him in frame on narrow viewports */
+  object-position: 75% center;
+}
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.45) 45%,
+    rgba(0, 0, 0, 0.15) 75%
+  );
+  z-index: 1;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 32px;
+  max-width: 760px;
+}
+
+.hero__title {
+  /*
+    Named-scale pick (Heading scale A "large", 56/67.2) pending Figma
+    confirmation — doc flags the hero headline style as unconfirmed. Sized to
+    stay clearly bigger than the "This could be you" H2 below it.
+  */
+  font-size: clamp(1.75rem, 4vw, 3.5rem);
+  line-height: 1.2;
+  font-weight: 900;
+  margin-bottom: var(--space-3);
+}
+
+@media (max-width: 640px) {
+  .hero__title {
+    margin-bottom: var(--space-2);
+  }
+}
+
+.hero__subhead {
+  font-size: clamp(0.9rem, 1.4vw, 1.0625rem);
+  max-width: 640px;
+}
+
+/* ---------- This could be you ---------- */
+.could-be-you {
+  padding-block: var(--space-6) var(--space-6);
+  text-align: center;
+}
+
+.could-be-you__title {
+  /*
+    Named-scale pick (H2 "medium", 36/43.2 at desktop) — the doc's confirmed
+    H2/xl 60/72 token produced a headline that read as large as (or larger
+    than) the hero title above it, which round-2 feedback flagged as wrong.
+    Sized down a tier, and scaled with viewport (tuned to stay smaller than
+    .hero__title's clamp at every width, not just at desktop) pending a
+    Figma re-check of which H2 step is actually intended here.
+  */
+  font-size: clamp(1.25rem, 3.6vw, 2.25rem);
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  color: #191919;
+  font-weight: 900;
+  margin-bottom: var(--space-2);
+}
+
+.could-be-you__highlight {
+  background: var(--color-gold);
+  padding: 0 0.3em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.could-be-you__subhead {
+  max-width: 640px;
+  margin-inline: auto;
+  color: var(--color-text-muted);
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 400;
+  margin-bottom: var(--space-4);
+}
+
+/*
+  Individual interactive photo cards (no wrapping background — removed per
+  latest feedback). Count: 5, fanned symmetrically around the center card.
+*/
+.photo-strip {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0;
+  padding-block: var(--space-8);
+}
+
+.photo-strip__item {
+  position: relative;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  width: min(180px, 17vw);
+  margin-inline: -20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-sm);
+  overflow: visible;
+  /*
+    Timing matches the profile-card hover behavior on
+    explore.asuonline.asu.edu/ocean-futures ("Check out what we've been up
+    to on social"): each card straightens (rotate -> 0) and jumps in front
+    of its neighbors (z-index -> top) on hover/focus, over 0.5s ease-in-out.
+  */
+  transition: transform 0.5s ease-in-out, z-index 0.5s ease-in-out;
+}
+
+.photo-strip__item:nth-child(1) {
+  transform: rotate(-10deg);
+  z-index: 1;
+}
+
+.photo-strip__item:nth-child(2) {
+  transform: rotate(-5deg) translateY(-6px);
+  z-index: 2;
+}
+
+.photo-strip__item:nth-child(3) {
+  transform: translateY(-12px);
+  z-index: 3;
+}
+
+.photo-strip__item:nth-child(4) {
+  transform: rotate(5deg) translateY(-6px);
+  z-index: 2;
+}
+
+.photo-strip__item:nth-child(5) {
+  transform: rotate(10deg);
+  z-index: 1;
+}
+
+.photo-strip__item:hover,
+.photo-strip__item:focus-visible,
+.photo-strip__item.is-active {
+  z-index: 10;
+}
+
+.photo-strip__item:nth-child(1):hover,
+.photo-strip__item:nth-child(1):focus-visible,
+.photo-strip__item:nth-child(1).is-active,
+.photo-strip__item:nth-child(5):hover,
+.photo-strip__item:nth-child(5):focus-visible,
+.photo-strip__item:nth-child(5).is-active {
+  transform: rotate(0deg);
+}
+
+.photo-strip__item:nth-child(2):hover,
+.photo-strip__item:nth-child(2):focus-visible,
+.photo-strip__item:nth-child(2).is-active,
+.photo-strip__item:nth-child(4):hover,
+.photo-strip__item:nth-child(4):focus-visible,
+.photo-strip__item:nth-child(4).is-active {
+  transform: rotate(0deg) translateY(-6px);
+}
+
+.photo-strip__item:nth-child(3):hover,
+.photo-strip__item:nth-child(3):focus-visible,
+.photo-strip__item:nth-child(3).is-active {
+  transform: translateY(-12px);
+}
+
+.photo-strip__item .placeholder-box {
+  border-radius: var(--radius-sm);
+  aspect-ratio: 6 / 7;
+  width: 100%;
+}
+
+.photo-strip__tag {
+  position: absolute;
+  top: -0.5rem;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  background: var(--color-maroon);
+  color: var(--color-white);
+  font-weight: bold;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.photo-strip__item:hover .photo-strip__tag,
+.photo-strip__item:focus-visible .photo-strip__tag,
+.photo-strip__item.is-active .photo-strip__tag {
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .photo-strip {
+    padding-inline: var(--space-4);
+  }
+
+  .photo-strip__item {
+    margin-inline: -12px;
+  }
+}
+
+.photo-collage__caption {
+  display: inline-block;
+  margin-top: var(--space-3);
+  background: var(--color-maroon);
+  color: var(--color-white);
+  font-weight: bold;
+  font-size: 0.875rem;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+}
+
+/* ---------- Picking your ceremonies ---------- */
+.picking-ceremonies {
+  padding-block: var(--space-8);
+}
+
+.ceremony-accordion__sentinel {
+  /* A normal (non-positioned) 0-height block, right before the pinned
+     wrapper — i.e. it sits at the same starting point .picking-
+     ceremonies__pinned's own natural flow position does, so it keeps moving
+     normally with scroll even once that wrapper is pinned, giving
+     js/ceremony-accordion.js a reliable continuous signal for "has scrolled
+     past the point where the pinned pair engages". */
+  display: block;
+  height: 0;
+  pointer-events: none;
+}
+
+/*
+  Text and the accordion box are both children of ONE sticky wrapper rather
+  than each having their own independent position: sticky — two separately-
+  sticky elements paired only by a matching `top` drift apart the moment
+  their natural heights diverge (which they did here: the accordion box
+  shrinks once it collapses to "only the last row open", the text never
+  does). A single sticky box can't drift from itself — both columns just
+  move with it. .picking-ceremonies__spacer below gives it room to travel
+  before releasing.
+*/
+.picking-ceremonies__pinned {
+  position: sticky;
+  top: calc(var(--header-height, 0px) + 96px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-8);
+  align-items: start;
+  /*
+    Without this, the wrapper's own height (align-items: start means it's
+    just whichever column is naturally tallest) shrinks the moment the
+    accordion collapses — and since that same shrinking height is this
+    sticky wrapper's own release boundary, it would release (and take the
+    paired text with it) sooner than intended right after the rows finish
+    collapsing, cutting the pinned pause short. A stable min-height keeps
+    that release boundary — and so the pause — consistent regardless of
+    collapsed/expanded state.
+  */
+  min-height: 900px;
+}
+
+/* Scroll room past where the pinned wrapper engages, for a brief pinned
+   pause before it releases. Needs to be generous: the accordion box is
+   ~615px tall fully expanded (all 3 items open by default), so it — not the
+   much shorter text column — determines how much of this the wrapper
+   actually needs. */
+.picking-ceremonies__spacer {
+  height: 500px;
+}
+
+.picking-ceremonies__title {
+  position: relative;
+  font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+  line-height: 1.15;
+  font-weight: 900;
+  margin-bottom: var(--space-5);
+}
+
+.picking-ceremonies__title::before {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 5px;
+  background: var(--color-gold);
+  margin-bottom: var(--space-4);
+}
+
+.picking-ceremonies__text p {
+  color: var(--color-text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.picking-ceremonies__text p + p {
+  margin-top: var(--space-5);
+}
+
+/*
+  Single bordered accordion box — NOT separate overlapping cards (reverted
+  per feedback: cards covering each other looked wrong; all three headers
+  should stay visible at once, only one panel open, like the approved
+  reference). All rows start expanded; once .picking-ceremonies__pinned
+  (above) engages its sticky offset, this collapses to only the last row
+  (matches the approved "closed state" reference), and reopens fully if the
+  user scrolls back up past that point.
+*/
+/*
+  Rows are plain normal-flow blocks — NOT individually position: sticky.
+  Nesting a sticky item inside another sticky element (.picking-ceremonies__
+  pinned) turned out to have several layers of hard-to-predict browser
+  behavior: a sticky row can't render closer to the row before it than that
+  row's own margin-box edge, and that clamp is resolved against the
+  *previous row's current rendered position*, not just fixed flow math — so
+  with 3+ stacked sticky rows the later ones lagged and drifted rather than
+  reaching their intended flush position. Tying the gap directly to the
+  `.is-open` state we already control reliably (js/ceremony-accordion.js)
+  is far simpler and fully deterministic: collapsing a row just transitions
+  its own trailing margin to 0, closing the gap to the next row.
+*/
+.ceremony-item {
+  border: 1px solid var(--color-gray-300);
+  border-radius: 0;
+  background: var(--color-white);
+  overflow: hidden;
+  margin-bottom: var(--space-6);
+  /* Slower than the site's default --duration-medium (300ms) specifically
+     for this merge — it reads noticeably smoother than a quick snap, and
+     stays in sync with .ceremony-item__panel-wrap's own transition below
+     (same duration/easing) since both animate together. */
+  transition: margin-bottom 500ms var(--ease-standard);
+}
+
+.ceremony-item:last-child {
+  margin-bottom: 0;
+}
+
+.ceremony-item:not(.is-open) {
+  margin-bottom: 0;
+}
+
+.ceremony-item__heading {
+  margin: 0;
+}
+
+.ceremony-item__trigger {
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+  padding: var(--space-6);
+}
+
+.ceremony-item__panel-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 500ms var(--ease-standard);
+}
+
+.ceremony-item.is-open .ceremony-item__panel-wrap {
+  grid-template-rows: 1fr;
+}
+
+.ceremony-item__panel {
+  overflow: hidden;
+  padding-inline: var(--space-6);
+}
+
+.ceremony-item__panel p {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  padding-bottom: var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .picking-ceremonies {
+    padding-block: var(--space-7);
+  }
+
+  .picking-ceremonies__pinned {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}

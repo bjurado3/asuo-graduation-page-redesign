@@ -1,0 +1,73 @@
+/*
+  Brand tokens for the ASU Online "Online graduation" page.
+  Colors confirmed against the Figma static export (Desktop-Grad_page-static.pdf):
+  gold and footer black were sampled directly from the render; maroon uses ASU's
+  standard brand maroon (the PDF's flattened anti-aliasing made maroon unreliable
+  to sample pixel-for-pixel). Swap these for the repo's real design-system tokens
+  if/when this page is merged into a codebase that already defines them.
+*/
+
+:root {
+  /* Brand */
+  --color-maroon: #8c1d40;
+  --color-maroon-dark: #6e1638;
+  --color-gold: #ffc627;
+  --color-gold-dark: #d4a017;
+
+  /* Neutrals */
+  --color-black: #000000;
+  --color-near-black: #191919;
+  --color-white: #ffffff;
+  --color-gray-100: #f1f1f1;
+  --color-gray-200: #e8e8e8;
+  --color-gray-300: #d3d3d3;
+  --color-gray-400: #b0b0b0;
+  --color-gray-600: #666666;
+  --color-gray-700: #444444;
+  --color-gray-900: #1e1e1e;
+
+  /* Text */
+  --color-text: var(--color-gray-900);
+  --color-text-muted: var(--color-gray-600);
+  --color-text-inverse: var(--color-white);
+
+  /* Type — Arial only; Helvetica/sans-serif are pure fallbacks for when Arial fails to load */
+  --font-display: Arial, Helvetica, sans-serif;
+  --font-body: Arial, Helvetica, sans-serif;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* Layout */
+  --container-max: 1440px;
+  --container-pad: var(--space-5);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-medium: 300ms;
+  --duration-slow: 600ms;
+
+  /* Focus */
+  --focus-ring: 3px solid var(--color-gold-dark);
+  --focus-ring-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-medium: 0ms;
+    --duration-slow: 0ms;
+  }
+}

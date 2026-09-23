@@ -1,0 +1,110 @@
+/* Reusable interactive components: buttons, chips, tabs, accordion. */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.btn-gold {
+  background: var(--color-gold);
+  color: var(--color-black);
+}
+
+.btn-gold:hover {
+  background: var(--color-gold-dark);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: currentColor;
+  color: var(--color-white);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-ghost-dark {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-black);
+}
+
+.btn-ghost-dark:hover {
+  background: var(--color-white);
+}
+
+/*
+  Neutral stand-in for an image asset that hasn't been dropped in yet.
+  Renders no visible text — the description lives only in the element's
+  aria-label (for assistive tech) and in an HTML comment beside it (for
+  whoever wires up the real asset).
+*/
+.placeholder-box {
+  display: block;
+  background: #e5e5e5;
+}
+
+/*
+  The graduation-mode toggle pill itself now lives in css/grad-toggle.css
+  (extracted exactly from the approved reference component). This file keeps
+  only the balloon/confetti effects it will trigger in the next phase.
+*/
+
+/* ---------- Graduation mode: falling balloons + cursor confetti ---------- */
+/*
+  Fixed and viewport-wide: balloons fall down the whole page, including over
+  the sticky global header (z-index 100, nav.css) and the toggle bar
+  (z-index 90, grad-toggle.css) — not hidden behind either as they pass.
+*/
+.balloon-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.balloon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: auto;
+  cursor: pointer;
+  user-select: none;
+  will-change: transform;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.2));
+}
+
+/*
+  Sits above the balloon layer too, since the cursor trail should always be
+  visible drawing over whatever's currently underneath the pointer.
+*/
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/*
+  Sizing, color and border-radius are set per-particle inline by
+  graduation-effects.js (two shape variants, gold/maroon fill); this just
+  establishes the positioning context the rAF loop animates via transform.
+*/
+.confetti-piece {
+  position: absolute;
+}
