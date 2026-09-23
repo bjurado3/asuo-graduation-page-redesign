@@ -19,6 +19,14 @@
   */
   position: fixed;
   top: var(--header-height, 0px);
+  /* Once .header-scrolled-out is set (js/header-height.js), the header itself
+     has scrolled out of view — snap to a flat 36px offset instead of staying
+     pinned at the header's full height, which otherwise reads as a large
+     empty gap above the pill. Slower than the site's other transitions
+     (--duration-medium is 300ms) since this one covers a much bigger
+     distance (header-height down to 36px), so it needs more time to read as
+     smooth rather than abrupt. */
+  transition: top 650ms var(--ease-standard);
   left: 0;
   right: 0;
   z-index: 90;
@@ -44,6 +52,10 @@
   /* Transparent strip spans the full width, but only the pill itself (and
      nothing in the empty space around it) should intercept clicks. */
   pointer-events: none;
+}
+
+.grad-toggle-bar.header-scrolled-out {
+  top: 36px;
 }
 
 .grad-toggle-bar .pill-outer {
@@ -75,16 +87,21 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  height: 57px;
-  /* Fixed to match the page's grid (253px), rather than sized from the
-     label text — see .pill-label's font-size and this gap, both tuned down
-     from their original values (16px/16px) so both "Feeling festive?" and
-     "Congrats graduate!" fit alongside the track at this width. At the
-     original sizes "Congrats graduate!" needed ~275px total, so the track
-     (anchored to the pill's right edge, flex-shrink:0) overflowed ~16px
-     past the pill's own rounded boundary. */
-  width: 253px;
+  /* 24px is the *minimum* label-to-track gap — .pill-track's own
+     margin-left: auto (below) absorbs any extra width this box has beyond
+     what the current label + this gap + the track need, so the shorter
+     "Feeling festive?" label ends up with more than 24px while "Congrats
+     graduate!" (the longer of the two, sized to fit exactly) gets exactly
+     24px. */
+  gap: 24px;
+  /* Whole pill scaled down from the reference's 57px by the same 0.7719
+     ratio (44/57) as the track/knob/icon below — font-size and gap stay put
+     since those were tuned separately for the 16px label. */
+  height: 44px;
+  /* Sized to fit "Congrats graduate!" (measured ~147.6px at 16px bold) plus
+     the 24px gap, the new 58px track, and this padding — that's ~255.6px;
+     rounded up just enough to land on a whole pixel. */
+  width: 256px;
   /* Right padding matches the Pressed state.svg measurement (~6px from the
      track's right edge to the pill's). */
   padding: 0 6px 0 20px;
@@ -103,7 +120,8 @@
 /* on = toggled/committed state: steady gold ring + glow (from the reference's
    drop-shadow filter). */
 .pill-outer.on {
-  box-shadow: 0 0 0 2px var(--toggle-gold), 0 0 20px rgba(255, 199, 43, 0.45);
+  /* Ring only — no blurred glow around the "on" state. */
+  box-shadow: 0 0 0 2px var(--toggle-gold);
 }
 
 /* Hover/focus — a soft shadow all around the pill (0 offset, so it reads as
@@ -118,13 +136,12 @@
 
 .pill-outer.on:hover,
 .pill-outer.on:focus-visible {
-  box-shadow: 0 0 12px rgba(116, 116, 116, 0.5), 0 0 0 2px var(--toggle-gold),
-    0 0 20px rgba(255, 199, 43, 0.45);
+  box-shadow: 0 0 12px rgba(116, 116, 116, 0.5), 0 0 0 2px var(--toggle-gold);
 }
 
 .pill-label {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
   white-space: nowrap;
   color: var(--color-near-black);
   transition: opacity 0.2s ease;
@@ -142,8 +159,11 @@
   margin-left: auto;
   position: relative;
   flex-shrink: 0;
-  width: 85px;
-  height: 50px;
+  /* 34px tall (down from the previous 44px) with width/knob/inset all scaled
+     by the same ratio (0.7719 = 44/57) as the whole pill above, so the
+     switch shrinks proportionally along with its container. */
+  width: 58px;
+  height: 34px;
   border-radius: 999px;
   background: var(--color-gray-300);
   overflow: hidden;
@@ -168,10 +188,10 @@
 
 .pill-knob {
   position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 42px;
-  height: 42px;
+  top: 2.7px;
+  left: 2.7px;
+  width: 28.5px;
+  height: 28.5px;
   border-radius: 50%;
   background: var(--color-white);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -181,64 +201,29 @@
   transition: left 0.6s var(--ease-standard);
 }
 
-/* 85 (track) - 42 (knob) - 4 (inset, both sides) */
+/* 58 (track) - 28.5 (knob) - 2.7 (inset, both sides) */
 .pill-outer.on .pill-knob {
-  left: 39px;
+  left: 26.8px;
 }
 
 .knob-icon {
   position: absolute;
-  transition: opacity var(--duration-medium) var(--ease-standard);
-}
-
-.knob-icon--confetti {
-  color: #747474;
-  opacity: 1;
-  animation: grad-toggle-wiggle 1s linear infinite;
 }
 
 .knob-icon--cap {
-  color: var(--color-near-black);
-  opacity: 0;
-}
-
-.pill-outer.on .knob-icon--confetti {
-  opacity: 0;
+  color: #747474;
 }
 
 .pill-outer.on .knob-icon--cap {
-  opacity: 1;
-}
-
-/* Four points instead of two so the swing eases through center on its way
-   between extremes (closer to a real sine wave) rather than snapping
-   direction at the two peaks. */
-@keyframes grad-toggle-wiggle {
-  0%,
-  100% {
-    transform: rotate(-5deg);
-  }
-  25% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(5deg);
-  }
-  75% {
-    transform: rotate(0deg);
-  }
+  color: var(--color-near-black);
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .grad-toggle-bar,
   .pill-label,
   .track-fill,
-  .pill-knob,
-  .knob-icon {
+  .pill-knob {
     transition: none;
-  }
-
-  .knob-icon--confetti {
-    animation: none;
   }
 }
 
