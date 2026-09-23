@@ -19,14 +19,11 @@
   */
   position: fixed;
   top: var(--header-height, 0px);
-  /* Once .header-scrolled-out is set (js/header-height.js), the header itself
-     has scrolled out of view — snap to a flat 36px offset instead of staying
-     pinned at the header's full height, which otherwise reads as a large
-     empty gap above the pill. Slower than the site's other transitions
-     (--duration-medium is 300ms) since this one covers a much bigger
-     distance (header-height down to 36px), so it needs more time to read as
-     smooth rather than abrupt. */
-  transition: top 650ms var(--ease-standard);
+  /* js/header-height.js overrides this with an inline style on every scroll
+     tick, tracking the header's live bottom edge (min 36px once it's fully
+     scrolled away) — no CSS transition here, since one would lag behind fast
+     scrolling and risk the exact header overlap that tracking is meant to
+     prevent. The live 1:1 tracking is what reads as smooth instead. */
   left: 0;
   right: 0;
   z-index: 90;
@@ -52,10 +49,6 @@
   /* Transparent strip spans the full width, but only the pill itself (and
      nothing in the empty space around it) should intercept clicks. */
   pointer-events: none;
-}
-
-.grad-toggle-bar.header-scrolled-out {
-  top: 36px;
 }
 
 .grad-toggle-bar .pill-outer {
@@ -219,7 +212,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .grad-toggle-bar,
   .pill-label,
   .track-fill,
   .pill-knob {

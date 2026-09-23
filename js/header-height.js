@@ -24,22 +24,33 @@ export function initHeaderHeightVar() {
 
 /**
  * The header is static, not sticky, so as it scrolls out of view the toggle
- * bar (still fixed at --header-height) would otherwise leave a growing empty
- * gap above it where the header used to be. As soon as the page starts
- * scrolling at all, switch the bar to its flat 36px top offset instead — not
- * only once the header has fully scrolled away. Direct scroll listener
- * rather than rAF-throttled, matching ceremony-accordion.js — the position
- * check itself is cheap.
+ * bar (previously fixed at a flat --header-height, or snapped to a flat
+ * 36px the instant any scrolling started) would otherwise either leave a
+ * growing empty gap above it, or — snapping too early — overlap and get
+ * clipped by the header while it's still substantially on screen. Instead,
+ * track the header's real, live bottom edge on every scroll tick and keep
+ * the bar's top at least HEADER_CLEARANCE below it (the bar's own 20px
+ * padding-top adds the rest, so the pill itself never sits closer than
+ * ~32px to the header), only settling at the flat MIN_TOP floor once the
+ * header has scrolled far enough away that the clearance rule would place
+ * it higher than that anyway. Direct scroll listener rather than
+ * rAF-throttled, matching ceremony-accordion.js — the position check itself
+ * is cheap.
  */
 export function initToggleBarScrollOffset() {
+  const header = document.querySelector(".site-header");
   const bar = document.querySelector(".grad-toggle-bar");
-  if (!bar) return;
+  if (!header || !bar) return;
 
-  const checkPosition = () => {
-    bar.classList.toggle("header-scrolled-out", window.scrollY > 0);
+  const MIN_TOP = 36;
+  const HEADER_CLEARANCE = 12; // + the bar's own 20px padding-top = 32px to the pill
+
+  const updatePosition = () => {
+    const headerBottom = header.getBoundingClientRect().bottom;
+    bar.style.top = `${Math.max(MIN_TOP, headerBottom + HEADER_CLEARANCE)}px`;
   };
 
-  checkPosition();
-  window.addEventListener("scroll", checkPosition, { passive: true });
-  window.addEventListener("resize", checkPosition);
+  updatePosition();
+  window.addEventListener("scroll", updatePosition, { passive: true });
+  window.addEventListener("resize", updatePosition);
 }

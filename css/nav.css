@@ -30,6 +30,13 @@
 }
 
 .site-header {
+  /* Positioned + stacked above .grad-toggle-bar (z-index: 90) so the header
+     always paints on top of the fixed toggle overlay in the (normally brief)
+     window before --header-height is measured, or if it's ever off — the
+     header's opaque background then fully hides any overlap instead of the
+     pill covering nav links/buttons underneath. */
+  position: relative;
+  z-index: 100;
   background: var(--color-white);
   border-bottom: 1px solid var(--color-gray-200);
 }
