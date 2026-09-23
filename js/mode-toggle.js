@@ -1,18 +1,18 @@
 /**
  * Wires the "Congrats graduate!" toggle switch: label crossfade, confetti ->
- * cap icon crossfade (driven by CSS off .pill-outer.on), hover/focus lift and
- * header-gap shrink, cursor-following tooltip, and the balloon-drop/confetti
- * trail effects.
+ * cap icon crossfade (driven by CSS off .pill-outer.on), hover/focus drop
+ * shadow, cursor-following tooltip, and the balloon-drop/confetti trail
+ * effects.
  */
-import { startGraduationEffects, stopGraduationEffects } from "./graduation-effects.js?v=6";
+import { startGraduationEffects, stopGraduationEffects, spawnTogglePop } from "./graduation-effects.js?v=8";
 
 export function initModeToggle() {
   const pill = document.getElementById("pill");
   const labelText = document.getElementById("labelText");
   const status = document.getElementById("srStatus");
   const tooltip = document.getElementById("tooltip");
-  const bar = document.querySelector(".grad-toggle-bar");
-  if (!pill || !labelText || !status || !tooltip || !bar) return;
+  const knob = document.querySelector(".pill-knob");
+  if (!pill || !labelText || !status || !tooltip || !knob) return;
 
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -33,6 +33,16 @@ export function initModeToggle() {
 
     if (on) {
       startGraduationEffects();
+      // A short delay rather than firing at the click itself, so the
+      // confetti reads as popping out from the knob mid-slide (.pill-knob's
+      // `left` transition is 600ms total — see css/grad-toggle.css) instead
+      // of from its starting position. Shorter than the full 600ms so it
+      // doesn't feel laggy relative to the click.
+      const popDelay = prefersReduced ? 0 : 200;
+      setTimeout(() => {
+        const rect = knob.getBoundingClientRect();
+        spawnTogglePop(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      }, popDelay);
     } else {
       stopGraduationEffects();
     }
@@ -84,13 +94,4 @@ export function initModeToggle() {
     tooltip.classList.add("visible");
   });
   pill.addEventListener("blur", () => tooltip.classList.remove("visible"));
-
-  // Header-to-toggle gap shrink (24px -> 16px): lives on .grad-toggle-bar,
-  // not .pill-outer itself, so it can't be a plain CSS :hover — the rest of
-  // the bar has pointer-events:none and only the pill is hoverable. Mirror
-  // the pill's hover/focus state onto the bar instead.
-  pill.addEventListener("mouseenter", () => bar.classList.add("is-hovered"));
-  pill.addEventListener("mouseleave", () => bar.classList.remove("is-hovered"));
-  pill.addEventListener("focus", () => bar.classList.add("is-hovered"));
-  pill.addEventListener("blur", () => bar.classList.remove("is-hovered"));
 }

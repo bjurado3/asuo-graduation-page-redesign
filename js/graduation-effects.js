@@ -167,14 +167,17 @@ function spawnConfettiParticle(x, y) {
   pushConfettiParticle(el, (Math.random() - 0.5) * 3, -1 - Math.random() * 2); // vx ±1.5, vy -3 to -1
 }
 
-// Balloon pop: same particle look/physics as the cursor trail, but bursting
-// outward in every direction from the pop point instead of drifting from a
-// moving cursor.
-function spawnConfettiBurst(x, y) {
-  for (let i = 0; i < BALLOON_POP_CONFETTI_COUNT; i++) {
+// Balloon pop (and, via the export below, the mode toggle's own switch-on
+// pop): same particle look/physics as the cursor trail, but bursting outward
+// in every direction from the pop point instead of drifting from a moving
+// cursor. `count` defaults to the balloon-pop tuning; `speedMultiplier`
+// scales how far particles travel, for callers that want a bigger-reaching
+// burst without also having to touch the shared balloon-pop tuning.
+function spawnConfettiBurst(x, y, count = BALLOON_POP_CONFETTI_COUNT, speedMultiplier = 1) {
+  for (let i = 0; i < count; i++) {
     const el = createConfettiElement(x, y);
     const angle = Math.random() * Math.PI * 2;
-    const speed = 2 + Math.random() * 5;
+    const speed = (2 + Math.random() * 5) * speedMultiplier;
     pushConfettiParticle(el, Math.cos(angle) * speed, Math.sin(angle) * speed);
   }
 }
@@ -296,6 +299,17 @@ export function autoStartGraduationEffectsOnMobile() {
   if (isMobile) {
     startGraduationEffects({ enableCursorTrail: false });
   }
+}
+
+// For the mode toggle's own switch-on pop (see js/mode-toggle.js) — a
+// smaller burst than a balloon pop, from a point the caller supplies (the
+// knob's own position) rather than an event target. No-ops unless the main
+// animation loop is actually running (checking `rafId`, not just `running`
+// — reduced motion sets `running` true but returns *before* starting that
+// loop, so spawned particles would just sit there forever unanimated).
+export function spawnTogglePop(x, y) {
+  if (!confettiLayer || !rafId) return;
+  spawnConfettiBurst(x, y, 32, 1.5);
 }
 
 export function stopGraduationEffects() {

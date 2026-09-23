@@ -35,21 +35,15 @@
   margin-inline: auto;
   padding-inline: var(--container-pad);
   gap: var(--space-1);
-  /* "Gap between global header and toggle" per the approved spec: 20px by
-     default, shrinking to 16px on hover (toggled via .is-hovered — the pill
-     is the hover target, but pointer-events:none on the rest of this bar
-     means the bar itself can't be :hover'd directly, so JS mirrors the
-     pill's hover/focus state onto this class). */
+  /* Gap between the global header and the toggle — fixed at 20px in every
+     state (previously shrank to 16px on hover, but that shift read as
+     another kind of "lift" alongside the pill's own hover effects, so it's
+     no longer state-dependent here). */
   padding-top: 20px;
   padding-bottom: var(--space-3);
-  transition: padding-top var(--duration-medium) var(--ease-standard);
   /* Transparent strip spans the full width, but only the pill itself (and
      nothing in the empty space around it) should intercept clicks. */
   pointer-events: none;
-}
-
-.grad-toggle-bar.is-hovered {
-  padding-top: 16px;
 }
 
 .grad-toggle-bar .pill-outer {
@@ -99,17 +93,32 @@
   /* 1px stroke around the pill (default state only — .on below replaces this
      with its own gold ring) as a box-shadow layer rather than a real
      `border`, so it doesn't eat into the padding box the JS width math
-     already accounts for. */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), 0 0 0 1px var(--color-gray-300);
+     already accounts for. No drop shadow at rest — that's hover/focus-only,
+     added below. */
+  box-shadow: 0 0 0 1px var(--color-gray-300);
   cursor: pointer;
   transition: box-shadow var(--duration-medium) var(--ease-standard);
 }
 
 /* on = toggled/committed state: steady gold ring + glow (from the reference's
-   drop-shadow filter), no pulse — the wiggling icon carries the "look at me"
-   job in the off state instead. */
+   drop-shadow filter). */
 .pill-outer.on {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), 0 0 0 2px var(--toggle-gold),
+  box-shadow: 0 0 0 2px var(--toggle-gold), 0 0 20px rgba(255, 199, 43, 0.45);
+}
+
+/* Hover/focus — a soft shadow all around the pill (0 offset, so it reads as
+   an even halo rather than a directional drop shadow that implies lift),
+   transitioning smoothly via .pill-outer's own `transition: box-shadow`
+   above. Two variants so it composes with the .on state's own steady
+   ring+glow instead of replacing it. */
+.pill-outer:hover,
+.pill-outer:focus-visible {
+  box-shadow: 0 0 12px rgba(116, 116, 116, 0.5), 0 0 0 1px var(--color-gray-300);
+}
+
+.pill-outer.on:hover,
+.pill-outer.on:focus-visible {
+  box-shadow: 0 0 12px rgba(116, 116, 116, 0.5), 0 0 0 2px var(--toggle-gold),
     0 0 20px rgba(255, 199, 43, 0.45);
 }
 
