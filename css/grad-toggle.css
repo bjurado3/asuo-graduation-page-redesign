@@ -27,7 +27,13 @@
      opaque bar/strip. The pill's own box-shadow gives it definition. */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* Right-aligned to match the page's grid — same max-width/padding as
+     .container (base.css), so the pill lines up with the nav's right edge
+     ("Request info") instead of centering across the full viewport. */
+  align-items: flex-end;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
   gap: var(--space-1);
   /* "Gap between global header and toggle" per the approved spec: 20px by
      default, shrinking to 16px on hover (toggled via .is-hovered — the pill
@@ -75,12 +81,18 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
   height: 57px;
+  /* Fixed to match the page's grid (253px), rather than sized from the
+     label text — see .pill-label's font-size and this gap, both tuned down
+     from their original values (16px/16px) so both "Feeling festive?" and
+     "Congrats graduate!" fit alongside the track at this width. At the
+     original sizes "Congrats graduate!" needed ~275px total, so the track
+     (anchored to the pill's right edge, flex-shrink:0) overflowed ~16px
+     past the pill's own rounded boundary. */
+  width: 253px;
   /* Right padding matches the Pressed state.svg measurement (~6px from the
-     track's right edge to the pill's) — used for both states so the pill's
-     JS-computed fixed width (see mode-toggle.js) always has enough room for
-     it, rather than the .on state alone needing more than was budgeted. */
+     track's right edge to the pill's). */
   padding: 0 6px 0 20px;
   border-radius: 999px;
   background: var(--color-white);
@@ -90,15 +102,7 @@
      already accounts for. */
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), 0 0 0 1px var(--color-gray-300);
   cursor: pointer;
-  transition: transform var(--duration-medium) var(--ease-standard),
-    box-shadow var(--duration-medium) var(--ease-standard);
-}
-
-/* Hover/focus lift — the header-gap shrink (16px vs. the default 20px) is
-   handled in the bar's own rules above, mirrored onto .is-hovered by JS. */
-.pill-outer:hover,
-.pill-outer:focus-visible {
-  transform: translateY(-2px);
+  transition: box-shadow var(--duration-medium) var(--ease-standard);
 }
 
 /* on = toggled/committed state: steady gold ring + glow (from the reference's
@@ -109,18 +113,9 @@
     0 0 20px rgba(255, 199, 43, 0.45);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .pill-outer,
-  .pill-outer:hover,
-  .pill-outer:focus-visible {
-    transition: box-shadow var(--duration-medium) var(--ease-standard);
-    transform: none;
-  }
-}
-
 .pill-label {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   white-space: nowrap;
   color: var(--color-near-black);
   transition: opacity 0.2s ease;
@@ -272,14 +267,3 @@
   per feedback to remove the visible micro-copy while keeping the aria-live
   announcement for screen readers.
 */
-
-#measurer {
-  position: absolute;
-  visibility: hidden;
-  white-space: nowrap;
-  top: -9999px;
-  left: -9999px;
-  font-weight: bold;
-  font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif;
-}

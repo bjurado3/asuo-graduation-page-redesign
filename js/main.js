@@ -1,6 +1,6 @@
 import { initNav } from "./nav.js";
 import { initPhotoStrip } from "./photo-strip.js";
-import { initModeToggle } from "./mode-toggle.js?v=4";
+import { initModeToggle } from "./mode-toggle.js?v=5";
 import { initHeaderHeightVar } from "./header-height.js";
 import { autoStartGraduationEffectsOnMobile } from "./graduation-effects.js?v=6";
 import { initCeremonyAccordion } from "./ceremony-accordion.js";

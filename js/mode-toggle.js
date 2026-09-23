@@ -10,37 +10,19 @@ export function initModeToggle() {
   const pill = document.getElementById("pill");
   const labelText = document.getElementById("labelText");
   const status = document.getElementById("srStatus");
-  const measurer = document.getElementById("measurer");
   const tooltip = document.getElementById("tooltip");
   const bar = document.querySelector(".grad-toggle-bar");
-  if (!pill || !labelText || !status || !measurer || !tooltip || !bar) return;
+  if (!pill || !labelText || !status || !tooltip || !bar) return;
 
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const OFF_TEXT = "Feeling festive?";
   const ON_TEXT = "Congrats graduate!";
 
-  // Kept in sync with .pill-outer's padding/gap and .pill-track's width in
-  // css/grad-toggle.css (20px left padding, 16px label-to-track gap, 85px
-  // track, 6px right padding — see that file's "Toggle switch component"
-  // section).
-  const LEFT_PAD = 20;
-  const TEXT_TRACK_GAP = 16;
-  const TRACK_WIDTH = 85;
-  const RIGHT_PAD = 6;
-
+  // Pill width is a fixed 253px set in CSS (.pill-outer) per the page's grid,
+  // not measured from the label text — it no longer resizes as the label
+  // crossfades between the two states.
   let on = false;
-
-  // width is measured ONCE, from whichever label text is wider, and locked
-  // forever — the pill no longer resizes as the label crossfades between the
-  // two states.
-  measurer.textContent = OFF_TEXT;
-  const offWidth = measurer.getBoundingClientRect().width;
-  measurer.textContent = ON_TEXT;
-  const onWidth = measurer.getBoundingClientRect().width;
-  const textWidth = Math.max(offWidth, onWidth);
-  const FIXED_WIDTH = Math.ceil(textWidth) + LEFT_PAD + TEXT_TRACK_GAP + TRACK_WIDTH + RIGHT_PAD;
-  pill.style.width = FIXED_WIDTH + "px";
 
   function setState(newOn) {
     on = newOn;
