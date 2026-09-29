@@ -40,22 +40,41 @@
 }
 
 .hero__content {
+  /*
+    Uses .grid-container (base.css) for the same 12-column max-width/margin
+    as the header above it — but .hero (its parent) is a flex container, and
+    a flex item with .grid-container's inherited `margin-inline: auto`
+    doesn't stretch to fill the cross axis the way a normal block would:
+    auto cross-axis margins opt the item out of stretch entirely, so it
+    would shrink-to-fit its content and center that narrower box, drifting
+    the title away from the nav's left edge above it. Overriding the margin
+    to 0 (and forcing width:100%) restores normal stretch behavior — full
+    width, flush left — while grid-container's own padding-inline/columns
+    still apply.
+  */
+  width: 100%;
+  margin-inline: 0;
   position: relative;
   z-index: 2;
   padding-bottom: 32px;
-  max-width: 760px;
 }
 
 .hero__title {
-  /*
-    Named-scale pick (Heading scale A "large", 56/67.2) pending Figma
-    confirmation — doc flags the hero headline style as unconfirmed. Sized to
-    stay clearly bigger than the "This could be you" H2 below it.
-  */
-  font-size: clamp(1.75rem, 4vw, 3.5rem);
-  line-height: 1.2;
+  /* Confirmed via Figma: H1/xl, 72/86.4 — the generic (non-H2) xl step,
+     one size up from "This could be you"'s H2/xl (60/72). */
+  grid-column: 1 / 7;
+  font-size: 72px;
+  line-height: 86.4px;
   font-weight: 900;
   margin-bottom: var(--space-3);
+}
+
+@media (max-width: 900px) {
+  .hero__title {
+    grid-column: 1 / -1;
+    font-size: clamp(1.75rem, 6vw, 72px);
+    line-height: 1.2;
+  }
 }
 
 @media (max-width: 640px) {
@@ -65,31 +84,39 @@
 }
 
 .hero__subhead {
-  font-size: clamp(0.9rem, 1.4vw, 1.0625rem);
-  max-width: 640px;
+  /* Same body style as .could-be-you__subhead (18/27) for consistency. */
+  grid-column: 1 / 7;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+@media (max-width: 900px) {
+  .hero__subhead {
+    grid-column: 1 / -1;
+  }
 }
 
 /* ---------- This could be you ---------- */
 .could-be-you {
-  padding-block: var(--space-6) var(--space-6);
+  padding-block: 96px;
   text-align: center;
 }
 
 .could-be-you__title {
-  /*
-    Named-scale pick (H2 "medium", 36/43.2 at desktop) — the doc's confirmed
-    H2/xl 60/72 token produced a headline that read as large as (or larger
-    than) the hero title above it, which round-2 feedback flagged as wrong.
-    Sized down a tier, and scaled with viewport (tuned to stay smaller than
-    .hero__title's clamp at every width, not just at desktop) pending a
-    Figma re-check of which H2 step is actually intended here.
-  */
-  font-size: clamp(1.25rem, 3.6vw, 2.25rem);
-  line-height: 1.2;
+  /* Confirmed via Figma inspect: H2/xl, 60/72. */
+  font-size: 60px;
+  line-height: 72px;
   letter-spacing: -0.035em;
   color: #191919;
   font-weight: 900;
   margin-bottom: var(--space-2);
+}
+
+@media (max-width: 640px) {
+  .could-be-you__title {
+    font-size: clamp(1.5rem, 8vw, 60px);
+    line-height: 1.2;
+  }
 }
 
 .could-be-you__highlight {

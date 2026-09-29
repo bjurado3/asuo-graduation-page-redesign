@@ -44,12 +44,28 @@ const BALLOON_POP_CONFETTI_COUNT = 24;
 let running = false;
 let balloonLayer = null;
 let confettiLayer = null;
+let balloonTooltip = null;
 let rafId = null;
 let showStartTime = 0;
 let lastFrameTime = 0;
 let balloons = [];
 let confettiParticles = [];
 let lastMouse = null;
+
+// Cursor-offset match the mode toggle's own tooltip (js/mode-toggle.js).
+const BALLOON_TOOLTIP_OFFSET = 14;
+
+function makeBalloonTooltip() {
+  const el = document.createElement("div");
+  el.className = "balloon-tooltip";
+  el.setAttribute("aria-hidden", "true");
+  // "burst-light-full" icon, supplied directly (assets/icons/burst-light-full.svg).
+  el.innerHTML =
+    '<svg class="balloon-tooltip__icon" viewBox="0 0 395 395" fill="none"><path d="M42.4008 42.4008C45.7336 39.068 50.918 38.5742 54.868 41.1664L162.999 113.254L188.242 45.9188C189.723 42.0305 193.365 39.5 197.5 39.5C201.635 39.5 205.277 42.0305 206.758 45.9188L233.05 116.031L283.289 99.3055C286.869 98.1328 290.757 99.0586 293.411 101.713C296.065 104.366 296.991 108.255 295.818 111.834L279.03 161.95L349.081 188.242C352.908 189.662 355.5 193.365 355.5 197.5C355.5 201.635 352.97 205.277 349.081 206.758L280.327 232.556L314.951 301.743C316.864 305.57 316.123 310.137 313.099 313.161C310.075 316.185 305.508 316.926 301.681 315.012L232.495 280.388L206.758 349.081C205.338 352.908 201.635 355.5 197.5 355.5C193.365 355.5 189.723 352.97 188.242 349.081L162.505 280.388L93.3187 314.951C89.4922 316.864 84.925 316.123 81.9008 313.099C78.8766 310.075 78.1359 305.508 80.0492 301.681L114.612 232.495L45.9188 206.758C42.0305 205.277 39.5 201.635 39.5 197.5C39.5 193.365 42.0305 189.723 45.9188 188.242L113.254 162.999L41.1664 54.868C38.5742 50.9797 39.068 45.7336 42.4008 42.4008ZM84.9867 84.9867L136.584 162.382C138.25 164.913 138.682 167.998 137.756 170.899C136.83 173.8 134.67 176.084 131.831 177.133L77.5187 197.5L131.831 217.867C134.423 218.855 136.522 220.891 137.571 223.484C138.62 226.076 138.435 229.038 137.201 231.507L110.97 284.03L163.493 257.799C166.023 256.565 168.924 256.441 171.516 257.429C174.109 258.416 176.145 260.515 177.133 263.169L197.5 317.543L217.867 263.169C218.855 260.577 220.891 258.478 223.484 257.429C226.076 256.38 229.038 256.565 231.507 257.799L284.03 284.03L257.799 231.507C256.565 228.977 256.441 226.076 257.429 223.484C258.416 220.891 260.515 218.855 263.169 217.867L317.543 197.5L263.169 177.133C258.17 175.281 255.577 169.788 257.244 164.789L270.76 124.302L230.273 137.818C225.212 139.484 219.78 136.892 217.929 131.893L197.562 77.5805L177.195 131.893C176.145 134.732 173.862 136.892 170.961 137.818C168.06 138.744 164.974 138.312 162.444 136.645L84.9867 84.9867Z" fill="#747474"/></svg>' +
+    "<span>Pop balloons</span>";
+  document.body.appendChild(el);
+  return el;
+}
 
 function makeBalloon(bounds) {
   const el = document.createElement("img");
@@ -90,6 +106,25 @@ function makeBalloon(bounds) {
     const rect = el.getBoundingClientRect();
     spawnConfettiBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
     el.remove();
+    balloonTooltip?.classList.remove("visible");
+  });
+
+  // "Pop balloons" tooltip: only while the cursor is actually over this
+  // balloon (never elsewhere) — mirrors the toggle pill's own cursor-follow
+  // tooltip in js/mode-toggle.js.
+  el.addEventListener("mouseenter", (e) => {
+    if (!balloonTooltip) return;
+    balloonTooltip.style.left = e.clientX + BALLOON_TOOLTIP_OFFSET + "px";
+    balloonTooltip.style.top = e.clientY + BALLOON_TOOLTIP_OFFSET + "px";
+    balloonTooltip.classList.add("visible");
+  });
+  el.addEventListener("mousemove", (e) => {
+    if (!balloonTooltip) return;
+    balloonTooltip.style.left = e.clientX + BALLOON_TOOLTIP_OFFSET + "px";
+    balloonTooltip.style.top = e.clientY + BALLOON_TOOLTIP_OFFSET + "px";
+  });
+  el.addEventListener("mouseleave", () => {
+    balloonTooltip?.classList.remove("visible");
   });
 
   applyBalloonTransform(state);
@@ -253,6 +288,8 @@ export function startGraduationEffects({ enableCursorTrail = true } = {}) {
   balloonLayer.setAttribute("aria-hidden", "true");
   document.body.appendChild(balloonLayer);
 
+  balloonTooltip = makeBalloonTooltip();
+
   balloons = [];
   const balloonCount = BALLOON_COUNT_MIN + Math.floor(Math.random() * (BALLOON_COUNT_MAX - BALLOON_COUNT_MIN + 1));
   for (let i = 0; i < balloonCount; i++) {
@@ -319,8 +356,10 @@ export function stopGraduationEffects() {
   window.removeEventListener("mousemove", onMouseMove);
   balloonLayer?.remove();
   confettiLayer?.remove();
+  balloonTooltip?.remove();
   balloonLayer = null;
   confettiLayer = null;
+  balloonTooltip = null;
   balloons = [];
   confettiParticles = [];
   lastMouse = null;

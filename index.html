@@ -8,12 +8,12 @@
   name="description"
   content="Everything ASU Online students need to know about applying for graduation, attending ceremonies and celebrating from home."
 />
-<link rel="stylesheet" href="css/tokens.css" />
-<link rel="stylesheet" href="css/base.css" />
-<link rel="stylesheet" href="css/components.css?v=2" />
-<link rel="stylesheet" href="css/nav.css?v=4" />
+<link rel="stylesheet" href="css/tokens.css?v=1" />
+<link rel="stylesheet" href="css/base.css?v=2" />
+<link rel="stylesheet" href="css/components.css?v=4" />
+<link rel="stylesheet" href="css/nav.css?v=13" />
 <link rel="stylesheet" href="css/grad-toggle.css?v=38" />
-<link rel="stylesheet" href="css/sections.css?v=18" />
+<link rel="stylesheet" href="css/sections.css?v=23" />
 <link rel="stylesheet" href="css/footer.css" />
 </head>
 <body>
@@ -21,13 +21,13 @@
 
 <header class="site-header">
   <div class="utility-bar">
-    <div class="container">
+    <div class="header-container">
       <a href="https://www.asu.edu/">ASU Home</a>
       <a href="https://my.asu.edu/">My ASU</a>
       <a href="#">Colleges and Schools</a>
       <a href="#">Sign in</a>
       <button class="utility-bar__search" type="button" aria-label="Search ASU Online">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false">
           <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" />
           <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
@@ -35,22 +35,19 @@
     </div>
   </div>
 
-  <nav class="main-nav container" aria-label="Primary">
+  <nav class="main-nav header-container" aria-label="Primary">
     <div class="nav-brand-group">
-      <div class="nav-logo-row">
-        <!-- Logo cropped from the reference header screenshot supplied for this build.
-             TODO: swap for ASU's official vector logo asset (SVG) when available —
-             this is a raster crop, not the source file. -->
-        <a class="nav-logo" href="https://www.asu.edu/" aria-label="Arizona State University home">
-          <img src="assets/icons/asu-online-logo-maroon.png" alt="Arizona State University" width="145" height="111" />
-        </a>
-        <span class="nav-site-name">ASU Online</span>
-      </div>
+      <a class="nav-logo" href="https://www.asu.edu/" aria-label="Arizona State University home">
+        <img src="assets/icons/asu-vertical-logo.png" alt="Arizona State University" width="93" height="72" />
+      </a>
+
+      <div class="nav-text-stack">
+      <span class="nav-site-name">ASU Online</span>
 
       <ul class="nav-links">
         <li>
           <a class="nav-links__home" href="https://asuonline.asu.edu/" aria-label="ASU Online home">
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+            <svg viewBox="0 0 24 24" width="18" height="16" aria-hidden="true" focusable="false">
               <path
                 d="M3 11.5 12 4l9 7.5M5.5 10v9h13v-9"
                 fill="none"
@@ -68,7 +65,6 @@
             href="#"
             aria-haspopup="true"
             aria-expanded="false"
-            aria-current="page"
           >
             Online Degrees
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -98,7 +94,7 @@
         </li>
         <li><a class="nav-link" href="#">Admission</a></li>
         <li class="nav-dropdown">
-          <a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false" aria-current="page">
             Student Experience
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -127,6 +123,7 @@
           </div>
         </li>
       </ul>
+      </div>
     </div>
 
     <div class="nav-actions">
@@ -197,7 +194,7 @@
       />
     </div>
     <div class="hero__scrim" aria-hidden="true"></div>
-    <div class="container hero__content">
+    <div class="grid-container hero__content">
       <h1 class="hero__title" id="hero-title">Online graduation</h1>
       <p class="hero__subhead">
         Earning your diploma begins whenever you decide to pursue an online degree at
@@ -269,275 +266,8 @@
     </div>
   </section>
 
-  <section class="picking-ceremonies container" aria-labelledby="picking-ceremonies-title">
-    <!--
-      Text and the accordion box previously each had their own independent
-      position: sticky (paired via a matching `top`), but their natural
-      heights could diverge — the accordion box shrinks once it collapses to
-      "only the last row open," the text never does — so they drifted apart
-      instead of releasing together. Wrapping both in ONE sticky element
-      (.picking-ceremonies__pinned) instead means they can't drift: sticky
-      only positions this single outer box, and both columns just move with
-      it automatically. The trailing spacer below gives it room to travel
-      before releasing.
-    -->
-    <span class="ceremony-accordion__sentinel" data-ceremony-sentinel aria-hidden="true"></span>
-
-    <div class="picking-ceremonies__pinned">
-      <div class="picking-ceremonies__text">
-        <h2 class="picking-ceremonies__title" id="picking-ceremonies-title">Picking your ceremonies</h2>
-        <p>
-          We encourage all our online students to attend their graduation
-          ceremonies on campus to celebrate their accomplishments, but it is
-          not a requirement to earn your degree and graduate.
-        </p>
-        <p>You have the following ceremony types you can register for:</p>
-      </div>
-
-      <div class="ceremony-accordion" data-ceremony-accordion>
-        <div class="ceremony-item is-open" data-ceremony-item>
-          <h3 class="ceremony-item__heading">
-            <button
-              type="button"
-              class="ceremony-item__trigger"
-              id="ceremony-trigger-commencement"
-              aria-expanded="true"
-              aria-controls="ceremony-panel-commencement"
-            >
-              Commencement
-            </button>
-          </h3>
-          <div class="ceremony-item__panel-wrap">
-            <div class="ceremony-item__panel" id="ceremony-panel-commencement" role="region" aria-labelledby="ceremony-trigger-commencement">
-              <p>
-                Commencement is the large university-wide ceremony. Your name
-                will not be called and your guests will not need tickets for
-                this event.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="ceremony-item is-open" data-ceremony-item>
-          <h3 class="ceremony-item__heading">
-            <button
-              type="button"
-              class="ceremony-item__trigger"
-              id="ceremony-trigger-convocation"
-              aria-expanded="true"
-              aria-controls="ceremony-panel-convocation"
-            >
-              College convocation
-            </button>
-          </h3>
-          <div class="ceremony-item__panel-wrap">
-            <div class="ceremony-item__panel" id="ceremony-panel-convocation" role="region" aria-labelledby="ceremony-trigger-convocation">
-              <p>
-                College convocation is a smaller ceremony where your name will
-                be called on stage. You may need tickets for guests.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="ceremony-item is-open" data-ceremony-item>
-          <h3 class="ceremony-item__heading">
-            <button
-              type="button"
-              class="ceremony-item__trigger"
-              id="ceremony-trigger-special-interest"
-              aria-expanded="true"
-              aria-controls="ceremony-panel-special-interest"
-            >
-              Special interest celebrations
-            </button>
-          </h3>
-          <div class="ceremony-item__panel-wrap">
-            <div class="ceremony-item__panel" id="ceremony-panel-special-interest" role="region" aria-labelledby="ceremony-trigger-special-interest">
-              <p>
-                Special interest celebrations, such as the ASU Online
-                Celebration that features lunch, fun and professional photo
-                opportunities and the chance to connect with faculty, students,
-                success coaches and staff, are another type of ceremony you can
-                attend where your name is called. You may need tickets for
-                guests.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="picking-ceremonies__spacer"></div>
-  </section>
-
-  <!-- Later phases (Ready to graduate, Tassel, video band, FAQ, achievements, alumni) continue below -->
 </main>
 
-<footer class="site-footer">
-  <div class="container site-footer__brand-row">
-    <!-- Logo cropped from the reference footer screenshot supplied for this build.
-         TODO: swap for ASU's official vector logo asset (SVG) when available. -->
-    <div class="site-footer__logo">
-      <img src="assets/icons/asu-online-logo-white.png" alt="ASU Online, Arizona State University" width="346" height="94" />
-    </div>
-    <ul class="site-footer__social" aria-label="ASU Online on social media">
-      <li>
-        <a class="social-icon" href="#" aria-label="ASU Online on Facebook">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M15 8.5h2V5.6c-.34-.05-1.5-.15-2.86-.15-2.84 0-4.79 1.79-4.79 5.08v2.72H6.3v3.24h3.05V21h3.24v-8.5h2.94l.47-3.25h-3.4V9.13c0-.94.26-1.63 1.4-1.63Z"/></svg>
-        </a>
-      </li>
-      <li>
-        <a class="social-icon" href="#" aria-label="ASU Online on LinkedIn">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.94 8.5H4V20h2.94V8.5ZM5.47 4a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4ZM20 13.54c0-3.2-1.7-4.69-3.97-4.69-1.83 0-2.65 1.01-3.11 1.71V8.5H10v11.5h2.92v-6.42c0-.34.02-.68.12-.92.27-.68.9-1.38 1.94-1.38 1.37 0 1.92 1.04 1.92 2.57V20H20v-6.46Z"/></svg>
-        </a>
-      </li>
-      <li>
-        <a class="social-icon" href="#" aria-label="ASU Online on Instagram">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="16.3" cy="7.7" r="1.1" fill="currentColor"/></svg>
-        </a>
-      </li>
-      <li>
-        <a class="social-icon" href="#" aria-label="ASU Online on YouTube">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="currentColor" d="M10.5 9.5v5l4.5-2.5-4.5-2.5Z"/></svg>
-        </a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="container site-footer__columns">
-    <div class="site-footer__blurb">
-      <p>
-        ASU Online is dedicated to providing innovative, high-quality online
-        education to students from across the country and around the world.
-      </p>
-      <ul class="footer-contact-list">
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 12h13m0 0-5-5m5 5-5 5"/><path fill="none" stroke="currentColor" stroke-width="2" d="M14 5h6v14h-6"/></svg>
-          <a href="#">Apply now</a>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="11" x2="12" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="8" r="1" fill="currentColor"/></svg>
-          <a href="tel:8552785080">Help Desk 855.278.5080</a>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2C9.5 22 2 14.5 2 7a2 2 0 0 1 2-2Z"/></svg>
-          <a href="tel:8662776589">Enrollment 866.277.6589</a>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m4 6.5 8 6 8-6"/></svg>
-          <a href="mailto:enrollmentonline@asu.edu">enrollmentonline@asu.edu</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <div class="footer-group">
-        <h2 class="footer-group__title">Online Degrees</h2>
-        <ul>
-          <li><a href="#">All Online Programs</a></li>
-          <li><a href="#">Undergraduate Degrees</a></li>
-          <li><a href="#">Graduate Degrees</a></li>
-          <li><a href="#">Graduate Certificates</a></li>
-          <li><a href="#">Nondegree Programs</a></li>
-          <li><a href="#">Browse Interest Areas</a></li>
-        </ul>
-      </div>
-      <div class="footer-group">
-        <h2 class="footer-group__title">About</h2>
-        <ul>
-          <li><a href="#">Why ASU Online</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Rankings</a></li>
-          <li><a href="#">Faculty</a></li>
-          <li><a href="#">Accreditation</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-col">
-      <div class="footer-group">
-        <h2 class="footer-group__title">Tuition</h2>
-        <ul>
-          <li><a href="#">Tuition Calculator</a></li>
-          <li><a href="#">Financial Aid</a></li>
-          <li><a href="#">Scholarships</a></li>
-        </ul>
-      </div>
-      <div class="footer-group">
-        <h2 class="footer-group__title">Newsroom</h2>
-        <ul>
-          <li><a href="#">ASU Online News</a></li>
-          <li><a href="#">Leading Educators</a></li>
-          <li><a href="#">Online Learning Tips</a></li>
-          <li><a href="#">Sun Devil Life</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-col">
-      <div class="footer-group">
-        <h2 class="footer-group__title">Admission</h2>
-        <ul>
-          <li><a href="#">First year</a></li>
-          <li><a href="#">Transfer</a></li>
-          <li><a href="#">Starbucks</a></li>
-          <li><a href="#">Home School</a></li>
-          <li><a href="#">International</a></li>
-          <li><a href="#">Graduate</a></li>
-          <li><a href="#">Military</a></li>
-          <li><a href="#">Nondegree</a></li>
-          <li><a href="#">Undecided</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-col">
-      <div class="footer-group">
-        <h2 class="footer-group__title">Student Experience</h2>
-        <ul>
-          <li><a href="#">Online Learning</a></li>
-          <li><a href="#">Reviews</a></li>
-          <li><a href="#">Student Services</a></li>
-          <li><a href="#">Student Community</a></li>
-          <li><a href="#">Tutoring</a></li>
-          <li><a href="#">Study Abroad</a></li>
-          <li><a href="#">Graduation &amp; Careers</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="site-footer__ribbon">
-    <div class="container">
-      <ul class="site-footer__ribbon-links">
-        <li><a href="#">Maps and Locations</a></li>
-        <li><a href="#">Jobs</a></li>
-        <li><a href="#">Directory</a></li>
-        <li><a href="#">Contact ASU</a></li>
-        <li><a href="https://my.asu.edu/">My ASU</a></li>
-      </ul>
-      <p class="site-footer__ranking">
-        <span>Repeatedly ranked<br />30+ lists in the last 3 years</span>
-        <span class="site-footer__ranking-badge" aria-hidden="true">#1</span>
-      </p>
-    </div>
-  </div>
-
-  <div class="site-footer__legal">
-    <ul class="container">
-      <li><a href="#">Copyright and Trademark</a></li>
-      <li><a href="#">Accessibility</a></li>
-      <li><a href="#">Privacy</a></li>
-      <li><a href="#">Terms of Use</a></li>
-      <li><a href="#">Emergency</a></li>
-      <li><a href="#">Manage my privacy settings</a></li>
-    </ul>
-  </div>
-</footer>
-
-<script type="module" src="js/main.js?v=6"></script>
+<script type="module" src="js/main.js?v=7"></script>
 </body>
 </html>

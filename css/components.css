@@ -101,6 +101,49 @@
 }
 
 /*
+  "Pop balloons" cursor-follow tooltip — shown only while the cursor is over
+  an actual balloon (js/graduation-effects.js toggles .visible per-balloon on
+  mouseenter/mouseleave), never any other time. pointer-events: none so it
+  never itself blocks the click that pops the balloon underneath it.
+*/
+.balloon-tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-gray-100);
+  border: 1px solid var(--color-gray-300);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-gray-600);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.balloon-tooltip.visible {
+  opacity: 1;
+}
+
+.balloon-tooltip__icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .balloon-tooltip {
+    transition: none;
+  }
+}
+
+/*
   Sizing, color and border-radius are set per-particle inline by
   graduation-effects.js (two shape variants, gold/maroon fill); this just
   establishes the positioning context the rAF loop animates via transform.

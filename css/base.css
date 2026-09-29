@@ -92,6 +92,56 @@ input:focus-visible,
   padding-inline: var(--container-pad);
 }
 
+/*
+  Shared 12-column grid container (Figma reference) — used by the global
+  header and the hero content, which sit on a wider/differently-margined
+  grid than the rest of the page's .container-based sections. Consumers
+  that need actual column spans (e.g. .hero__title constrained to columns
+  1-6) are direct children and use `grid-column`; consumers that just need
+  the same left/right bounds (e.g. .main-nav, a flex row) override
+  `display` back to flex via the cascade while keeping this element's
+  max-width/margin/padding.
+*/
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--grid-gutter);
+  max-width: var(--grid-max);
+  margin-inline: auto;
+  padding-inline: var(--grid-margin);
+}
+
+/*
+  Matches asuonline.asu.edu's own header container exactly (measured at
+  1920px viewport: 15px gutter, 1320px max-width) — that site uses
+  Bootstrap's `.container-lg`, whose max-width steps at the standard BS5
+  breakpoints (960 / 1140 / 1320), so this reproduces the same table rather
+  than a single fixed value.
+*/
+.header-container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 15px;
+}
+
+@media (min-width: 992px) {
+  .header-container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .header-container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .header-container {
+    max-width: 1320px;
+  }
+}
+
 section[id] {
   scroll-margin-top: var(--space-7);
 }

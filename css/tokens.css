@@ -49,6 +49,19 @@
   /* Layout */
   --container-max: 1440px;
   --container-pad: var(--space-5);
+
+  /*
+    12-column desktop grid (Figma reference): equal margins, first column
+    ~135px from the viewport edge at desktop widths. clamp() rather than a
+    hard breakpoint switch — 7vw resolves to exactly 135px at ~1929px
+    viewport width, so it reads as "135px at desktop" while still scaling
+    down fluidly on laptop-size screens instead of jumping, and floors at
+    the same 24px inset the rest of the site already uses on narrow
+    viewports.
+  */
+  --grid-margin: clamp(24px, 7vw, 135px);
+  --grid-gutter: var(--space-5);
+  --grid-max: 1920px;
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-pill: 999px;

@@ -4,7 +4,7 @@
  * shadow, cursor-following tooltip, and the balloon-drop/confetti trail
  * effects.
  */
-import { startGraduationEffects, stopGraduationEffects, spawnTogglePop } from "./graduation-effects.js?v=8";
+import { startGraduationEffects, stopGraduationEffects, spawnTogglePop } from "./graduation-effects.js?v=9";
 
 export function initModeToggle() {
   const pill = document.getElementById("pill");
