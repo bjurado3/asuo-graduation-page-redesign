@@ -1,0 +1,20 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="53.9186" height="66.652" viewBox="0 0 53.9186 66.652" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 86640">
+<rect id="Rectangle 38902" x="11.7542" y="16.1215" width="30.4098" height="31.1895" fill="#747474"/>
+<g id="Vector" filter="url(#filter0_d_1608_14830)">
+<path d="M4.528 12.4899C4.18778 8.68815 6.98758 5.32193 10.7715 4.98331L38.2126 2.52761C41.9964 2.18899 45.3494 5.0046 45.6897 8.80632L49.3906 50.1621C49.7308 53.9639 46.931 57.3301 43.1471 57.6687L15.706 60.1244C11.9222 60.463 8.56914 57.6474 8.22893 53.8457L4.528 12.4899ZM12.1593 20.4917C12.2441 21.4395 13.0853 22.1458 14.0286 22.0614L38.0395 19.9127C38.9828 19.8283 39.6852 18.9838 39.6004 18.036C39.5156 17.0883 38.6744 16.3819 37.7311 16.4664L13.7202 18.6151C12.7769 18.6995 12.0745 19.544 12.1593 20.4917ZM14.6454 28.9541C13.7021 29.0385 12.9997 29.883 13.0845 30.8307C13.1693 31.7784 14.0105 32.4848 14.9538 32.4004L38.9648 30.2516C39.9081 30.1672 40.6105 29.3227 40.5256 28.375C40.4408 27.4273 39.5997 26.7209 38.6564 26.8053L14.6454 28.9541ZM15.5706 39.293C14.6273 39.3774 13.925 40.2219 14.0098 41.1697C14.0946 42.1174 14.9358 42.8237 15.879 42.7393L29.5996 41.5115C30.5429 41.4271 31.2453 40.5826 31.1605 39.6348C31.0756 38.6871 30.2345 37.9807 29.2912 38.0652L15.5706 39.293Z" fill="#E8E8E8"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_1608_14830" x="5.96046e-08" y="0" width="53.9186" height="66.652" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="2"/>
+<feGaussianBlur stdDeviation="2.25"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1608_14830"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1608_14830" result="shape"/>
+</filter>
+</defs>
+</svg>

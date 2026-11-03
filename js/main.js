@@ -1,9 +1,14 @@
 import { initNav } from "./nav.js";
-import { initPhotoStrip } from "./photo-strip.js";
-import { initModeToggle } from "./mode-toggle.js?v=7";
+import { initPhotoStrip } from "./photo-strip.js?v=4";
+import { initModeToggle } from "./mode-toggle.js?v=11";
 import { initHeaderHeightVar, initToggleBarScrollOffset } from "./header-height.js?v=4";
 import { autoStartGraduationEffectsOnMobile } from "./graduation-effects.js?v=9";
-import { initCeremonyAccordion } from "./ceremony-accordion.js";
+import { initReadyTabs } from "./ready-tabs.js";
+import { initScrollReveal } from "./scroll-reveal.js?v=3";
+import { initTasselChat } from "./tassel-chat.js";
+import { initFaq } from "./faq.js";
+import { initAlumniOrbit } from "./alumni-orbit.js?v=2";
+import { initRfiForm } from "./rfi-form.js";
 
 initNav();
 initPhotoStrip();
@@ -11,4 +16,9 @@ initHeaderHeightVar();
 initToggleBarScrollOffset();
 initModeToggle();
 autoStartGraduationEffectsOnMobile();
-initCeremonyAccordion();
+initReadyTabs();
+initScrollReveal();
+initTasselChat();
+initFaq();
+initAlumniOrbit();
+initRfiForm();

@@ -1,9 +1,15 @@
 /* ---------- Hero ---------- */
+/*
+  Figma "Desktop" hero: 476px-tall photo, dark #191919 gradient rising from the
+  bottom 270px, white H1 + 18/27 subhead pinned bottom-left with 48px of
+  padding below. Content sits on the shared 12-column grid (.grid-container):
+  title spans all columns, subhead spans columns 1-7 (= the design's 631px at
+  a 1280px viewport).
+*/
 .hero {
   position: relative;
   color: var(--color-white);
   overflow: hidden;
-  /* Confirmed: fixed height of 476px (not aspect-ratio scaled with width). */
   width: 100%;
   height: 476px;
   /* Pins .hero__content (the only in-flow child) to the bottom of the box. */
@@ -23,242 +29,265 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* subject sits right-of-center in the source crop; keep him in frame on narrow viewports */
-  object-position: 75% center;
+  object-position: center;
 }
 
 .hero__scrim {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 270px;
   background: linear-gradient(
-    100deg,
-    rgba(0, 0, 0, 0.72) 0%,
-    rgba(0, 0, 0, 0.45) 45%,
-    rgba(0, 0, 0, 0.15) 75%
+    to top,
+    var(--color-near-black) 0%,
+    rgba(25, 25, 25, 0) 94.51%
   );
   z-index: 1;
 }
 
 .hero__content {
   /*
-    Uses .grid-container (base.css) for the same 12-column max-width/margin
-    as the header above it — but .hero (its parent) is a flex container, and
-    a flex item with .grid-container's inherited `margin-inline: auto`
-    doesn't stretch to fill the cross axis the way a normal block would:
-    auto cross-axis margins opt the item out of stretch entirely, so it
-    would shrink-to-fit its content and center that narrower box, drifting
-    the title away from the nav's left edge above it. Overriding the margin
-    to 0 (and forcing width:100%) restores normal stretch behavior — full
-    width, flush left — while grid-container's own padding-inline/columns
-    still apply.
+    .hero is a flex container, and a flex item with .grid-container's
+    `margin-inline: auto` shrinks to fit instead of stretching, so reset the
+    margin and force full width to keep the grid's left edge flush with the
+    header above it.
   */
   width: 100%;
   margin-inline: 0;
   position: relative;
   z-index: 2;
-  padding-bottom: 32px;
+  padding-bottom: 48px;
+  row-gap: 24px;
 }
 
 .hero__title {
-  /* Confirmed via Figma: H1/xl, 72/86.4 — the generic (non-H2) xl step,
-     one size up from "This could be you"'s H2/xl (60/72). */
-  grid-column: 1 / 7;
+  /* Figma H1/xl: 72/86.4, bold, -3.5% tracking. */
+  grid-column: 1 / -1;
   font-size: 72px;
   line-height: 86.4px;
+  letter-spacing: -0.035em;
   font-weight: 900;
-  margin-bottom: var(--space-3);
-}
-
-@media (max-width: 900px) {
-  .hero__title {
-    grid-column: 1 / -1;
-    font-size: clamp(1.75rem, 6vw, 72px);
-    line-height: 1.2;
-  }
-}
-
-@media (max-width: 640px) {
-  .hero__title {
-    margin-bottom: var(--space-2);
-  }
 }
 
 .hero__subhead {
-  /* Same body style as .could-be-you__subhead (18/27) for consistency. */
-  grid-column: 1 / 7;
+  /* Figma Body/large 18/27, #fafafa, 7 of 12 columns wide. */
+  grid-column: 1 / 8;
   font-size: 18px;
   line-height: 27px;
+  color: #fafafa;
 }
 
 @media (max-width: 900px) {
+  .hero__title {
+    font-size: clamp(1.75rem, 8vw, 72px);
+    line-height: 1.2;
+  }
+
   .hero__subhead {
     grid-column: 1 / -1;
   }
 }
 
+@media (max-width: 640px) {
+  .hero {
+    height: 420px;
+  }
+
+  .hero__content {
+    row-gap: var(--space-3);
+    padding-bottom: var(--space-6);
+  }
+}
+
 /* ---------- This could be you ---------- */
+/*
+  Figma "This could be you": 96px vertical padding, 32px between the heading
+  block, the photo row and the CTA. Content is centered across columns 2-11
+  of the shared 12-column grid; the photo row fills those 10 columns.
+*/
 .could-be-you {
   padding-block: 96px;
   text-align: center;
+  row-gap: 32px;
+}
+
+.could-be-you > * {
+  grid-column: 2 / 12;
 }
 
 .could-be-you__title {
-  /* Confirmed via Figma inspect: H2/xl, 60/72. */
+  /* H2/xl, 60/72. */
   font-size: 60px;
   line-height: 72px;
   letter-spacing: -0.035em;
-  color: #191919;
+  color: var(--color-near-black);
   font-weight: 900;
-  margin-bottom: var(--space-2);
+  margin-bottom: 12px;
 }
 
 @media (max-width: 640px) {
   .could-be-you__title {
-    font-size: clamp(1.5rem, 8vw, 60px);
+    font-size: clamp(1.75rem, 10vw, 60px);
     line-height: 1.2;
   }
 }
 
 .could-be-you__highlight {
+  display: inline-block;
   background: var(--color-gold);
-  padding: 0 0.3em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
+  height: 58px;
+  line-height: 58px;
+  padding-inline: 7px;
+  vertical-align: middle;
 }
 
 .could-be-you__subhead {
-  max-width: 640px;
+  max-width: 804px;
   margin-inline: auto;
-  color: var(--color-text-muted);
+  color: #484848;
   font-size: 18px;
   line-height: 27px;
   font-weight: 400;
-  margin-bottom: var(--space-4);
+}
+
+.could-be-you__cta {
+  /* Figma Buttons-v3: 16px bold, 16/32 padding, 25px radius, no border. */
+  justify-self: center;
+  grid-column: 2 / 12;
+  padding: 16px 32px;
+  font-size: 16px;
+  border: 0;
+  border-radius: 25px;
+  color: var(--color-near-black);
 }
 
 /*
-  Individual interactive photo cards (no wrapping background — removed per
-  latest feedback). Count: 5, fanned symmetrically around the center card.
+  Five overlapping photo cards, each tilted a hair (Figma rotations in --rot).
+  Each card is a crop of a larger photo; the <img> percentages below are the
+  Figma crop offsets. Hover/focus straightens a card and lifts it above its
+  neighbors (timing follows the Ocean Futures profile cards); the graduate's
+  name appears in a cursor-following tag (.photo-tag, js/photo-strip.js).
 */
 .photo-strip {
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: flex-end;
-  gap: 0;
-  padding-block: var(--space-8);
+  padding: 0;
 }
 
 .photo-strip__item {
+  --rot: 0deg;
   position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  aspect-ratio: 185 / 237;
+  margin-left: -14px;
   border: none;
-  background: none;
+  background: var(--color-near-black);
   padding: 0;
   cursor: pointer;
-  width: min(180px, 17vw);
-  margin-inline: -20px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  border-radius: var(--radius-sm);
-  overflow: visible;
-  /*
-    Timing matches the profile-card hover behavior on
-    explore.asuonline.asu.edu/ocean-futures ("Check out what we've been up
-    to on social"): each card straightens (rotate -> 0) and jumps in front
-    of its neighbors (z-index -> top) on hover/focus, over 0.5s ease-in-out.
-  */
-  transition: transform 0.5s ease-in-out, z-index 0.5s ease-in-out;
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+  transform: rotate(var(--rot)) scale(var(--scale, 1));
+  transition: transform 0.5s ease-in-out;
 }
 
-.photo-strip__item:nth-child(1) {
-  transform: rotate(-10deg);
-  z-index: 1;
+.photo-strip__item:first-child {
+  margin-left: 0;
 }
 
-.photo-strip__item:nth-child(2) {
-  transform: rotate(-5deg) translateY(-6px);
-  z-index: 2;
-}
+.photo-strip__item:nth-child(1) { --rot: -1deg; z-index: 1; }
+.photo-strip__item:nth-child(2) { --rot: 2.06deg; z-index: 2; }
+.photo-strip__item:nth-child(3) { --rot: -2.11deg; z-index: 3; }
+.photo-strip__item:nth-child(4) { --rot: 2.28deg; z-index: 2; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05); }
+.photo-strip__item:nth-child(5) { --rot: 2.28deg; z-index: 1; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05); }
 
-.photo-strip__item:nth-child(3) {
-  transform: translateY(-12px);
-  z-index: 3;
-}
-
-.photo-strip__item:nth-child(4) {
-  transform: rotate(5deg) translateY(-6px);
-  z-index: 2;
-}
-
-.photo-strip__item:nth-child(5) {
-  transform: rotate(10deg);
-  z-index: 1;
-}
-
-.photo-strip__item:hover,
-.photo-strip__item:focus-visible,
-.photo-strip__item.is-active {
-  z-index: 10;
-}
-
-.photo-strip__item:nth-child(1):hover,
-.photo-strip__item:nth-child(1):focus-visible,
-.photo-strip__item:nth-child(1).is-active,
-.photo-strip__item:nth-child(5):hover,
-.photo-strip__item:nth-child(5):focus-visible,
-.photo-strip__item:nth-child(5).is-active {
-  transform: rotate(0deg);
-}
-
-.photo-strip__item:nth-child(2):hover,
-.photo-strip__item:nth-child(2):focus-visible,
-.photo-strip__item:nth-child(2).is-active,
-.photo-strip__item:nth-child(4):hover,
-.photo-strip__item:nth-child(4):focus-visible,
-.photo-strip__item:nth-child(4).is-active {
-  transform: rotate(0deg) translateY(-6px);
-}
-
-.photo-strip__item:nth-child(3):hover,
-.photo-strip__item:nth-child(3):focus-visible,
-.photo-strip__item:nth-child(3).is-active {
-  transform: translateY(-12px);
-}
-
-.photo-strip__item .placeholder-box {
-  border-radius: var(--radius-sm);
-  aspect-ratio: 6 / 7;
-  width: 100%;
-}
-
-.photo-strip__tag {
+.photo-strip__item img {
   position: absolute;
-  top: -0.5rem;
-  left: 50%;
-  transform: translate(-50%, -100%);
+  max-width: none;
+  pointer-events: none;
+}
+
+/* Figma crop offsets, as percentages of the card box. */
+.photo-strip__item:nth-child(1) img { width: 352.69%; height: 184.44%; left: -158.47%; top: -12.05%; }
+.photo-strip__item:nth-child(3) img { width: 587.2%; height: 257.1%; left: -304.9%; top: -65.66%; object-fit: cover; }
+.photo-strip__item:nth-child(4) img { width: 271.9%; height: 142.18%; left: -47.61%; top: -11.53%; }
+.photo-strip__item:nth-child(5) img { width: 271.9%; height: 142.18%; left: -116.85%; top: -22.33%; }
+
+/* Card 2's photo is counter-rotated in the design so the family stays level. */
+.photo-strip__item:nth-child(2) img {
+  width: 199.67%;
+  height: 103.5%;
+  left: 57.27%;
+  top: 50.2%;
+  object-fit: cover;
+  /* Cancels the card's tilt so the family stays level, including the hover tilt. */
+  transform: translate(-50%, -50%) rotate(calc(var(--rot) * -1));
+  transition: transform 0.5s ease-in-out;
+}
+
+/*
+  Hover, copied from asuonline.asu.edu/students/community: the card scales to
+  1.1, settles on a new small random tilt and jumps to the front (inline
+  --scale / --rot / z-index from js/photo-strip.js, 0.5s ease-in-out), while a
+  maroon name pill follows the cursor 20px down and right.
+*/
+.photo-tag {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  box-sizing: border-box;
+  width: max-content;
+  padding: 8px 16px;
+  border-radius: 45px;
   background: var(--color-maroon);
   color: var(--color-white);
-  font-weight: bold;
-  font-size: 0.875rem;
+  font-size: 16px;
+  line-height: 24px;
   white-space: nowrap;
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-pill);
-  opacity: 0;
   pointer-events: none;
-  transition: opacity var(--duration-fast) var(--ease-standard);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.photo-strip__item:hover .photo-strip__tag,
-.photo-strip__item:focus-visible .photo-strip__tag,
-.photo-strip__item.is-active .photo-strip__tag {
+.photo-tag.is-visible {
   opacity: 1;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .could-be-you {
+    padding-block: var(--space-7);
+  }
+
+  .could-be-you > * {
+    grid-column: 1 / -1;
+  }
+
   .photo-strip {
-    padding-inline: var(--space-4);
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 12px 0;
+    scroll-snap-type: x proximity;
   }
 
   .photo-strip__item {
-    margin-inline: -12px;
+    flex: 0 0 150px;
+    scroll-snap-align: center;
+  }
+
+  .photo-tag {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-strip__item,
+  .photo-strip__item:nth-child(2) img,
+  .photo-tag {
+    transition: none;
   }
 }
 
@@ -273,179 +302,2492 @@
   border-radius: var(--radius-pill);
 }
 
-/* ---------- Picking your ceremonies ---------- */
-.picking-ceremonies {
-  padding-block: var(--space-8);
-}
-
-.ceremony-accordion__sentinel {
-  /* A normal (non-positioned) 0-height block, right before the pinned
-     wrapper — i.e. it sits at the same starting point .picking-
-     ceremonies__pinned's own natural flow position does, so it keeps moving
-     normally with scroll even once that wrapper is pinned, giving
-     js/ceremony-accordion.js a reliable continuous signal for "has scrolled
-     past the point where the pinned pair engages". */
-  display: block;
-  height: 0;
-  pointer-events: none;
-}
-
+/* ---------- Ready to graduate? ---------- */
 /*
-  Text and the accordion box are both children of ONE sticky wrapper rather
-  than each having their own independent position: sticky — two separately-
-  sticky elements paired only by a matching `top` drift apart the moment
-  their natural heights diverge (which they did here: the accordion box
-  shrinks once it collapses to "only the last row open", the text never
-  does). A single sticky box can't drift from itself — both columns just
-  move with it. .picking-ceremonies__spacer below gives it room to travel
-  before releasing.
+  Figma "Ready to graduate?": #fafafa band, 96px vertical padding, cap icon +
+  60/72 H2 + 18/27 subhead, a pill tab switcher (Applying / Going) and a
+  white bordered panel with 48px padding. Everything sits on columns 2-11 of
+  the shared 12-column grid.
 */
-.picking-ceremonies__pinned {
-  position: sticky;
-  top: calc(var(--header-height, 0px) + 96px);
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--space-8);
-  align-items: start;
-  /*
-    Without this, the wrapper's own height (align-items: start means it's
-    just whichever column is naturally tallest) shrinks the moment the
-    accordion collapses — and since that same shrinking height is this
-    sticky wrapper's own release boundary, it would release (and take the
-    paired text with it) sooner than intended right after the rows finish
-    collapsing, cutting the pinned pause short. A stable min-height keeps
-    that release boundary — and so the pause — consistent regardless of
-    collapsed/expanded state.
-  */
-  min-height: 900px;
+.ready {
+  background: #fafafa;
+  padding-block: 96px;
+  row-gap: 32px;
+  max-width: none;
 }
 
-/* Scroll room past where the pinned wrapper engages, for a brief pinned
-   pause before it releases. Needs to be generous: the accordion box is
-   ~615px tall fully expanded (all 3 items open by default), so it — not the
-   much shorter text column — determines how much of this the wrapper
-   actually needs. */
-.picking-ceremonies__spacer {
-  height: 500px;
+.ready > * {
+  grid-column: 2 / 12;
 }
 
-.picking-ceremonies__title {
-  position: relative;
-  font-size: clamp(1.75rem, 3.6vw, 2.75rem);
-  line-height: 1.15;
+.ready__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.ready__icon {
+  width: 75px;
+  height: auto;
+}
+
+.ready__title {
+  font-size: 60px;
+  line-height: 72px;
+  letter-spacing: -0.035em;
   font-weight: 900;
-  margin-bottom: var(--space-5);
+  color: var(--color-near-black);
+  margin-top: 8px;
 }
 
-.picking-ceremonies__title::before {
-  content: "";
-  display: block;
-  width: 64px;
-  height: 5px;
-  background: var(--color-gold);
-  margin-bottom: var(--space-4);
+.ready__subhead {
+  max-width: 765px;
+  margin-top: 8px;
+  font-size: 18px;
+  line-height: 27px;
+  color: #484848;
 }
 
-.picking-ceremonies__text p {
-  color: var(--color-text-muted);
-  font-size: 1.0625rem;
-  line-height: 1.6;
-}
-
-.picking-ceremonies__text p + p {
-  margin-top: var(--space-5);
-}
-
-/*
-  Single bordered accordion box — NOT separate overlapping cards (reverted
-  per feedback: cards covering each other looked wrong; all three headers
-  should stay visible at once, only one panel open, like the approved
-  reference). All rows start expanded; once .picking-ceremonies__pinned
-  (above) engages its sticky offset, this collapses to only the last row
-  (matches the approved "closed state" reference), and reopens fully if the
-  user scrolls back up past that point.
-*/
-/*
-  Rows are plain normal-flow blocks — NOT individually position: sticky.
-  Nesting a sticky item inside another sticky element (.picking-ceremonies__
-  pinned) turned out to have several layers of hard-to-predict browser
-  behavior: a sticky row can't render closer to the row before it than that
-  row's own margin-box edge, and that clamp is resolved against the
-  *previous row's current rendered position*, not just fixed flow math — so
-  with 3+ stacked sticky rows the later ones lagged and drifted rather than
-  reaching their intended flush position. Tying the gap directly to the
-  `.is-open` state we already control reliably (js/ceremony-accordion.js)
-  is far simpler and fully deterministic: collapsing a row just transitions
-  its own trailing margin to 0, closing the gap to the next row.
-*/
-.ceremony-item {
-  border: 1px solid var(--color-gray-300);
-  border-radius: 0;
+/* Tab switcher */
+.ready__tabs {
+  display: flex;
+  gap: 8px;
+  height: 48px;
+  padding: 4px;
   background: var(--color-white);
-  overflow: hidden;
-  margin-bottom: var(--space-6);
-  /* Slower than the site's default --duration-medium (300ms) specifically
-     for this merge — it reads noticeably smoother than a quick snap, and
-     stays in sync with .ceremony-item__panel-wrap's own transition below
-     (same duration/easing) since both animate together. */
-  transition: margin-bottom 500ms var(--ease-standard);
+  border: 1px solid #d0d0d0;
+  border-radius: 100px;
 }
 
-.ceremony-item:last-child {
-  margin-bottom: 0;
-}
-
-.ceremony-item:not(.is-open) {
-  margin-bottom: 0;
-}
-
-.ceremony-item__heading {
-  margin: 0;
-}
-
-.ceremony-item__trigger {
-  display: block;
-  width: 100%;
-  border: none;
-  background: none;
+.ready__tab {
+  flex: 1 1 0;
+  min-width: 0;
+  border: 0;
+  border-radius: 100px;
+  background: transparent;
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: bold;
+  color: #747474;
   cursor: pointer;
-  text-align: left;
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-text);
-  padding: var(--space-6);
+  transition: background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
 }
 
-.ceremony-item__panel-wrap {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 500ms var(--ease-standard);
+.ready__tab:hover {
+  color: var(--color-near-black);
 }
 
-.ceremony-item.is-open .ceremony-item__panel-wrap {
-  grid-template-rows: 1fr;
+.ready__tab.is-selected {
+  background: var(--color-gold);
+  color: var(--color-near-black);
 }
 
-.ceremony-item__panel {
-  overflow: hidden;
-  padding-inline: var(--space-6);
+/* Panel */
+.ready__panel {
+  background: var(--color-white);
+  border: 1px solid #d0d0d0;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-near-black);
 }
 
-.ceremony-item__panel p {
-  color: var(--color-text-muted);
-  font-size: 1rem;
-  line-height: 1.6;
-  padding-bottom: var(--space-6);
+.ready__panel[hidden] {
+  display: none;
+}
+
+.ready__panel a {
+  color: var(--color-maroon);
+  text-decoration: underline;
+}
+
+.ready__lead {
+  font-size: 24px;
+  line-height: 28.8px;
+  letter-spacing: -0.035em;
+  font-weight: bold;
+  color: var(--color-black);
+}
+
+.ready__lead--box {
+  background: #fafafa;
+  border: 1px solid #d9d9d9;
+  padding: 32px 24px;
+  color: var(--color-near-black);
+}
+
+.ready__steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ready__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.ready__num {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: var(--color-black);
+  font-size: 18px;
+  line-height: 21.6px;
+  font-weight: bold;
+}
+
+.ready__step-body {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ready__alpha {
+  list-style: lower-alpha;
+  padding-left: 48px;
+}
+
+.ready__callout {
+  background: #fafafa;
+  padding: 24px 32px;
+}
+
+.ready__callout-title {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19.2px;
+  letter-spacing: -0.035em;
+  margin-bottom: 12px;
+}
+
+.ready__callout ul {
+  list-style: disc;
+  padding-left: 24px;
+}
+
+.ready__subtitle {
+  font-size: 24px;
+  line-height: 28.8px;
+  letter-spacing: -0.035em;
+  font-weight: bold;
+}
+
+.ready__muted {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19.2px;
+  letter-spacing: -0.035em;
+  color: #747474;
+}
+
+.ready__bullets {
+  list-style: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-left: 24px;
 }
 
 @media (max-width: 768px) {
-  .picking-ceremonies {
+  .ready {
     padding-block: var(--space-7);
   }
 
-  .picking-ceremonies__pinned {
+  .ready > * {
+    grid-column: 1 / -1;
+  }
+
+  .ready__title {
+    font-size: clamp(1.75rem, 10vw, 60px);
+    line-height: 1.2;
+  }
+
+  .ready__tab {
+    padding-inline: 8px;
+    font-size: 14px;
+  }
+
+  .ready__panel {
+    padding: 24px 16px;
+  }
+
+  .ready__callout {
+    padding: 16px;
+  }
+}
+
+/* ---------- Picking your ceremonies ---------- */
+/*
+  Figma "Picking your ceremonies": white section, 96px vertical padding, gold
+  64x8 rule above a 60/72 H2, 18/27 intro, then three equal bordered cards
+  (4 of 12 columns each, 32px padding, 2px #d0d0d0 border).
+*/
+.ceremonies {
+  padding-block: 96px;
+  row-gap: 32px;
+}
+
+.ceremonies__header {
+  grid-column: 1 / 11;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.ceremonies__rule {
+  width: 64px;
+  height: 8px;
+}
+
+.ceremonies__title {
+  font-size: 60px;
+  line-height: 72px;
+  letter-spacing: -0.035em;
+  font-weight: 900;
+  color: var(--color-near-black);
+  margin-top: 8px;
+}
+
+.ceremonies__intro {
+  margin-top: 8px;
+  font-size: 18px;
+  line-height: 27px;
+  color: var(--color-near-black);
+}
+
+.ceremonies__intro p + p {
+  margin-top: 27px;
+}
+
+.ceremonies a,
+.ceremony-card a {
+  color: var(--color-maroon);
+  text-decoration: underline;
+}
+
+.ceremonies__cards {
+  grid-column: 1 / -1;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  align-items: stretch;
+}
+
+.ceremony-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 436px;
+  padding: 32px;
+  background: var(--color-white);
+  border: 1px solid #d0d0d0;
+  font-size: 18px;
+  line-height: 27px;
+  color: var(--color-near-black);
+}
+
+.ceremony-card__icon {
+  width: 35px;
+  height: 35px;
+}
+
+.ceremony-card__title {
+  font-size: 24px;
+  line-height: 28.8px;
+  letter-spacing: -0.035em;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 900px) {
+  .ceremonies {
+    padding-block: var(--space-7);
+  }
+
+  .ceremonies__header {
+    grid-column: 1 / -1;
+  }
+
+  .ceremonies__title {
+    font-size: clamp(1.75rem, 10vw, 60px);
+    line-height: 1.2;
+  }
+
+  .ceremonies__cards {
     grid-template-columns: 1fr;
-    gap: var(--space-6);
+    row-gap: var(--space-5);
+  }
+
+  .ceremony-card {
+    min-height: 0;
+  }
+}
+
+/* ---------- Registering for a ceremony / Summer graduates ---------- */
+/*
+  Figma: two 1101x527 photo panels, 32px apart, each with a 480px white card
+  (32px padding) inset ~70px from the panel edge and vertically centered.
+  Scroll-in animation copies asuonline.asu.edu's "slide-to-left/right" card:
+  the card starts translated 125% of its own width toward the side it enters
+  from (clipped by the panel's overflow: hidden) and transitions to rest
+  over 0.5s when the panel scrolls into view (js/scroll-reveal.js).
+*/
+.feature-panels {
+  row-gap: 32px;
+  padding-bottom: 96px;
+}
+
+.feature-panel {
+  grid-column: 1 / -1;
+  position: relative;
+  overflow: hidden;
+  min-height: 527px;
+  /* The panel is the full 1110px grid width, so its own 12 columns line up
+     with the page grid; the cards span 5 columns each. */
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  align-items: center;
+}
+
+/* Registering: card on columns 7-11. Summer: columns 2-6. */
+.feature-panel--registering .feature-panel__card {
+  grid-column: 7 / 12;
+}
+
+.feature-panel--summer .feature-panel__card {
+  grid-column: 2 / 7;
+}
+
+/*
+  Photo zoom-out, copied from asuonline.asu.edu's background-image-container:
+  the photo layer starts at scale(1.1) and settles to scale(1) over 0.5s
+  (ease-in-out, 50ms delay) once the panel is about half on screen. Scaling
+  this wrapper (not the <img>) keeps the zoom centered on the panel, with the
+  panel's overflow: hidden clipping the extra.
+*/
+.feature-panel__media {
+  position: absolute;
+  inset: 0;
+  transform: scale(1.1);
+  transform-origin: center center;
+  transition: transform 0.5s ease-in-out 50ms;
+}
+
+.feature-panel__media.is-in {
+  transform: scale(1);
+}
+
+.feature-panel__img {
+  position: absolute;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Figma crop of each photo inside its panel. */
+.feature-panel--registering .feature-panel__img {
+  width: 186.92%;
+  height: 179.51%;
+  left: -33.65%;
+  top: -57.22%;
+}
+
+.feature-panel--summer .feature-panel__img {
+  width: 149.45%;
+  height: 122.46%;
+  left: -35.56%;
+  top: -13.52%;
+}
+
+.feature-panel__card {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px;
+  background: var(--color-white);
+  color: var(--color-near-black);
+  font-size: 16px;
+  line-height: 24px;
+  transition: transform 0.5s;
+}
+
+.feature-panel--summer .feature-panel__card {
+  gap: 16px;
+}
+
+.feature-panel__title {
+  font-size: 36px;
+  line-height: 43.2px;
+  letter-spacing: -0.035em;
+  font-weight: 900;
+}
+
+.feature-panel__note-title {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19.2px;
+  letter-spacing: -0.035em;
+  margin-bottom: 4px;
+}
+
+.feature-panel__note ul {
+  list-style: disc;
+  padding-left: 24px;
+}
+
+/* Pre-reveal state — added by js/scroll-reveal.js, removed when in view. */
+.feature-panel__card.is-hidden-right {
+  transform: translateX(125%);
+}
+
+.feature-panel__card.is-hidden-left {
+  transform: translateX(-125%);
+}
+
+@media (max-width: 900px) {
+  .feature-panels {
+    padding-bottom: var(--space-7);
+  }
+
+  .feature-panel {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+    padding: 220px var(--space-4) var(--space-4);
+  }
+
+  .feature-panel--registering .feature-panel__card,
+  .feature-panel--summer .feature-panel__card {
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .feature-panel__title {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-panel__card {
+    transition: none;
+  }
+
+  .feature-panel__card.is-hidden-right,
+  .feature-panel__card.is-hidden-left {
+    transform: none;
+  }
+
+  .feature-panel__media {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Tassel chatbot ---------- */
+/*
+  Figma "Get graduation answers and updates with Tassel": copy + QR on the
+  left (columns 1-5), a 595x659 phone stage on the right, clipped flush at the
+  bottom of the section. All stage children use Figma's coordinates inside
+  that 595x659 frame. The chat plays Figma's 8.5s motion loop (keyframes
+  copied from the file's motion data); the pause button freezes it.
+*/
+.tassel {
+  position: relative;
+  overflow: hidden;
+  min-height: 750px;
+  align-items: start;
+  background: var(--color-white);
+}
+
+.tassel__copy {
+  grid-column: 1 / 6;
+  padding-top: 104px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  color: var(--color-near-black);
+}
+
+.tassel__icon {
+  width: 78px;
+  height: auto;
+}
+
+.tassel__title {
+  max-width: 429px;
+  font-size: 36px;
+  line-height: 43.2px;
+  letter-spacing: -0.035em;
+  font-weight: 900;
+  margin-bottom: 20px; /* + 12px flex gap = Figma's 32px */
+}
+
+.tassel__text {
+  max-width: 426px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.tassel__qr-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 182px;
+}
+
+.tassel__qr {
+  flex: 0 0 152px;
+  height: 147px;
+  padding: 3px 6px;
+  background: var(--color-white);
+  border: 0.9px solid #d0d0d0;
+  border-radius: 2.6px;
+  box-shadow: 0 1.4px 7.9px rgba(0, 0, 0, 0.16);
+}
+
+.tassel__qr img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+}
+
+.tassel__qr-text {
+  max-width: 197px;
+  font-size: 18px;
+  line-height: 21.6px;
+  letter-spacing: -0.035em;
+  font-weight: bold;
+}
+
+.tassel__sms {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: -12px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-maroon);
+}
+
+.tassel__sms img {
+  flex: 0 0 15px;
+}
+
+/* Phone stage */
+.tassel__stage {
+  --sf: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  /* The phone's bezel is centered on columns 7-11 (the negative margin pulls the 595px
+     stage left so the phone, not the stage edge, sits on the column span). */
+  grid-column: 7 / 13;
+  justify-self: start;
+  margin-left: calc(((var(--grid-content) - 330px) * 5 / 12 + 120px) / 2 - 271px);
+  position: relative;
+  width: 595px;
+  height: 659px;
+  margin-top: 91px;
+  overflow: hidden;
+  font-family: var(--sf);
+}
+
+.tassel__stage img {
+  max-width: none;
+}
+
+.tassel__phone {
+  position: absolute;
+  left: -63px;
+  top: -20.6px;
+  width: 642.174px;
+  height: 963.261px;
+  transform: rotate(0.38deg);
+}
+
+/* Chat messages (outer wrapper = animated position, inner = Figma tilt) */
+.tassel__msg {
+  position: absolute;
+}
+
+.tassel__msg p {
+  margin: 0;
+}
+
+.tassel__msg-inner {
+  position: relative;
+}
+
+.tassel__msg--greeting {
+  left: 8.11px;
+  top: 187.55px;
+  width: 308px;
+  height: 106px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tassel__msg--greeting .tassel__msg-inner {
+  transform: rotate(0.41deg);
+  width: 307.277px;
+  height: 103.932px;
+  background: #e9e9eb;
+  border-radius: 14.46px;
+  box-shadow: 0 3.615px 3.615px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.tassel__msg--greeting p {
+  position: absolute;
+  left: 15.36px;
+  top: 8.13px;
+  width: 276.549px;
+  font-size: 22.025px;
+  line-height: 28.495px;
+  letter-spacing: -0.5287px;
+  color: #000;
+}
+
+.tassel__msg--user {
+  left: 157.37px;
+  top: 322.25px;
+  width: 314.184px;
+  height: 81.859px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tassel__msg--user .tassel__msg-inner {
+  transform: rotate(-0.38deg);
+  width: 313.662px;
+  display: flex;
+  justify-content: flex-end;
+  filter: drop-shadow(0 3.704px 1.852px rgba(0, 0, 0, 0.12));
+}
+
+.tassel__msg--user p {
+  width: 251.325px;
+  min-height: 79.78px;
+  padding: 8.531px 8.802px 8.531px 17.063px;
+  background: #448af7;
+  border-radius: 15.854px;
+  font-size: 24.086px;
+  line-height: 31.282px;
+  letter-spacing: -0.5801px;
+  color: #fff;
+}
+
+.tassel__msg--reply {
+  left: 92.58px;
+  top: 443.71px;
+  width: 345.97px;
+  height: 73.15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tassel__msg--reply .tassel__msg-inner {
+  transform: rotate(-0.07deg);
+  width: 345.886px;
+  filter: drop-shadow(0 3.615px 1.808px rgba(0, 0, 0, 0.12));
+}
+
+.tassel__msg--reply p {
+  height: 72.749px;
+  padding: 7.773px 15.545px;
+  background: #e9e9eb;
+  border-radius: 14.46px;
+  font-size: 22.023px;
+  line-height: 28.5px;
+  letter-spacing: -0.5285px;
+  color: #000;
+}
+
+/* Typing indicator */
+.tassel__typing {
+  position: absolute;
+  left: 89.53px;
+  top: 438.22px;
+  width: 121.344px;
+  height: 85.051px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tassel__typing-inner {
+  transform: rotate(-2.86deg);
+  width: 117.533px;
+  padding: 8.823px;
+}
+
+.tassel__typing-bubble {
+  position: relative;
+  transform: rotate(3.01deg);
+  height: 56.468px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5.294px;
+  background: #e9e9eb;
+  border-radius: 28.234px;
+}
+
+.anim-dot {
+  width: 10.588px;
+  height: 10.588px;
+}
+
+.tassel__tail {
+  position: absolute;
+}
+
+.tassel__tail--1 {
+  left: 0;
+  top: 38.82px;
+  width: 21.175px;
+  height: 21.175px;
+}
+
+.tassel__tail--2 {
+  left: -8.31px;
+  top: 57.03px;
+  width: 9.246px;
+  height: 9.246px;
+}
+
+/* iPhone header overlay */
+.tassel__header {
+  position: absolute;
+  left: 74.84px;
+  top: 25.91px;
+  width: 372.016px;
+  display: flex;
+  flex-direction: column;
+  gap: 7.403px;
+  padding: 11.105px 0 12.956px;
+  background: #f5f5f7;
+  border-bottom: 0.925px solid #e5e5ea;
+  border-radius: 48.121px 48.121px 0 0;
+  font-family: Inter, var(--sf);
+}
+
+.tassel__status {
+  display: flex;
+  align-items: center;
+  gap: 57.376px;
+  padding: 0 34.24px 0 38.867px;
+}
+
+.tassel__time {
+  font-size: 13.881px;
+  font-weight: 600;
+  color: #000;
+  white-space: nowrap;
+}
+
+.tassel__status-icons {
+  display: flex;
+  align-items: center;
+  gap: 4.627px;
+  height: 17.94px;
+}
+
+.tassel__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14.807px;
+}
+
+.tassel__nav-spacer {
+  width: 40.718px;
+  height: 40.718px;
+}
+
+.tassel__group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.702px;
+}
+
+.tassel__avatar {
+  width: 74.033px;
+  height: 44.42px;
+  object-fit: contain;
+}
+
+.tassel__group-title {
+  font-size: 11.105px;
+  font-weight: 500;
+  color: #000;
+}
+
+/* Pause / play */
+.tassel__pause {
+  position: absolute;
+  right: 37px;
+  bottom: 62px;
+  width: 63px;
+  height: 63px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+}
+
+.tassel__pause-icon {
+  position: absolute;
+  inset: 0;
+  width: 63px;
+  height: 63px;
+}
+
+.tassel__pause-icon--play {
+  display: none;
+}
+
+.tassel__pause[aria-pressed="true"] .tassel__pause-icon--pause {
+  display: none;
+}
+
+.tassel__pause[aria-pressed="true"] .tassel__pause-icon--play {
+  display: block;
+}
+
+.tassel__pause:hover .tassel__pause-icon {
+  filter: brightness(0.96);
+}
+
+/*
+  Motion: 8.5s loop, keyframes copied from Figma's motion data
+  (typing indicator, dot pulses, three message bubbles).
+*/
+.anim-greeting,
+.anim-user,
+.anim-reply,
+.anim-typing,
+.anim-dot {
+  animation-duration: 8.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.anim-greeting { animation-name: tassel-greeting-opacity, tassel-greeting-move; }
+.anim-user { animation-name: tassel-user-opacity, tassel-user-move; }
+.anim-reply { animation-name: tassel-reply-opacity, tassel-reply-move; }
+.anim-typing { animation-name: tassel-typing; }
+.anim-dot--l { animation-name: tassel-dot-l; }
+.anim-dot--c { animation-name: tassel-dot-c; }
+.anim-dot--r { animation-name: tassel-dot-r; }
+
+/* Paused: freeze every animation in the stage. */
+.tassel__stage.is-paused .anim-greeting,
+.tassel__stage.is-paused .anim-user,
+.tassel__stage.is-paused .anim-reply,
+.tassel__stage.is-paused .anim-typing,
+.tassel__stage.is-paused .anim-dot {
+  animation-play-state: paused;
+}
+
+/* Reduced motion: start paused on a frame where the whole chat is visible (t = 7.9s). */
+.tassel__stage.is-static .anim-greeting,
+.tassel__stage.is-static .anim-user,
+.tassel__stage.is-static .anim-reply,
+.tassel__stage.is-static .anim-typing,
+.tassel__stage.is-static .anim-dot {
+  animation-delay: -7.9s;
+}
+
+@keyframes tassel-greeting-opacity {
+  0% { opacity: 0; }
+  4.259% { animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); opacity: 0; }
+  10.235% { opacity: 1; }
+  94.118% { animation-timing-function: cubic-bezier(0.4, 0, 0.7, 0.4); opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes tassel-greeting-move {
+  0% { translate: 0 14.46px; }
+  4.259% { animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); translate: 0 14.46px; }
+  10.235% { translate: 0 0; }
+  100% { translate: 0 0; }
+}
+
+@keyframes tassel-user-opacity {
+  0% { opacity: 0; }
+  17.047% { animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); opacity: 0; }
+  23.024% { opacity: 1; }
+  94.118% { animation-timing-function: cubic-bezier(0.4, 0, 0.7, 0.4); opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes tassel-user-move {
+  0% { translate: 0 14.818px; }
+  17.047% { animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); translate: 0 14.818px; }
+  23.024% { translate: 0 0; }
+  100% { translate: 0 0; }
+}
+
+/* Reply: stays visible to the end of the loop (Figma has no fade-out for it). */
+@keyframes tassel-reply-opacity {
+  0% { opacity: 0; }
+  55.412% { animation-timing-function: cubic-bezier(0.05, 0.7, 0.1, 1); opacity: 0; }
+  58.824% { opacity: 1; }
+  100% { opacity: 1; }
+}
+@keyframes tassel-reply-move {
+  0% { translate: -80.226px 21.607px; }
+  55.412% { animation-timing-function: cubic-bezier(0.05, 0.7, 0.1, 1); translate: -80.226px 21.607px; }
+  58.824% { translate: -80.226px 11.571px; }
+  100% { translate: -80.226px 11.571px; }
+}
+
+@keyframes tassel-typing {
+  0% { opacity: 0; }
+  27.282% { animation-timing-function: ease-out; opacity: 0; }
+  29.835% { opacity: 1; }
+  46.035% { animation-timing-function: ease-in-out; opacity: 1; }
+  48.588% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes tassel-dot-l {
+  0% { opacity: 0.3; }
+  29.835% { animation-timing-function: ease-in-out; opacity: 0.3; }
+  31.541% { animation-timing-function: ease-in-out; opacity: 1; }
+  34.106% { animation-timing-function: ease-in-out; opacity: 0.3; }
+  36.659% { animation-timing-function: ease-in-out; opacity: 1; }
+  39.212% { animation-timing-function: ease-in-out; opacity: 0.3; }
+  41.776% { animation-timing-function: ease-in-out; opacity: 1; }
+  44.329% { opacity: 0.3; }
+  100% { opacity: 0.3; }
+}
+@keyframes tassel-dot-c {
+  0% { opacity: 0.3; }
+  31.118% { animation-timing-function: ease-in-out; opacity: 0.3; }
+  32.824% { animation-timing-function: ease-in-out; opacity: 1; }
+  35.376% { animation-timing-function: ease-in-out; opacity: 0.3; }
+  37.941% { animation-timing-function: ease-in-out; opacity: 1; }
+  40.494% { animation-timing-function: ease-in-out; opacity: 0.3; }
+  43.047% { animation-timing-function: ease-in-out; opacity: 1; }
+  45.612% { opacity: 0.3; }
+  100% { opacity: 0.3; }
+}
+@keyframes tassel-dot-r {
+  0% { opacity: 0.3; }
+  32.4% { animation-timing-function: ease-in-out; opacity: 0.3; }
+  34.106% { animation-timing-function: ease-in-out; opacity: 1; }
+  36.659% { animation-timing-function: ease-in-out; opacity: 0.3; }
+  39.212% { animation-timing-function: ease-in-out; opacity: 1; }
+  41.776% { animation-timing-function: ease-in-out; opacity: 0.3; }
+  44.329% { animation-timing-function: ease-in-out; opacity: 1; }
+  46.894% { opacity: 0.3; }
+  100% { opacity: 0.3; }
+}
+
+@media (max-width: 900px) {
+  .tassel {
+    min-height: 0;
+    padding-bottom: 0;
+  }
+
+  .tassel__copy {
+    grid-column: 1 / -1;
+    padding-top: var(--space-7);
+  }
+
+  .tassel__stage {
+    grid-column: 1 / -1;
+    justify-self: center;
+    margin-left: 0;
+    margin-top: var(--space-6);
+  }
+}
+
+@media (max-width: 480px) {
+  .tassel__stage {
+    zoom: 0.6;
+  }
+
+  .tassel__qr-row {
+    height: auto;
+  }
+}
+
+/* ---------- From the laptop to graduation ---------- */
+/*
+  Figma "Section Video Apollo": 610px-tall photo with a 50% #191919 overlay,
+  56/67.2 H1 + 16/24 copy bottom-left (82px up from the bottom), and a gray
+  "Watch video" pill bottom-right that links out to YouTube.
+*/
+.laptop {
+  position: relative;
+  height: 610px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  color: #fafafa;
+}
+
+.laptop__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.laptop__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(25, 25, 25, 0.5);
+}
+
+.laptop__content {
+  position: relative;
+  width: 100%;
+  margin-inline: 0;
+  padding-bottom: 82px;
+  align-items: end;
+}
+
+.laptop__copy {
+  grid-column: 1 / 9;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.laptop__title {
+  font-size: 56px;
+  line-height: 67.2px;
+  letter-spacing: -0.035em;
+  font-weight: 900;
+}
+
+.laptop__copy p {
+  max-width: 573px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.laptop__watch {
+  grid-column: 9 / -1;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px 8px 16px;
+  background: #747474;
+  color: #fafafa;
+  border-radius: 100px;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: bold;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.laptop__watch:hover {
+  background: #5c5c5c;
+}
+
+@media (max-width: 900px) {
+  .laptop {
+    height: auto;
+    min-height: 480px;
+  }
+
+  .laptop__content {
+    padding-block: 120px var(--space-6);
+    row-gap: var(--space-5);
+  }
+
+  .laptop__copy,
+  .laptop__watch {
+    grid-column: 1 / -1;
+  }
+
+  .laptop__watch {
+    justify-self: start;
+  }
+
+  .laptop__title {
+    font-size: clamp(1.75rem, 9vw, 56px);
+    line-height: 1.2;
+  }
+}
+
+/* ---------- FAQ ---------- */
+/*
+  Figma "FAQ's": 56/67.2 H1 + 24px gray sub on the left with the speech-bubble
+  art top-right, pill filter tabs, then three topic groups (36/43.2 heading,
+  question list in 5 columns + #fafafa answer panel in 5 columns) and a
+  bordered "know before you go" note. Filters show All groups or just one;
+  each group opens one question at a time.
+*/
+.faq {
+  padding-block: 96px;
+  row-gap: 32px;
+}
+
+.faq > * {
+  grid-column: 1 / -1;
+}
+
+.faq__header {
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: start;
+}
+
+.faq__heading {
+  grid-column: 1 / 11;
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+}
+
+.faq__title {
+  max-width: 850px;
+  font-size: 56px;
+  line-height: 67.2px;
+  letter-spacing: -0.035em;
+  font-weight: 900;
+  color: var(--color-near-black);
+}
+
+.faq__sub {
+  font-size: 24px;
+  line-height: 28.8px;
+  letter-spacing: -0.035em;
+  font-weight: bold;
+  color: #747474;
+}
+
+/* Speech-bubble art (Figma coordinates inside a 135x132 box) */
+.faq__art {
+  grid-column: 11 / -1;
+  justify-self: end;
+  position: relative;
+  width: 135px;
+  height: 132px;
+}
+
+.faq__art img {
+  position: absolute;
+  max-width: none;
+  display: block;
+}
+
+.faq__art-gray {
+  left: 42.63px;
+  top: 53.05px;
+  width: 75.675px;
+  height: 68.506px;
+  transform: rotate(-3.22deg);
+}
+
+.faq__art-dots {
+  left: 57.88px;
+  top: 79.45px;
+  width: 36.148px;
+  height: 6.964px;
+  transform: rotate(177.14deg) skewX(0.78deg) scaleY(-1);
+}
+
+.faq__art-yellow {
+  left: 0;
+  top: 0;
+  width: 82.352px;
+  height: 73.169px;
+  transform: translate(3.8px, 4.3px) rotate(-6.37deg);
+}
+
+.faq__art-badge {
+  left: 98.78px;
+  top: 23.05px;
+  width: 36.219px;
+  height: 36.219px;
+}
+
+/* Filter tabs */
+.faq-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.faq-filter {
+  height: 48px;
+  min-width: 222px;
+  padding: 8px 16px;
+  background: var(--color-white);
+  border: 1px solid #d0d0d0;
+  border-radius: 100px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: bold;
+  color: #747474;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.faq-filter[data-faq-filter="all"] {
+  min-width: 100px;
+}
+
+/*
+  States. Figma only provides default and selected; hover / pressed values
+  below are inferred from the site's palette and should be checked against the
+  design system's hover variants.
+*/
+.faq-filter:hover {
+  border-color: var(--color-near-black);
+  color: var(--color-near-black);
+}
+
+.faq-filter:active {
+  background: var(--color-gray-200);
+}
+
+.faq-filter.is-selected {
+  background: var(--color-black);
+  border-color: var(--color-black);
+  color: #fafafa;
+}
+
+.faq-filter.is-selected:hover {
+  background: var(--color-near-black);
+  border-color: var(--color-near-black);
+  color: var(--color-white);
+}
+
+.faq-filter.is-selected:active {
+  background: #333;
+}
+
+/* Groups */
+.faq-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.faq-group[hidden] {
+  display: none;
+}
+
+.faq-group__title {
+  font-size: 36px;
+  line-height: 43.2px;
+  letter-spacing: -0.035em;
+  font-weight: 900;
+  color: var(--color-near-black);
+  margin-bottom: 32px;
+}
+
+.faq-set {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  align-items: start;
+}
+
+/* Questions on columns 1-5, answer panel on columns 6-10 (445px each). */
+.faq-list {
+  grid-column: 1 / 6;
+}
+
+.faq-answers {
+  grid-column: 6 / 11;
+}
+
+.faq-list {
+  list-style: none;
+  padding-block: 8px; /* + each row's 16px padding = Figma's 24px list inset */
+}
+
+/*
+  Row hover, copied from asuonline.asu.edu ("Common questions" on Why ASU
+  Online). On hover the row indents 16px, the gap between the question and the
+  icon tightens from 24px to 8px (so the text slides right while the icon stays
+  put), the text darkens and the gold chevron fades in, all over 0.5s ease.
+  The selected row doesn't indent and always shows its chevron.
+*/
+.faq-item {
+  padding: 16px 0;
+  border-bottom: 1px solid #d0d0d0;
+  transition: padding-left 0.5s ease, border-color 0.5s ease;
+}
+
+.faq-item:last-child {
+  border-bottom: 0;
+}
+
+.faq-item.is-selected {
+  border-bottom: 2px solid var(--color-near-black);
+}
+
+.faq-q {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  font-size: 18px;
+  line-height: 27px;
+  color: #747474;
+  cursor: pointer;
+  transition: gap 0.5s ease, color 0.5s ease;
+}
+
+.faq-q__text {
+  flex: 1 1 auto;
+}
+
+.faq-q__icon {
+  position: relative;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.faq-q__icon img {
+  position: absolute;
+  max-width: none;
+}
+
+.faq-q__selected {
+  inset: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.faq-q__chev {
+  left: 8px;
+  top: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.faq-item:hover,
+.faq-item:focus-within:has(:focus-visible) {
+  padding-left: 16px;
+}
+
+.faq-item:hover .faq-q,
+.faq-item:has(.faq-q:focus-visible) .faq-q {
+  gap: 8px;
+  color: #484848;
+}
+
+.faq-item:hover .faq-q__icon,
+.faq-item:has(.faq-q:focus-visible) .faq-q__icon {
+  opacity: 1;
+}
+
+.faq-item.is-selected,
+.faq-item.is-selected:hover {
+  padding-left: 0;
+}
+
+.faq-item.is-selected .faq-q,
+.faq-item.is-selected:hover .faq-q {
+  gap: 24px;
+  color: var(--color-near-black);
+}
+
+.faq-item.is-selected .faq-q__icon {
+  opacity: 1;
+}
+
+/* On phones the icon is always shown and rows don't indent, as on the live site. */
+@media (max-width: 767px) {
+  .faq-q__icon {
+    opacity: 1;
+  }
+
+  .faq-item:hover,
+  .faq-item:focus-within:has(:focus-visible) {
+    padding-left: 0;
+  }
+
+  .faq-item:hover .faq-q,
+  .faq-item:has(.faq-q:focus-visible) .faq-q {
+    gap: 24px;
+  }
+}
+
+.faq-answers {
+  background: #fafafa;
+  padding: 32px;
+  color: var(--color-near-black);
+}
+
+.faq-answer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.faq-answer[hidden] {
+  display: none;
+}
+
+.faq-answer p {
+  margin: 0;
+}
+
+.faq-answer__title {
+  font-weight: bold;
+  line-height: 19.2px;
+  letter-spacing: -0.035em;
+}
+
+.faq-answer a,
+.faq-note a {
+  color: var(--color-maroon);
+  text-decoration: underline;
+}
+
+/* Note */
+.faq-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 32px 24px;
+  background: var(--color-white);
+  border: 1px solid #d0d0d0;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000;
+}
+
+.faq-note p {
+  max-width: 859px;
+}
+
+.faq-note__art {
+  position: relative;
+  flex: 0 0 67px;
+  width: 67px;
+  height: 80px;
+}
+
+.faq-note__art img {
+  position: absolute;
+  max-width: none;
+  display: block;
+}
+
+.faq-note__sparkle {
+  left: 50.85px;
+  top: 0.8px;
+  width: 10.822px;
+  height: 10.831px;
+  transform: rotate(80.43deg);
+}
+
+.faq-note__doc {
+  left: 8.15px;
+  top: 8.17px;
+  width: 46.096px;
+  height: 58.825px;
+}
+
+.faq-note__mag {
+  left: 38.39px;
+  top: 38.51px;
+  width: 28.607px;
+  height: 28.607px;
+}
+
+.faq-note__phone {
+  position: absolute;
+  left: 0;
+  top: 57.33px;
+  width: 22.584px;
+  height: 22.584px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-gold);
+  border-radius: 50%;
+}
+
+.faq-note__phone img {
+  position: static;
+  width: 22px;
+  height: 22px;
+}
+
+@media (max-width: 900px) {
+  .faq {
+    padding-block: var(--space-7);
+  }
+
+  .faq__heading,
+  .faq__art {
+    grid-column: 1 / -1;
+  }
+
+  .faq__art {
+    justify-self: start;
+    order: -1;
+    margin-bottom: var(--space-4);
+  }
+
+  .faq__title {
+    font-size: clamp(1.75rem, 8vw, 56px);
+    line-height: 1.2;
+  }
+
+  .faq-filter {
+    flex: 1 1 100%;
+  }
+
+  .faq-set {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-list,
+  .faq-answers {
+    grid-column: auto;
+  }
+
+  .faq-note {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-filter,
+  .faq-item,
+  .faq-q,
+  .faq-q__icon {
+    transition: none;
+  }
+}
+
+/* FAQ answers with lists (nested lists for the commencement/convocation answer). */
+.faq-answer ul {
+  list-style: disc;
+  padding-left: 24px;
+  margin: 0;
+}
+
+.faq-answer ul ul {
+  margin-top: 0;
+}
+
+/* ---------- Online student yearbook ---------- */
+/*
+  Figma "Online student yearbook": #fafafa band, 604px tall. The magazine is a
+  stack of masked page layers + shadow/reflection (mix-blend multiply/screen)
+  positioned with Figma's own coordinates inside a 1279x604 stage, shifted so
+  the magazine's left edge sits just inside the grid margin. Copy sits in
+  columns 7-11, vertically centered.
+*/
+.yearbook {
+  position: relative;
+  height: 604px;
+  background: #fafafa;
+  max-width: none;
+  align-items: center;
+}
+
+.yearbook__art {
+  grid-column: 1 / 7;
+  position: relative;
+  height: 604px;
+  overflow: hidden;
+}
+
+.yb-stage {
+  position: absolute;
+  left: -90px;
+  top: 0;
+  width: 1279px;
+  height: 604px;
+}
+
+.yb-layer {
+  position: absolute;
+  max-width: none;
+  display: block;
+}
+
+.yb-layer img,
+.yb-masked img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
+.yb-masked {
+  -webkit-mask-mode: luminance;
+  mask-mode: luminance;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: var(--pos);
+  mask-position: var(--pos);
+  -webkit-mask-size: var(--size);
+  mask-size: var(--size);
+  mask-clip: no-clip;
+}
+
+.yb-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.yb-rot {
+  flex: none;
+  transform: rotate(4.1deg) skewX(0.12deg);
+}
+
+.yb-rot .yb-masked {
+  position: relative;
+}
+
+.yb-multiply {
+  mix-blend-mode: multiply;
+}
+
+.yb-screen {
+  mix-blend-mode: screen;
+}
+
+.yearbook__copy {
+  grid-column: 7 / 12;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  color: var(--color-near-black);
+}
+
+.yearbook__text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.yearbook__title {
+  font-size: 48px;
+  line-height: 57.6px;
+  letter-spacing: -0.035em;
+  font-weight: 900;
+}
+
+.yearbook__sub {
+  font-size: 24px;
+  line-height: 28.8px;
+  letter-spacing: -0.035em;
+  font-weight: bold;
+}
+
+.yearbook__text p {
+  font-size: 16px;
+  line-height: 24px;
+  color: #000;
+}
+
+.yearbook__cta {
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 24px;
+  border: 0;
+  border-radius: 50px;
+  color: #000;
+}
+
+@media (max-width: 900px) {
+  .yearbook {
+    height: auto;
+    padding-block: var(--space-6);
+    row-gap: var(--space-5);
+  }
+
+  .yearbook__art {
+    grid-column: 1 / -1;
+    height: 440px;
+  }
+
+  .yb-stage {
+    left: 50%;
+    transform: translateX(-312px);
+  }
+
+  .yearbook__copy {
+    grid-column: 1 / -1;
+  }
+
+  .yearbook__title {
+    font-size: clamp(1.75rem, 9vw, 48px);
+    line-height: 1.2;
+  }
+}
+
+/* ---------- Join the ASU Alumni Association (orbit carousel) ---------- */
+/*
+  Figma: 810px white section, centered 36px heading + copy + gold pill, then a
+  fan of tilted photo cards on a very large circle that runs past both screen
+  edges, with prev/next arrows below. Cards are positioned by js/alumni-orbit.js
+  (GSAP): the ring rotates with scroll, cards drift off their orbit when you
+  scroll fast, and the arrows nudge it one card at a time. The inline
+  transforms on each card are the Figma positions, used as the no-JS state.
+*/
+.alumni {
+  position: relative;
+  height: 810px;
+  overflow: hidden;
+  background: var(--color-white);
+}
+
+.alumni__copy {
+  position: relative;
+  z-index: 50;
+  width: min(730px, calc(100% - 48px)); /* 8 grid columns */
+  margin: 0 auto;
+  padding-top: 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.alumni__text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.alumni__title {
+  font-size: 36px;
+  line-height: 43.2px;
+  letter-spacing: -0.035em;
+  font-weight: 900;
+}
+
+.alumni__text p {
+  font-size: 16px;
+  line-height: 24px;
+  color: #000;
+}
+
+.alumni__cta {
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 24px;
+  border: 0;
+  border-radius: 50px;
+  color: var(--color-near-black);
+}
+
+/* The orbit origin sits at the horizontal center, 348px down (Figma's group offset). */
+.alumni__carousel {
+  position: absolute;
+  left: 50%;
+  top: 348px;
+  width: 0;
+  height: 0;
+}
+
+.alumni__orbit {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.alumni-card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 235px;
+  background: var(--color-white);
+  border-radius: 4px;
+  will-change: transform;
+}
+
+.alumni-card--a {
+  height: 296px;
+  box-shadow: 0 4px 3.4px rgba(0, 0, 0, 0.08);
+}
+
+.alumni-card--b {
+  height: 290px;
+  border: 1px solid var(--color-gray-100);
+  box-shadow: 0 3px 4.9px rgba(0, 0, 0, 0.09);
+}
+
+.alumni-card__photo {
+  position: absolute;
+  overflow: hidden;
+}
+
+.alumni-card--a .alumni-card__photo {
+  left: 4.85px;
+  top: 5.64px;
+  width: 224.943px;
+  height: 284.879px;
+}
+
+.alumni-card--b .alumni-card__photo {
+  left: 3.84px;
+  top: 5.18px;
+  width: 225px;
+  height: 276px;
+  background: var(--color-white);
+  box-shadow: 0 3.155px 3.155px rgba(0, 0, 0, 0.25);
+}
+
+.alumni-card__photo > img {
+  position: absolute;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.alumni-card__star {
+  left: 172.43px;
+  top: 180.85px;
+  width: 44.571px;
+  height: 42.471px;
+  transform: rotate(21.78deg);
+  object-fit: contain !important;
+}
+
+/* Hand-drawn doodles that sit between the cards (static, as in Figma). */
+.alumni__decor {
+  position: absolute;
+  max-width: none;
+  pointer-events: none;
+  z-index: 60;
+}
+
+.alumni__decor--star {
+  left: calc(343px - 873.7px);
+  top: calc(414px - 348px);
+  width: 38.21px;
+  height: 37.34px;
+}
+
+.alumni__decor--hand {
+  left: calc(1402.7px - 873.7px);
+  top: calc(424px - 348px);
+  width: 65.8px;
+  height: 81.61px;
+}
+
+/* Prev / next */
+.alumni__arrows {
+  position: absolute;
+  left: 50%;
+  top: 698px;
+  z-index: 70;
+  display: flex;
+  gap: 18px;
+  transform: translateX(-50%);
+}
+
+.alumni-arrow {
+  position: relative;
+  width: 58.5px;
+  height: 58.5px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-standard),
+    filter var(--duration-fast) var(--ease-standard);
+}
+
+.alumni-arrow > img:first-child {
+  display: block;
+  width: 58.5px;
+  height: 58.5px;
+}
+
+.alumni-arrow:hover {
+  filter: brightness(0.95);
+  transform: scale(1.05);
+}
+
+.alumni-arrow:active {
+  transform: scale(0.97);
+}
+
+.alumni-arrow__icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12.857px;
+  height: 7.802px;
+  max-width: none;
+}
+
+.alumni-arrow__icon--prev {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.alumni-arrow__icon--next {
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alumni-arrow {
+    transition: none;
+  }
+}
+
+/* ---------- RFI: "Get started today" ---------- */
+/*
+  Figma "RFI Desktop": 923px band. A photo bleeds in from the left edge of the
+  viewport and ends on the right edge of grid column 8; the white form card
+  sits on columns 7-12 (48px padding => 444px fields), 108px from the top and
+  overlapping the photo. Continue is disabled (50% maroon) until the required
+  fields are filled.
+*/
+.rfi {
+  position: relative;
+  height: 923px;
+  background: var(--color-white);
+  align-items: start;
+}
+
+.rfi__photo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  /* grid margin + 8 columns (8 x column + 7 x 30px gutter) */
+  width: calc(max(var(--grid-min-margin), (100% - var(--grid-content)) / 2) + (var(--grid-content) - 330px) * 8 / 12 + 210px);
+  overflow: hidden;
+}
+
+.rfi__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 100%;
+}
+
+.rfi__card {
+  grid-column: 7 / 13;
+  position: relative;
+  z-index: 1;
+  margin-top: 108px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px; /* intro -> fields; Continue adds 12px more (36px total) */
+  padding: 64px 48px;
+  background: var(--color-white);
+  filter: drop-shadow(0 4px 2px rgba(0, 0, 0, 0.05));
+}
+
+.rfi__intro,
+.rfi__fields {
+  align-self: stretch;
+}
+
+.rfi__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--color-near-black);
+}
+
+.rfi__step {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: bold;
+}
+
+.rfi__title {
+  font-size: 24px;
+  line-height: 28.8px;
+  letter-spacing: -0.035em;
+  font-weight: 900;
+}
+
+.rfi__lede {
+  font-size: 14px;
+  line-height: 21px;
+  color: #747474;
+}
+
+.rfi__required-note {
+  font-size: 12px;
+  line-height: 18px;
+  color: #747474;
+}
+
+.rfi__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.rfi-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rfi-label {
+  padding: 0;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: bold;
+  color: var(--color-near-black);
+}
+
+/* Select styled like Figma's input-base: 1px #d0d0d0, 17px side padding, 12/18 placeholder, 14px chevron. */
+.rfi-select {
+  position: relative;
+}
+
+.rfi-select select {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 9px 41px 9px 17px;
+  border: 1px solid #d0d0d0;
+  border-radius: 0;
+  background: var(--color-white);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-near-black);
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.rfi-select select:invalid {
+  color: #747474;
+}
+
+.rfi-select select:hover {
+  border-color: #747474;
+}
+
+.rfi-select__chev {
+  position: absolute;
+  right: 17px;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.rfi-select__chev img {
+  position: absolute;
+  left: 2px;
+  top: 4px;
+}
+
+/* Radio group */
+.rfi-radios {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rfi-radios .rfi-label {
+  white-space: nowrap; /* one line in Figma (it runs about 6px past the 444px field) */
+}
+
+.rfi-radios__row {
+  display: flex;
+  gap: 16px;
+}
+
+.rfi-radio {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 11.111px;
+  cursor: pointer;
+}
+
+.rfi-radio input {
+  position: absolute;
+  width: 22.222px;
+  height: 22.222px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.rfi-radio__icon {
+  position: relative;
+  display: block;
+  width: 22.222px;
+  height: 22.222px;
+}
+
+.rfi-radio__icon img {
+  display: block;
+  width: 22.222px;
+  height: 22.222px;
+}
+
+/* Checked dot (Figma only shows the unchecked ring). */
+.rfi-radio__icon::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--color-near-black);
+  transform: scale(0);
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.rfi-radio input:checked + .rfi-radio__icon::after {
+  transform: scale(1);
+}
+
+.rfi-radio:hover .rfi-radio__icon {
+  filter: brightness(0.8);
+}
+
+.rfi-radio input:focus-visible + .rfi-radio__icon {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: 50%;
+}
+
+.rfi-radio__text {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-near-black);
+}
+
+/* Continue: disabled = rgba(98,20,45,.5) / rgba(250,250,250,.5) per Figma. */
+.rfi__continue {
+  margin-top: 12px;
+  padding: 16px 32px;
+  border: 0;
+  border-radius: 25px;
+  background: var(--color-maroon);
+  color: #fafafa;
+  font-size: 16px;
+  line-height: normal;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.rfi__continue:hover:not(:disabled) {
+  background: var(--color-maroon-dark);
+}
+
+.rfi__continue:disabled {
+  background: rgba(98, 20, 45, 0.5);
+  color: rgba(250, 250, 250, 0.5);
+  cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+  .rfi {
+    height: auto;
+    padding-bottom: var(--space-7);
+  }
+
+  .rfi__photo {
+    position: relative;
+    grid-column: 1 / -1;
+    width: auto;
+    height: 280px;
+    margin-inline: calc(var(--grid-min-margin) * -1);
+  }
+
+  .rfi__card {
+    grid-column: 1 / -1;
+    margin-top: calc(var(--space-6) * -1);
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .rfi-radios .rfi-label {
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rfi-radio__icon::after,
+  .rfi__continue {
+    transition: none;
+  }
+}
+
+/* Alumni carousel input: horizontal swipes/drags belong to the cards, vertical ones scroll the page. */
+.alumni {
+  touch-action: pan-y;
+}
+
+.alumni-card {
+  cursor: grab;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.alumni.is-dragging,
+.alumni.is-dragging .alumni-card {
+  cursor: grabbing;
+}
+
+.alumni-card img {
+  -webkit-user-drag: none;
+}
+
+/* ---------- Graduate modal (asuonline.asu.edu "modal-backdrop" pattern) ---------- */
+/*
+  Dim + 4px blur over the whole page, white panel 70vw wide centered, 32px
+  padding, 25px/50px soft shadow, 24px round close button 32px from the corner,
+  and the site's 0.25s "drop-in" entrance. Layout of the panel follows Figma:
+  photo on the left (458px), name / program / divider / quote / link on the right.
+*/
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1055;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(25, 25, 25, 0.5);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  animation: modal-fade 0.25s ease-out;
+}
+
+.modal-backdrop[hidden] {
+  display: none;
+}
+
+.modal-backdrop.is-closing {
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+
+.modal-container {
+  position: relative;
+  width: 70vw;
+  min-width: min(100% - 32px, 640px);
+  max-width: 1100px;
+  height: 600px;
+  max-height: calc(100vh - 32px);
+  padding: 32px;
+  background: var(--color-white);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: modal-drop-in 0.25s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  transform: translateZ(0);
+}
+
+.modal-container:focus {
+  outline: none;
+}
+
+.modal-content {
+  display: flex;
+  gap: 32px;
+  height: 100%;
+}
+
+.modal-media {
+  position: relative;
+  flex: 0 0 458px;
+  max-width: 48%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-near-black);
+}
+
+/* Position and size are set inline from the card's crop (js/photo-strip.js). */
+.modal-media img {
+  display: block;
+  object-fit: cover;
+}
+
+.modal-info {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 40px 56px 0 0;
+  color: var(--color-near-black);
+}
+
+.modal-title {
+  font-size: 48px;
+  line-height: 57.6px;
+  letter-spacing: -0.035em;
+  font-weight: 900;
+}
+
+.modal-program {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 19.2px;
+  letter-spacing: -0.035em;
+  font-weight: bold;
+  color: var(--color-maroon);
+}
+
+.modal-divider {
+  height: 1px;
+  margin: 24px 0;
+  background: #d0d0d0;
+}
+
+.modal-quote {
+  font-size: 17px;
+  line-height: 26px;
+}
+
+.modal-link {
+  display: inline-block;
+  margin-top: 32px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-maroon);
+  text-decoration: underline;
+}
+
+.modal-info [hidden] {
+  display: none;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+}
+
+.modal-close-btn img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+@keyframes modal-drop-in {
+  0% { opacity: 0; transform: translate3d(0, -40px, 0); }
+  60% { transform: translate3d(0, 10px, 0); }
+  100% { opacity: 1; transform: translateZ(0); }
+}
+
+@keyframes modal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  .modal-container {
+    width: calc(100vw - 32px);
+    min-width: 0;
+    height: auto;
+    overflow-y: auto;
+    padding: 24px;
+  }
+
+  .modal-content {
+    flex-direction: column;
+    gap: 24px;
+    height: auto;
+  }
+
+  .modal-media {
+    flex: 0 0 auto;
+    max-width: none;
+    height: 280px;
+  }
+
+  .modal-info {
+    padding: 0 40px 0 0;
+    overflow: visible;
+  }
+
+  .modal-title {
+    font-size: 36px;
+    line-height: 43.2px;
+  }
+
+  .modal-close-btn {
+    top: 16px;
+    right: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-container,
+  .modal-backdrop {
+    animation: none;
+  }
+
+  .modal-backdrop.is-closing {
+    transition: none;
   }
 }

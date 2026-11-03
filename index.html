@@ -8,68 +8,49 @@
   name="description"
   content="Everything ASU Online students need to know about applying for graduation, attending ceremonies and celebrating from home."
 />
-<link rel="stylesheet" href="css/tokens.css?v=1" />
-<link rel="stylesheet" href="css/base.css?v=2" />
+<link rel="stylesheet" href="css/tokens.css?v=4" />
+<link rel="stylesheet" href="css/base.css?v=5" />
 <link rel="stylesheet" href="css/components.css?v=4" />
-<link rel="stylesheet" href="css/nav.css?v=13" />
-<link rel="stylesheet" href="css/grad-toggle.css?v=38" />
-<link rel="stylesheet" href="css/sections.css?v=23" />
-<link rel="stylesheet" href="css/footer.css" />
+<link rel="stylesheet" href="css/nav.css?v=18" />
+<link rel="stylesheet" href="css/grad-toggle.css?v=42" />
+<link rel="stylesheet" href="css/sections.css?v=47" />
+<link rel="stylesheet" href="css/footer.css?v=4" />
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
 <header class="site-header">
   <div class="utility-bar">
-    <div class="header-container">
-      <a href="https://www.asu.edu/">ASU Home</a>
-      <a href="https://my.asu.edu/">My ASU</a>
-      <a href="#">Colleges and Schools</a>
-      <a href="#">Sign in</a>
-      <button class="utility-bar__search" type="button" aria-label="Search ASU Online">
-        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false">
-          <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
+    <div class="header-inner utility-bar__inner">
+      <a href="https://www.asu.edu/" target="_blank" rel="noopener">ASU Home</a>
+      <a href="https://my.asu.edu/" target="_blank" rel="noopener">My ASU</a>
+      <a href="https://asu.edu/about/colleges-and-schools/" target="_blank" rel="noopener">Colleges and Schools</a>
+      <a href="https://weblogin.asu.edu/cgi-bin/login" target="_blank" rel="noopener">Sign in</a>
+      <button class="utility-bar__search" type="button" aria-label="Search ASU">
+        <img src="assets/header/search.svg" alt="" width="14" height="14" />
       </button>
     </div>
   </div>
 
-  <nav class="main-nav header-container" aria-label="Primary">
-    <div class="nav-brand-group">
+  <div class="main-nav-wrap">
+    <nav class="main-nav header-inner" aria-label="Primary">
       <a class="nav-logo" href="https://www.asu.edu/" aria-label="Arizona State University home">
-        <img src="assets/icons/asu-vertical-logo.png" alt="Arizona State University" width="93" height="72" />
+        <img src="assets/header/asu-logo.png" alt="Arizona State University" width="93" height="72" />
       </a>
 
       <div class="nav-text-stack">
-      <span class="nav-site-name">ASU Online</span>
+        <a class="nav-site-name" href="https://asuonline.asu.edu/">ASU Online</a>
 
-      <ul class="nav-links">
-        <li>
-          <a class="nav-links__home" href="https://asuonline.asu.edu/" aria-label="ASU Online home">
-            <svg viewBox="0 0 24 24" width="18" height="16" aria-hidden="true" focusable="false">
-              <path
-                d="M3 11.5 12 4l9 7.5M5.5 10v9h13v-9"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </a>
-        </li>
+        <ul class="nav-links">
+          <li class="nav-home">
+            <a class="nav-links__home" href="https://asuonline.asu.edu/" aria-label="ASU Online home">
+              <img src="assets/header/home.svg" alt="" width="18" height="16" />
+            </a>
+          </li>
         <li class="nav-dropdown">
-          <a
-            class="nav-link"
-            href="#"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Online Degrees
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+          <a class="nav-link" style="width:140px" href="#" aria-haspopup="true" aria-expanded="false">
+            <span>Online Degrees</span>
+            <img src="assets/header/dropdown.svg" alt="" width="12" height="12" />
           </a>
           <div class="nav-dropdown__panel" hidden>
             <!-- TODO: populate with the real Online Degrees submenu -->
@@ -79,11 +60,9 @@
           </div>
         </li>
         <li class="nav-dropdown">
-          <a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false">
-            Tuition
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+          <a class="nav-link" style="width:76px" href="#" aria-haspopup="true" aria-expanded="false">
+            <span>Tuition</span>
+            <img src="assets/header/dropdown.svg" alt="" width="12" height="12" />
           </a>
           <div class="nav-dropdown__panel" hidden>
             <!-- TODO: populate with the real Tuition submenu -->
@@ -92,13 +71,11 @@
             <a href="#">Scholarships</a>
           </div>
         </li>
-        <li><a class="nav-link" href="#">Admission</a></li>
-        <li class="nav-dropdown">
-          <a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false" aria-current="page">
-            Student Experience
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+          <li class="nav-item"><a class="nav-link nav-link--plain" href="https://asuonline.asu.edu/admission/">Admission</a></li>
+        <li class="nav-dropdown nav-item--current">
+          <a class="nav-link" style="width:168px" href="#" aria-haspopup="true" aria-expanded="false" aria-current="page">
+            <span>Student Experience</span>
+            <img src="assets/header/dropdown.svg" alt="" width="12" height="12" />
           </a>
           <div class="nav-dropdown__panel" hidden>
             <!-- TODO: populate with the real Student Experience submenu -->
@@ -107,13 +84,11 @@
             <a href="#">Graduation &amp; Careers</a>
           </div>
         </li>
-        <li><a class="nav-link" href="#">Newsroom</a></li>
+          <li class="nav-item"><a class="nav-link nav-link--plain" href="https://asuonline.asu.edu/newsroom/">Newsroom</a></li>
         <li class="nav-dropdown">
-          <a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false">
-            About
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+          <a class="nav-link" style="width:70px" href="#" aria-haspopup="true" aria-expanded="false">
+            <span>About</span>
+            <img src="assets/header/dropdown.svg" alt="" width="12" height="12" />
           </a>
           <div class="nav-dropdown__panel" hidden>
             <!-- TODO: populate with the real About submenu -->
@@ -122,27 +97,21 @@
             <a href="#">FAQ</a>
           </div>
         </li>
-      </ul>
+        </ul>
       </div>
-    </div>
 
-    <div class="nav-actions">
-      <a class="btn btn-gold" href="#">Apply now</a>
-      <a class="btn btn-gold" href="#">Request info</a>
-    </div>
+      <div class="nav-actions">
+        <a class="btn btn-gold" href="https://webapp4.asu.edu/uga_admissionsapp/" target="_blank" rel="noopener">Apply now</a>
+        <a class="btn btn-gold" href="https://asuonline.asu.edu/online-degree-programs/undergraduate/accounting-degree/#program-rfi" target="_blank" rel="noopener">Request info</a>
+      </div>
 
-    <button
-      class="nav-menu-toggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="primary-nav"
-      aria-label="Open menu"
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    </button>
-  </nav>
+      <button class="nav-menu-toggle" type="button" aria-expanded="false" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </nav>
+  </div>
 </header>
 
 <!--
@@ -182,12 +151,6 @@
 <main id="main-content">
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero__media">
-      <!--
-        Clean 1280x476 photo export (no baked-in text/UI), matches the hero's
-        aspect ratio exactly. Swap for a higher-res version (~1920px+ wide,
-        same ~2.7:1 crop) if/when one's available, to stay sharp on large
-        displays — this one will upscale slightly past ~1280px viewport width.
-      -->
       <img
         src="assets/images/hero-commencement.jpg"
         alt="An ASU graduate in a maroon cap and gown applauding at a commencement ceremony."
@@ -198,76 +161,872 @@
       <h1 class="hero__title" id="hero-title">Online graduation</h1>
       <p class="hero__subhead">
         Earning your diploma begins whenever you decide to pursue an online degree at
-        Arizona State University. Explore student stories, graduation details and
-        frequently asked questions.
+        Arizona State University. Explore how to attend ASU&rsquo;s graduation
+        ceremonies, read student stories and browse frequently asked questions.
       </p>
     </div>
   </section>
 
-  <section class="could-be-you container" aria-labelledby="could-be-you-title">
-    <h2 class="could-be-you__title" id="could-be-you-title">
-      This could be <span class="could-be-you__highlight">you</span>
-    </h2>
-    <p class="could-be-you__subhead">
-      Explore this guide to ensure a seamless celebration of your life-changing
-      accomplishment, whether you're celebrating from home or attending the
-      ceremonies in Arizona.
-    </p>
+  <section class="could-be-you grid-container" aria-labelledby="could-be-you-title">
+    <div>
+      <h2 class="could-be-you__title" id="could-be-you-title">
+        This could be <span class="could-be-you__highlight">you</span>
+      </h2>
+      <p class="could-be-you__subhead">
+        Your graduation moment will arrive before you know it. Get inspired by recent
+        graduates who took a bold step towards transforming their career, their life,
+        their community by earning their degree.
+      </p>
+    </div>
 
-    <div
-      class="photo-strip"
-      role="group"
-      aria-label="Sample ASU Online graduates — hover or select a photo to see their name"
-    >
+    <div class="photo-strip" role="group" aria-label="Recent ASU Online graduates">
       <!--
-        TODO: replace placeholder photos + names with final graduate photography
-        and real names/quotes. Angled fan composition (5 cards) is handled in CSS.
+        Hover and modal follow asuonline.asu.edu/students/community. TODO: only
+        Gary Legaspi's details come from the Figma file; the other four names are
+        carried over from the earlier placeholder build — add their program,
+        quote and video link (data-program / data-quote / data-video-url), and
+        the video itself (the modal shows the photo until a video source exists).
       -->
-      <button class="photo-strip__item" type="button">
-        <div
-          class="placeholder-box"
-          role="img"
-          aria-label="Placeholder — graduate photo pending: graduate in cap and gown smiling outdoors"
-        ></div>
-        <span class="photo-strip__tag">Marcus Lee</span>
+      <button class="photo-strip__item" type="button" data-name="Gary Legaspi" data-position="62% 35%" data-program="Master of Project Management &rsquo;24" data-quote="&ldquo;Being a working professional, the online option was very attractive for me. And as I went through the experience, the support was incredible. The feedback they offered me, I was able to apply it immediately to my current work.&rdquo;" data-video-url="#">
+        <img src="assets/images/grad-gary.jpg" alt="Gary Legaspi, smiling in a maroon cap and gown with a gold stole and flower lei." />
       </button>
-      <button class="photo-strip__item" type="button">
-        <div
-          class="placeholder-box"
-          role="img"
-          aria-label="Placeholder — graduate photo pending: two graduates in caps and gowns standing together on campus"
-        ></div>
-        <span class="photo-strip__tag">Vanessa Zupancic</span>
+      <button class="photo-strip__item" type="button" data-name="Vanessa Zupancic" data-position="50% 45%">
+        <img src="assets/images/grad-family.jpg" alt="Vanessa Zupancic and family, with a young girl holding a diploma folder." />
       </button>
-      <button class="photo-strip__item" type="button">
-        <div
-          class="placeholder-box"
-          role="img"
-          aria-label="Placeholder — graduate photo pending: graduate in cap and gown smiling in front of a campus building"
-        ></div>
-        <span class="photo-strip__tag">Priya Anand</span>
+      <button class="photo-strip__item" type="button" data-name="Priya Anand" data-position="50% 40%">
+        <img src="assets/images/grad-still.jpg" alt="A graduate in a maroon cap and gown with a gold stole, smiling." />
       </button>
-      <button class="photo-strip__item" type="button">
-        <div
-          class="placeholder-box"
-          role="img"
-          aria-label="Placeholder — graduate photo pending: graduate in cap and gown celebrating with family"
-        ></div>
-        <span class="photo-strip__tag">James Whitfield</span>
+      <button class="photo-strip__item" type="button" data-name="James Whitfield" data-position="50% 40%">
+        <img src="assets/images/grad-4.jpg" alt="A graduate in cap and gown hugging a child who holds a diploma folder." />
       </button>
-      <button class="photo-strip__item" type="button">
-        <div
-          class="placeholder-box"
-          role="img"
-          aria-label="Placeholder — graduate photo pending: graduate in cap and gown waving to the crowd"
-        ></div>
-        <span class="photo-strip__tag">Amara Okafor</span>
+      <button class="photo-strip__item" type="button" data-name="Amara Okafor" data-position="70% 40%">
+        <img src="assets/images/grad-5.jpg" alt="A graduate in cap and gown and gold stole standing with arms outstretched." />
+      </button>
+    </div>
+
+    <!-- TODO: point at the "Ready to graduate?" section once it's built. -->
+    <a class="btn btn-gold could-be-you__cta" href="#ready-to-graduate">Start your journey</a>
+  </section>
+
+  <section class="ready grid-container" id="ready-to-graduate" aria-labelledby="ready-title">
+    <header class="ready__header">
+      <img class="ready__icon" src="assets/icons/cap-confetti.svg" alt="" width="75" height="71" />
+      <h2 class="ready__title" id="ready-title">Ready to graduate?</h2>
+      <p class="ready__subhead">
+        Explore this guide to ensure a seamless celebration of your life-changing
+        accomplishment, whether you&rsquo;re celebrating from home or attending the
+        ceremonies in Arizona.
+      </p>
+    </header>
+
+    <div class="ready__tabs" role="tablist" aria-label="Graduation steps">
+      <button class="ready__tab is-selected" id="tab-applying" type="button" role="tab" aria-selected="true" aria-controls="panel-applying">Applying for graduation</button>
+      <button class="ready__tab" id="tab-going" type="button" role="tab" aria-selected="false" aria-controls="panel-going" tabindex="-1">Going to graduation</button>
+    </div>
+
+    <div class="ready__panel" id="panel-applying" role="tabpanel" aria-labelledby="tab-applying">
+      <p class="ready__lead">You&rsquo;ll need to apply for graduation regardless of whether you&rsquo;re attending ceremonies or not.</p>
+
+      <ol class="ready__steps">
+        <li class="ready__step">
+          <span class="ready__num" aria-hidden="true">1</span>
+          <div class="ready__step-body">
+            <p><strong>Verify you&rsquo;re ready to graduate.</strong> You can check with your academic advisor to confirm you&rsquo;ve met your program&rsquo;s requirements to graduate. You can also verify online:</p>
+            <ol class="ready__alpha">
+              <li>Undergraduate students use the <a href="https://provost.asu.edu/curriculum-development/dars" target="_blank" rel="noopener">Degree Audit Reporting System (DARS)</a>.</li>
+              <li>Graduate students use the <a href="https://graduate.asu.edu/current-students/completing-your-degree/your-plan-study-ipos" target="_blank" rel="noopener">iPOS</a>.</li>
+            </ol>
+          </div>
+        </li>
+        <li class="ready__step">
+          <span class="ready__num" aria-hidden="true">2</span>
+          <div class="ready__step-body">
+            <p><strong>Apply on My ASU.</strong> When you&rsquo;re in <a href="https://webapp4.asu.edu/myasu/" target="_blank" rel="noopener">My ASU</a>, select Apply for Graduation within the My Programs box. Turn off any pop-up blockers before starting the process.</p>
+            <div class="ready__callout">
+              <p class="ready__callout-title">Make sure to apply before these deadlines:</p>
+              <ul>
+                <li>Fall: Oct. 1</li>
+                <li>Spring: Feb. 15</li>
+                <li>Summer: June 15</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="ready__step">
+          <span class="ready__num" aria-hidden="true">3</span>
+          <div class="ready__step-body">
+            <p><strong>Pay the fees.</strong></p>
+            <div class="ready__callout">
+              <ul>
+                <li>Application fee: $100</li>
+                <li>Each additional, concurrent degree: $25</li>
+                <li>Late fee, if applicable: $35</li>
+              </ul>
+            </div>
+            <p>You&rsquo;re set. Watch your inbox for multiple email communications about your upcoming graduation with information about important dates, ceremonies and how to prepare.</p>
+          </div>
+        </li>
+      </ol>
+
+      <p>For undergraduates: If your GPA makes you eligible for <a href="https://registrar.asu.edu/graduation-next-steps" target="_blank" rel="noopener">honor cords</a>, they will be distributed by mail at least one month before graduation.</p>
+    </div>
+
+    <div class="ready__panel" id="panel-going" role="tabpanel" aria-labelledby="tab-going" hidden>
+      <p class="ready__lead ready__lead--box">Graduation is an exciting time. Take a look at these resources to help you plan your big moment.</p>
+
+      <h3 class="ready__subtitle">Visiting ASU and attending your ceremony</h3>
+      <p class="ready__muted">Whether you already live near an ASU campus or are coming from out of town, here are some quick tips to help you prepare:</p>
+
+      <ul class="ready__bullets">
+        <li>
+          <strong>Graduates must wear caps, gowns and tassels to participate in their graduation ceremony.</strong>
+          You can purchase your regalia online from
+          <a href="http://colleges.herffjones.com/college/_arizonastate/" target="_blank" rel="noopener">Herff Jones</a>,
+          ASU&rsquo;s official partner, or stop by during the online grad fair.
+          <a href="https://graduation.asu.edu/graduates/capandgown" target="_blank" rel="noopener">Follow this guide to learn more about attire requirements and how to wear your cap and gown</a>.
+        </li>
+        <li>
+          <strong>Coming from out of town?</strong>
+          You can find hotel discounts through the
+          <a href="https://alumni.asu.edu/" target="_blank" rel="noopener">ASU Alumni Association</a>
+          and the
+          <a href="https://visit.asu.edu/travel" target="_blank" rel="noopener">ASU Travel Guide</a>.
+          If you&rsquo;re a student attending through a corporate partnership, you&rsquo;ll be notified of additional lodging accommodations. Also, check out our
+          <a href="https://asuonline.asu.edu/newsroom/online-learning-tips/graduation-here-lets-celebrate/" target="_blank" rel="noopener">coming to campus guide</a>
+          to learn about fun things to do and more.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ceremonies grid-container" id="picking-ceremonies" aria-labelledby="ceremonies-title">
+    <header class="ceremonies__header">
+      <img class="ceremonies__rule" src="assets/icons/line-gold.svg" alt="" width="64" height="8" />
+      <h2 class="ceremonies__title" id="ceremonies-title">Picking your ceremonies</h2>
+      <div class="ceremonies__intro">
+        <p>
+          We encourage all online students to attend their graduation ceremonies on campus to
+          celebrate their accomplishments, but it is not a requirement to earn your degree and
+          graduate.
+          <a href="https://graduation.asu.edu/ceremonies/schedule" target="_blank" rel="noopener">Check the graduation site</a>
+          for more details about upcoming ceremonies, the schedule and guest tickets.
+        </p>
+        <p>You can attend commencement, college convocation and special-interest celebrations.</p>
+      </div>
+    </header>
+
+    <ul class="ceremonies__cards">
+      <li class="ceremony-card">
+        <img class="ceremony-card__icon" src="assets/icons/ceremony-commencement.svg" alt="" width="35" height="35" />
+        <h3 class="ceremony-card__title">Commencement</h3>
+        <p>Commencement is the large university-wide ceremony. Your name will not be called and your guests will not need tickets for this event.</p>
+      </li>
+      <li class="ceremony-card">
+        <img class="ceremony-card__icon" src="assets/icons/ceremony-convocation.svg" alt="" width="35" height="35" />
+        <h3 class="ceremony-card__title">College convocation</h3>
+        <p>College convocation is a smaller ceremony where your name will be called on stage. You may need tickets for guests.</p>
+      </li>
+      <li class="ceremony-card">
+        <img class="ceremony-card__icon" src="assets/icons/ceremony-special.svg" alt="" width="35" height="35" />
+        <h3 class="ceremony-card__title">Special-interest celebrations</h3>
+        <p>
+          <a href="https://graduation.asu.edu/ceremonies/additional-celebrations" target="_blank" rel="noopener">Special-interest celebrations</a>
+          &mdash; such as the ASU Online Celebration that features lunch, photo opportunities, and
+          the chance to connect with faculty, students, success coaches, and staff &mdash; are
+          another type of ceremony you can attend. You may need tickets for guests.
+        </p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="feature-panels grid-container" aria-label="Ceremony registration and summer graduates">
+    <article class="feature-panel feature-panel--registering" aria-labelledby="registering-title">
+      <div class="feature-panel__media" data-zoom><img class="feature-panel__img" src="assets/images/registering-ceremony.jpg" alt="A graduate in a maroon cap and gown with a gold stole and lei, walking hand in hand with a loved one outdoors." loading="lazy" /></div>
+      <div class="feature-panel__card" data-reveal="right">
+        <h2 class="feature-panel__title" id="registering-title">Registering for a ceremony</h2>
+        <p>After applying for graduation and paying the fees, go to My ASU and select the Register Ceremonies link in the graduation tab. From there, fill out the form for each ceremony you&rsquo;d like to attend. A confirmation email will be sent after completing each form.</p>
+        <!--
+          TODO: in Figma the "Please note" block sits off-canvas to the right of
+          this card (a hidden second state). Placed inside the card for now —
+          confirm the intended placement.
+        -->
+        <div class="feature-panel__note">
+          <p class="feature-panel__note-title">Please note:</p>
+          <ul>
+            <li>Spring ceremony registration usually opens in late February and closes around the first week of April.</li>
+            <li>Fall ceremony registration opens in September and often closes in November.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="feature-panel feature-panel--summer" aria-labelledby="summer-title">
+      <div class="feature-panel__media" data-zoom><img class="feature-panel__img" src="assets/images/summer-graduates.jpg" alt="A graduate in a maroon cap and gown with a gold stole, smiling and holding her diploma cover high." loading="lazy" /></div>
+      <div class="feature-panel__card" data-reveal="left">
+        <h2 class="feature-panel__title" id="summer-title">Summer graduates</h2>
+        <p>Graduates who are within 12 credits or less from program completion and are completing coursework in the summer may participate in ceremonies in May, or in December following course completion. This applies to undergraduate candidates and most master&rsquo;s degree candidates. Check with your success coach for details.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="tassel grid-container" aria-labelledby="tassel-title">
+    <div class="tassel__copy">
+      <img class="tassel__icon" src="assets/tassel/cap-question.svg" alt="" width="78" height="71" />
+      <h2 class="tassel__title" id="tassel-title">Get graduation answers and updates with Tassel</h2>
+      <p class="tassel__text">Sign up with our AI chatbot Tassel to get updates, support and answers to your questions. Tassel can help you navigate registration, campus and tickets. Plus, you&rsquo;ll get alerts about any ceremony time changes.</p>
+
+      <div class="tassel__qr-row">
+        <div class="tassel__qr">
+          <img src="assets/tassel/qr.png" alt="QR code to sign up for Tassel text alerts" width="140" height="140" />
+        </div>
+        <p class="tassel__qr-text">Scan the QR code to sign up for text alerts.</p>
+      </div>
+      <p class="tassel__sms">
+        <img src="assets/tassel/chat-icon.svg" alt="" width="15" height="15" />
+        <span>You can also text 855-603-0652 to connect with Tassel.</span>
+      </p>
+    </div>
+
+    <div class="tassel__stage" id="tasselStage" role="group" aria-label="Animated example of a chat with Tassel, the graduation chatbot">
+      <img class="tassel__phone" src="assets/tassel/phone.png" alt="" width="642" height="963" />
+
+      <!-- Typing indicator -->
+      <div class="tassel__typing anim-typing" aria-hidden="true">
+        <div class="tassel__typing-inner">
+          <div class="tassel__typing-bubble">
+            <img class="anim-dot anim-dot--l" src="assets/tassel/dot-left.svg" alt="" width="11" height="11" />
+            <img class="anim-dot anim-dot--c" src="assets/tassel/dot-center.svg" alt="" width="11" height="11" />
+            <img class="anim-dot anim-dot--r" src="assets/tassel/dot-right.svg" alt="" width="11" height="11" />
+            <img class="tassel__tail tassel__tail--1" src="assets/tassel/tail-1.svg" alt="" width="21" height="21" />
+            <img class="tassel__tail tassel__tail--2" src="assets/tassel/tail-2.svg" alt="" width="9" height="9" />
+          </div>
+        </div>
+      </div>
+
+      <!-- User message -->
+      <div class="tassel__msg tassel__msg--user anim-user">
+        <div class="tassel__msg-inner"><p>Do I need tickets for commencement?</p></div>
+      </div>
+
+      <!-- Tassel greeting -->
+      <div class="tassel__msg tassel__msg--greeting anim-greeting">
+        <div class="tassel__msg-inner"><p>Hi! I&rsquo;m Tassel &#128522;, the AI Chatbot for ASU&rsquo;s Graduation Ceremonies.</p></div>
+      </div>
+
+      <!-- Tassel reply -->
+      <div class="tassel__msg tassel__msg--reply anim-reply">
+        <div class="tassel__msg-inner"><p>No, you do not need tickets for commencement! &#127891;</p></div>
+      </div>
+
+      <!-- iPhone header -->
+      <div class="tassel__header" aria-hidden="true">
+        <div class="tassel__status">
+          <span class="tassel__time">9:41</span>
+          <img src="assets/tassel/dynamic-island.svg" alt="" width="102" height="28" />
+          <span class="tassel__status-icons">
+            <img src="assets/tassel/ios-signal.svg" alt="" width="16" height="14" />
+            <img src="assets/tassel/ios-wifi.svg" alt="" width="16" height="16" />
+            <img src="assets/tassel/ios-battery.svg" alt="" width="23" height="16" />
+          </span>
+        </div>
+        <div class="tassel__nav">
+          <span class="tassel__nav-spacer"></span>
+          <span class="tassel__group">
+            <img class="tassel__avatar" src="assets/tassel/avatar.svg" alt="" width="74" height="45" />
+            <span class="tassel__group-title">Tassel</span>
+          </span>
+          <span class="tassel__nav-spacer"></span>
+        </div>
+      </div>
+
+      <button class="tassel__pause" id="tasselPause" type="button" aria-pressed="false" aria-controls="tasselStage" aria-label="Pause animation">
+        <img class="tassel__pause-icon tassel__pause-icon--pause" src="assets/tassel/pause-button.svg" alt="" width="63" height="63" />
+        <img class="tassel__pause-icon tassel__pause-icon--play" src="assets/tassel/play-button.svg" alt="" width="63" height="63" />
       </button>
     </div>
   </section>
 
+  <section class="laptop" aria-labelledby="laptop-title">
+    <img class="laptop__img" src="assets/images/laptop-to-graduation.jpg" alt="A graduate in a maroon cap and gold stole poses with four family members, flashing the pitchfork hand sign in front of a yellow backdrop." loading="lazy" />
+    <div class="laptop__overlay" aria-hidden="true"></div>
+    <div class="grid-container laptop__content">
+      <div class="laptop__copy">
+        <h2 class="laptop__title" id="laptop-title">From the laptop to graduation</h2>
+        <p>Each graduation season, online students celebrate their accomplishments with friends, family and their community. It is time to reflect on your achievements and your next steps. Get a behind-the-scenes look at the event for online students.</p>
+      </div>
+      <a class="laptop__watch" href="https://www.youtube.com/watch?v=Pw_2skUu2LE" target="_blank" rel="noopener">
+        Watch video
+        <img src="assets/icons/play-circle.svg" alt="" width="24" height="24" />
+        <span class="visually-hidden">(opens YouTube in a new tab)</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="faq grid-container" id="faq" aria-labelledby="faq-title">
+    <header class="faq__header">
+      <div class="faq__heading">
+        <h2 class="faq__title" id="faq-title">Frequently asked questions about graduation for online students</h2>
+        <p class="faq__sub">Common ASU graduation questions from online students like you.</p>
+      </div>
+      <div class="faq__art" aria-hidden="true">
+        <img class="faq__art-gray" src="assets/faq/bubble-gray.svg" alt="" />
+        <img class="faq__art-dots" src="assets/faq/bubble-dots.svg" alt="" />
+        <img class="faq__art-yellow" src="assets/faq/bubble-yellow.svg" alt="" />
+        <img class="faq__art-badge" src="assets/faq/badge-maroon.svg" alt="" />
+      </div>
+    </header>
+
+    <div class="faq-filters" role="group" aria-label="Filter questions by topic">
+      <button class="faq-filter is-selected" type="button" data-faq-filter="all" aria-pressed="true">All</button>
+      <button class="faq-filter" type="button" data-faq-filter="planning" aria-pressed="false">Planning for graduation</button>
+      <button class="faq-filter" type="button" data-faq-filter="home" aria-pressed="false">Graduating from home</button>
+      <button class="faq-filter" type="button" data-faq-filter="celebrating" aria-pressed="false">Celebrating graduation</button>
+    </div>
+
+    <div class="faq-groups">
+
+      <div class="faq-group" id="faq-group-planning" data-faq-group="planning">
+        <h3 class="faq-group__title">Planning for graduation</h3>
+        <div class="faq-set">
+          <ul class="faq-list">
+          <li class="faq-item is-selected">
+            <button class="faq-q" type="button" aria-expanded="true" aria-controls="faq-planning-a1">
+              <span class="faq-q__text">Can online ASU students walk at graduation?</span>
+              <span class="faq-q__icon" aria-hidden="true">
+                <img class="faq-q__selected" src="assets/faq/chevron-active.svg" alt="" width="32" height="32" />
+                <img class="faq-q__chev" src="assets/faq/chevron-right.svg" alt="" width="16" height="16" />
+              </span>
+            </button>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-planning-a2">
+              <span class="faq-q__text">What is the process to apply for graduation as an online student at ASU?</span>
+              <span class="faq-q__icon" aria-hidden="true">
+                <img class="faq-q__selected" src="assets/faq/chevron-active.svg" alt="" width="32" height="32" />
+                <img class="faq-q__chev" src="assets/faq/chevron-right.svg" alt="" width="16" height="16" />
+              </span>
+            </button>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-planning-a3">
+              <span class="faq-q__text">Do I need to apply to graduate if I don't plan to attend the ceremonies?</span>
+              <span class="faq-q__icon" aria-hidden="true">
+                <img class="faq-q__selected" src="assets/faq/chevron-active.svg" alt="" width="32" height="32" />
+                <img class="faq-q__chev" src="assets/faq/chevron-right.svg" alt="" width="16" height="16" />
+              </span>
+            </button>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-planning-a4">
+              <span class="faq-q__text">How do I register to attend a ceremony to graduate as an online student?</span>
+              <span class="faq-q__icon" aria-hidden="true">
+                <img class="faq-q__selected" src="assets/faq/chevron-active.svg" alt="" width="32" height="32" />
+                <img class="faq-q__chev" src="assets/faq/chevron-right.svg" alt="" width="16" height="16" />
+              </span>
+            </button>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-planning-a5">
+              <span class="faq-q__text">What's the difference between the commencement and convocation ceremonies?</span>
+              <span class="faq-q__icon" aria-hidden="true">
+                <img class="faq-q__selected" src="assets/faq/chevron-active.svg" alt="" width="32" height="32" />
+                <img class="faq-q__chev" src="assets/faq/chevron-right.svg" alt="" width="16" height="16" />
+              </span>
+            </button>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-planning-a6">
+              <span class="faq-q__text">How do I get my honor cords?</span>
+              <span class="faq-q__icon" aria-hidden="true">
+                <img class="faq-q__selected" src="assets/faq/chevron-active.svg" alt="" width="32" height="32" />
+                <img class="faq-q__chev" src="assets/faq/chevron-right.svg" alt="" width="16" height="16" />
+              </span>
+            </button>
+          </li>
+          </ul>
+          <div class="faq-answers" aria-live="polite">
+          <div class="faq-answer" id="faq-planning-a1">
+            <p class="faq-answer__title">Yes, online students can attend and walk at ASU&rsquo;s in-person graduation ceremonies.</p>
+            <p>This includes commencement with President Michael Crow and convocation with your program&rsquo;s school or college.</p>
+          </div>
+          <div class="faq-answer" id="faq-planning-a2" hidden>
+            <p class="faq-answer__title">You&rsquo;ll want to apply for graduation through your <a href="https://webapp4.asu.edu/myasu/student" target="_blank" rel="noopener">My ASU account</a>, then pay your fees.</p>
+            <p>Once you&rsquo;ve applied, you&rsquo;ll be able to register for your ceremonies through your My ASU account as well, <a href="https://graduation.asu.edu/ceremonies/schedule" target="_blank" rel="noopener">choosing your ceremonies</a> and more.</p>
+            <p>Make sure you <a href="https://graduation.asu.edu/graduates/capandgown" target="_blank" rel="noopener">purchase your cap and gown</a>, as that is required to attend your ceremonies. Also, please note any <a href="https://graduation.asu.edu/guests/accessibility" target="_blank" rel="noopener">ADA accommodations</a> you may need when you are registering for your ceremony.</p>
+            <p>Learn more about all the steps when applying.</p>
+          </div>
+          <div class="faq-answer" id="faq-planning-a3" hidden>
+            <p class="faq-answer__title">Yes, you still need to apply to graduate through My ASU, even if you don&rsquo;t plan to attend any ceremonies.</p>
+            <p>You just won&rsquo;t need to register for ceremonies.</p>
+          </div>
+          <div class="faq-answer" id="faq-planning-a4" hidden>
+            <p class="faq-answer__title">You can register to attend a ceremony through My ASU in the My Programs box by selecting the Apply for Graduation option.</p>
+          </div>
+          <div class="faq-answer" id="faq-planning-a5" hidden>
+            <p class="faq-answer__title">We&rsquo;ve broken down the differences between a commencement and a convocation here:</p>
+            <ul>
+              <li>Commencement:
+                <ul>
+                  <li>These are large university-wide ceremonies for undergraduate and graduate students where degrees are conferred by the President of ASU.</li>
+                  <li>An unlimited number of guests are permitted.</li>
+                  <li>Bachelor's degree candidates will be recognized as a group. Individual names will not be called and students do not walk across the stage.</li>
+                  <li>Master's degree candidates will be recognized as a group. Doctoral degree candidates will be hooded by their selected faculty and individual names will be called to cross the stage.</li>
+                </ul>
+              </li>
+              <li>Convocation:
+                <ul>
+                  <li>These are smaller, college-level ceremonies. These might not take place on the same day as commencement.</li>
+                  <li>Some convocation ceremonies require tickets.</li>
+                  <li>Each graduate&rsquo;s name will be individually called and they will cross the stage at convocation ceremonies, including each college convocation as well as the specialty convocations.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="faq-answer" id="faq-planning-a6" hidden>
+            <p class="faq-answer__title">Honor cords are only for undergraduate students.</p>
+            <p>You&rsquo;ll automatically have your honor cords mailed to you if your GPA is eligible. Here are the requirements breakdowns:</p>
+            <ul>
+              <li>3.40-3.59 - cum laude</li>
+              <li>3.60-3.79 - magna cum laude</li>
+              <li>3.80-4.00 - summa cum laude</li>
+            </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-group" id="faq-group-home" data-faq-group="home">
+        <h3 class="faq-group__title">Graduating from home</h3>
+        <div class="faq-set">
+          <ul class="faq-list">
+          <li class="faq-item is-selected">
+            <button class="faq-q" type="button" aria-expanded="true" aria-controls="faq-home-a1">
+              <span class="faq-q__text">Do I have to attend a ceremony to graduate as an online student at ASU?</span>
+              <span class="faq-q__icon" aria-hidden="true">
+                <img class="faq-q__selected" src="assets/faq/chevron-active.svg" alt="" width="32" height="32" />
+                <img class="faq-q__chev" src="assets/faq/chevron-right.svg" alt="" width="16" height="16" />
+              </span>
+            </button>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-home-a2">
+              <span class="faq-q__text">Are there ways to celebrate my graduation if I don&rsquo;t plan to attend a ceremony?</span>
+              <span class="faq-q__icon" aria-hidden="true">
+                <img class="faq-q__selected" src="assets/faq/chevron-active.svg" alt="" width="32" height="32" />
+                <img class="faq-q__chev" src="assets/faq/chevron-right.svg" alt="" width="16" height="16" />
+              </span>
+            </button>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-home-a3">
+              <span class="faq-q__text">Do they still announce my name at the ceremony if I don&rsquo;t attend?</span>
+              <span class="faq-q__icon" aria-hidden="true">
+                <img class="faq-q__selected" src="assets/faq/chevron-active.svg" alt="" width="32" height="32" />
+                <img class="faq-q__chev" src="assets/faq/chevron-right.svg" alt="" width="16" height="16" />
+              </span>
+            </button>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-home-a4">
+              <span class="faq-q__text">Is there a way to stream the graduation ceremonies for family members who can&rsquo;t attend?</span>
+              <span class="faq-q__icon" aria-hidden="true">
+                <img class="faq-q__selected" src="assets/faq/chevron-active.svg" alt="" width="32" height="32" />
+                <img class="faq-q__chev" src="assets/faq/chevron-right.svg" alt="" width="16" height="16" />
+              </span>
+            </button>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-home-a5">
+              <span class="faq-q__text">How do I get my diploma case if I&rsquo;m not attending a ceremony?</span>
+              <span class="faq-q__icon" aria-hidden="true">
+                <img class="faq-q__selected" src="assets/faq/chevron-active.svg" alt="" width="32" height="32" />
+                <img class="faq-q__chev" src="assets/faq/chevron-right.svg" alt="" width="16" height="16" />
+              </span>
+            </button>
+          </li>
+          </ul>
+          <div class="faq-answers" aria-live="polite">
+          <div class="faq-answer" id="faq-home-a1">
+            <p class="faq-answer__title">No.</p>
+            <p>If you choose not to take part in any ceremony but have applied for graduation and met the university&rsquo;s academic requirements, you&rsquo;ll receive your diploma in the mail.</p>
+          </div>
+          <div class="faq-answer" id="faq-home-a2" hidden>
+            <p class="faq-answer__title">All online students can have a StageClip video made celebrating the occasion by <a href="https://upload.stageclip.com/email" target="_blank" rel="noopener">uploading their own content here</a>.</p>
+            <p>Enter your ASU email address (ASURITE@asu.edu), and then StageClip will send you an email with instructions. You&rsquo;ll be able to share your StageClip video on social media or at your graduation party. You can also <a href="https://graduation.asu.edu/2025-graduation-toolkit" target="_blank" rel="noopener">view and download</a> our fun graphics, Zoom backgrounds, social media filters and GIFs to celebrate your achievements.</p>
+          </div>
+          <div class="faq-answer" id="faq-home-a3" hidden>
+            <p class="faq-answer__title">No.</p>
+            <p>Only graduates who are present in person will have their names called.</p>
+          </div>
+          <div class="faq-answer" id="faq-home-a4" hidden>
+            <p class="faq-answer__title">Commencement ceremonies and many of the convocations are livestreamed, so your family and friends can follow along from home.</p>
+            <p>Links to each livestream are available on the <a href="https://graduation.asu.edu/ceremonies/latest" target="_blank" rel="noopener">schedule for commencement and convocation ceremonies</a>.</p>
+            <p>If you attend in person, you&rsquo;ll automatically have a StageClip produced of you walking across the stage, so you can share your big accomplishment with friends and family.</p>
+          </div>
+          <div class="faq-answer" id="faq-home-a5" hidden>
+            <p class="faq-answer__title">If you do not plan to attend graduation celebrations, you may request to have your diploma case mailed to you.</p>
+            <p>You can request your diploma case by contacting your college. <a href="https://graduation.asu.edu/ceremonies/faq" target="_blank" rel="noopener">Find contact information on this page&rsquo;s FAQ</a>.</p>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-group" id="faq-group-celebrating" data-faq-group="celebrating">
+        <h3 class="faq-group__title">Celebrating graduation</h3>
+        <div class="faq-set">
+          <ul class="faq-list">
+          <li class="faq-item is-selected">
+            <button class="faq-q" type="button" aria-expanded="true" aria-controls="faq-celebrating-a1">
+              <span class="faq-q__text">How do I get my diploma as an online student at ASU?</span>
+              <span class="faq-q__icon" aria-hidden="true">
+                <img class="faq-q__selected" src="assets/faq/chevron-active.svg" alt="" width="32" height="32" />
+                <img class="faq-q__chev" src="assets/faq/chevron-right.svg" alt="" width="16" height="16" />
+              </span>
+            </button>
+          </li>
+          <li class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-celebrating-a2">
+              <span class="faq-q__text">Am I allowed to visit campus to take graduation photos?</span>
+              <span class="faq-q__icon" aria-hidden="true">
+                <img class="faq-q__selected" src="assets/faq/chevron-active.svg" alt="" width="32" height="32" />
+                <img class="faq-q__chev" src="assets/faq/chevron-right.svg" alt="" width="16" height="16" />
+              </span>
+            </button>
+          </li>
+          </ul>
+          <div class="faq-answers" aria-live="polite">
+          <div class="faq-answer" id="faq-celebrating-a1">
+            <p class="faq-answer__title">You&rsquo;ll receive your diploma in the mail once your university academic requirements are met.</p>
+            <p>We mail the diplomas approximately six to eight weeks after the degree conferral date. Graduates will receive an email notification via their ASU email account when their diploma has been mailed. Diplomas are mailed to the student&rsquo;s diploma mailing address, which can be viewed and updated from My ASU. <a href="https://registrar.asu.edu/diploma" target="_blank" rel="noopener">More information on diplomas</a>.</p>
+          </div>
+          <div class="faq-answer" id="faq-celebrating-a2" hidden>
+            <p class="faq-answer__title">Yes, online students can visit campus to take graduation photos.</p>
+            <p>GradImages will be taking complimentary photos at each of ASU's campuses if you&rsquo;d like professional photos. <a href="https://graduation.asu.edu/ceremonies/memories" target="_blank" rel="noopener">View more</a> information on photo dates, locations and registration.</p>
+            <p>You can register to take photos at any available campus location.</p>
+            <p>Looking for other fun ways to create virtual mementos? <a href="https://graduation.asu.edu/graduation-toolkit" target="_blank" rel="noopener">View and download graphics, Zoom backgrounds, social media filters and GIFs</a> to help you celebrate your achievement.</p>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="faq-note">
+      <div class="faq-note__art" aria-hidden="true">
+        <img class="faq-note__sparkle" src="assets/faq/sparkle.svg" alt="" />
+        <img class="faq-note__doc" src="assets/faq/doc.svg" alt="" />
+        <img class="faq-note__mag" src="assets/faq/magnifier.svg" alt="" />
+        <span class="faq-note__phone"><img src="assets/faq/phone.svg" alt="" /></span>
+      </div>
+      <p>Visit our <a href="https://graduation.asu.edu/know-before-you-go" target="_blank" rel="noopener">know before you go resource</a> to learn more about parking, seating, our clear bag policy and more during ceremonies. <a href="https://graduation.asu.edu/ceremonies/faq" target="_blank" rel="noopener">Browse more graduation frequently asked questions</a>.</p>
+    </aside>
+  </section>
+
+  <section class="yearbook grid-container" aria-labelledby="yearbook-title">
+    <div class="yearbook__art" role="img" aria-label="Cover of the 2026 Achievements online student yearbook, a magazine with a gold bookmark ribbon.">
+      <div class="yb-stage" aria-hidden="true">
+        <img class="yb-layer" src="assets/yearbook/cover.svg" alt="" style="left:133.73px;top:112.5px;width:356.587px;height:407.976px" />
+        <img class="yb-layer" src="assets/yearbook/m1.svg" alt="" style="left:146.21px;top:379.57px;width:117.313px;height:140.99px" />
+        <div class="yb-layer yb-center" style="left:-16.89px;top:24.59px;width:768.657px;height:600.423px"><div class="yb-rot"><div class="yb-masked" style="width:732.404px;height:549.303px;-webkit-mask-image:url(assets/yearbook/mask1.svg);mask-image:url(assets/yearbook/mask1.svg);--pos:154.478px 358.776px;--size:174.364px 183.841px"><img src="assets/yearbook/page1.png" alt="" width="732" height="549" /></div></div></div>
+        <img class="yb-layer" src="assets/yearbook/m2.svg" alt="" style="left:138.98px;top:378.39px;width:187.375px;height:139.065px" />
+        <div class="yb-layer yb-masked" style="left:-75.03px;top:38.67px;width:733.23px;height:549.922px;-webkit-mask-image:url(assets/yearbook/mask2.svg);mask-image:url(assets/yearbook/mask2.svg);--pos:214px 339.67px;--size:187.614px 139.16px"><img src="assets/yearbook/page2.png" alt="" /></div>
+        <img class="yb-layer" src="assets/yearbook/m3.svg" alt="" style="left:140.05px;top:193.92px;width:342.897px;height:271.294px" />
+        <div class="yb-layer yb-masked" style="left:-75.08px;top:38.78px;width:733.232px;height:549.923px;-webkit-mask-image:url(assets/yearbook/mask3.svg);mask-image:url(assets/yearbook/mask3.svg);--pos:215.101px 155.045px;--size:343.363px 271.47px"><img src="assets/yearbook/page3.png" alt="" /></div>
+        <img class="yb-layer" src="assets/yearbook/m4.svg" alt="" style="left:146.57px;top:170.37px;width:343.8px;height:275.556px" />
+        <div class="yb-layer yb-masked" style="left:-75.06px;top:38.73px;width:733.232px;height:549.923px;-webkit-mask-image:url(assets/yearbook/mask4.svg);mask-image:url(assets/yearbook/mask4.svg);--pos:221.6px 131.545px;--size:344.273px 275.733px"><img src="assets/yearbook/page4.png" alt="" /></div>
+        <img class="yb-layer" src="assets/yearbook/m5.svg" alt="" style="left:133.82px;top:115.95px;width:132.033px;height:263.789px" />
+        <div class="yb-layer yb-masked" style="left:-75.12px;top:38.64px;width:732.157px;height:549.91px;-webkit-mask-image:url(assets/yearbook/mask5.svg);mask-image:url(assets/yearbook/mask5.svg);--pos:208.899px 77.279px;--size:132.484px 263.858px"><img src="assets/yearbook/page6.svg" alt="" /></div>
+        <img class="yb-layer" src="assets/yearbook/m6.svg" alt="" style="left:141.93px;top:112.43px;width:347.634px;height:325.523px" />
+        <div class="yb-layer yb-masked" style="left:-75.11px;top:38.75px;width:733.234px;height:549.925px;-webkit-mask-image:url(assets/yearbook/mask6.svg);mask-image:url(assets/yearbook/mask6.svg);--pos:217px 73.594px;--size:348.196px 325.703px"><img src="assets/yearbook/page5.png" alt="" /></div>
+        <img class="yb-layer yb-multiply" src="assets/yearbook/shadow.png" alt="" style="left:133.5px;top:112.44px;width:356.951px;height:408.24px" />
+        <img class="yb-layer yb-screen" src="assets/yearbook/reflection.png" alt="" style="left:133.37px;top:112.44px;width:356.951px;height:408.24px" />
+        <img class="yb-layer" src="assets/yearbook/bookmark.svg" alt="" style="left:262.06px;top:110.46px;width:87.98px;height:156.975px" />
+        <img class="yb-layer yb-multiply" src="assets/yearbook/bm-shadow.png" alt="" style="left:261.8px;top:110.3px;width:88.53px;height:157.4px" />
+        <img class="yb-layer yb-screen" src="assets/yearbook/bm-reflection.png" alt="" style="left:261.8px;top:110.3px;width:88.53px;height:157.4px" />
+      </div>
+    </div>
+    <div class="yearbook__copy">
+      <div class="yearbook__text">
+        <h2 class="yearbook__title" id="yearbook-title">2026 Achievements</h2>
+        <h3 class="yearbook__sub">Online student yearbook</h3>
+        <p>Soak in the moment and celebrate graduation. Students from around the world earned their degrees from wherever they worked best. Take a look at the class of 2026 as they celebrate their accomplishment, along with fun trends that happened this year and more.</p>
+      </div>
+      <!-- TODO: link to the yearbook file/page (not specified in Figma). -->
+      <a class="btn btn-gold yearbook__cta" href="#">
+        Download the yearbook
+        <img src="assets/yearbook/ext-icon.svg" alt="" width="16" height="16" />
+        <span class="visually-hidden">(opens in a new tab)</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="alumni" aria-labelledby="alumni-title">
+    <div class="alumni__copy">
+      <div class="alumni__text">
+        <h2 class="alumni__title" id="alumni-title">Join the ASU Alumni Association</h2>
+        <p>The ASU Alumni Association has more than 170 chapters and thousands of members based in the U.S. and internationally. Join a chapter near you to attend networking events, enjoy Sun Devil traditions and promote ASU in your community.</p>
+      </div>
+      <a class="btn btn-gold alumni__cta" href="https://alumni.asu.edu/" target="_blank" rel="noopener">
+        Connect with ASU alumni
+        <img src="assets/alumni/ext-icon.svg" alt="" width="16" height="16" />
+        <span class="visually-hidden">(opens in a new tab)</span>
+      </a>
+    </div>
+
+    <div class="alumni__carousel" role="region" aria-roledescription="carousel" aria-label="ASU alumni photos">
+      <img class="alumni__decor alumni__decor--star" src="assets/alumni/decor-star.svg" alt="" aria-hidden="true" />
+      <img class="alumni__decor alumni__decor--hand" src="assets/alumni/decor-hand.svg" alt="" aria-hidden="true" />
+      <div class="alumni__orbit" id="alumniOrbit">
+        <div class="alumni-card alumni-card--b" data-angle="-49" aria-hidden="true" style="z-index:1;transform:translate(-943.39px,579.93px) translate(-50%,-50%) rotate(-49deg)">
+          <div class="alumni-card__photo"><img src="assets/alumni/tucson.jpg" alt="" style="left:-23.54px;top:-58.13px;width:264.199px;height:399.916px" loading="lazy" /></div>
+        </div>
+        <div class="alumni-card alumni-card--a" data-angle="-34.83" data-cx="180.975" data-cy="363.485" style="z-index:2;transform:translate(-692.73px,363.49px) translate(-50%,-50%) rotate(-34.83deg)">
+          <div class="alumni-card__photo"><img src="assets/alumni/undergrad.jpg" alt="Two graduates in cap and gown laughing together outdoors, one carrying a gold and maroon backpack." style="left:-13px;top:-22px;width:238.929px;height:358.218px" loading="lazy" /></div>
+        </div>
+        <div class="alumni-card alumni-card--b" data-angle="-21.78" data-cx="427.908" data-cy="224.163" style="z-index:3;transform:translate(-445.79px,224.16px) translate(-50%,-50%) rotate(-21.78deg)">
+          <div class="alumni-card__photo"><img src="assets/alumni/thrive.jpg" alt="Two women laughing together at an ASU alumni event." style="left:-201.12px;top:-34.7px;width:526.145px;height:350.935px" loading="lazy" /><img class="alumni-card__star" src="assets/alumni/card-star.svg" alt="" /></div>
+        </div>
+        <div class="alumni-card alumni-card--b" data-angle="-4.8" data-cx="724.823" data-cy="154.325" style="z-index:4;transform:translate(-148.88px,154.32px) translate(-50%,-50%) rotate(-4.8deg)">
+          <div class="alumni-card__photo"><img src="assets/alumni/dsc4012.jpg" alt="An alumna in a yellow ASU shirt and sunglasses smiles while painting a wooden bench." style="left:-113.41px;top:-2.01px;width:433.447px;height:289px" loading="lazy" /></div>
+        </div>
+        <div class="alumni-card alumni-card--b" data-angle="7.35" data-cx="1024.095" data-cy="159.733" style="z-index:5;transform:translate(150.39px,159.73px) translate(-50%,-50%) rotate(7.35deg)">
+          <div class="alumni-card__photo"><img src="assets/alumni/graduate.jpg" alt="A graduate in a maroon cap and gown hugging a smiling child." style="left:-333.54px;top:-109.13px;width:668.803px;height:446.086px" loading="lazy" /></div>
+        </div>
+        <div class="alumni-card alumni-card--b" data-angle="16.87" data-cx="1298.557" data-cy="217.762" style="z-index:6;transform:translate(424.86px,217.76px) translate(-50%,-50%) rotate(16.87deg)">
+          <div class="alumni-card__photo"><img src="assets/alumni/dsc3975.jpg" alt="An older alumnus in an ASU cap flashes a pitchfork sign while painting." style="left:-157.54px;top:-10.13px;width:476.242px;height:317.533px" loading="lazy" /></div>
+        </div>
+        <div class="alumni-card alumni-card--b" data-angle="32.69" data-cx="1570.172" data-cy="356.394" style="z-index:7;transform:translate(696.47px,356.39px) translate(-50%,-50%) rotate(32.69deg)">
+          <div class="alumni-card__photo"><img src="assets/alumni/tucson.jpg" alt="A framed ASU Alumni Association graduation celebration photo with people in the background." style="left:-23.54px;top:-58.13px;width:264.199px;height:399.916px" loading="lazy" /></div>
+        </div>
+        <div class="alumni-card alumni-card--a" data-angle="47" aria-hidden="true" style="z-index:8;transform:translate(914.19px,547.5px) translate(-50%,-50%) rotate(47deg)">
+          <div class="alumni-card__photo"><img src="assets/alumni/undergrad.jpg" alt="" style="left:-13px;top:-22px;width:238.929px;height:358.218px" loading="lazy" /></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alumni__arrows">
+      <button class="alumni-arrow" type="button" id="alumniPrev" aria-label="Previous alumni photos">
+        <img src="assets/alumni/prev-circle.svg" alt="" width="58" height="58" />
+        <img class="alumni-arrow__icon alumni-arrow__icon--prev" src="assets/alumni/prev-chevron.svg" alt="" />
+      </button>
+      <button class="alumni-arrow" type="button" id="alumniNext" aria-label="Next alumni photos">
+        <img src="assets/alumni/next-circle.svg" alt="" width="58" height="58" />
+        <img class="alumni-arrow__icon alumni-arrow__icon--next" src="assets/alumni/next-chevron.svg" alt="" />
+      </button>
+    </div>
+  </section>
+
+  <section class="rfi grid-container" id="request-info" aria-labelledby="rfi-title">
+    <div class="rfi__photo" aria-hidden="true">
+      <img src="assets/rfi/rfi-graduates.jpg" alt="" loading="lazy" />
+    </div>
+
+    <!--
+      TODO: Figma only designs step 1 of 2 with a disabled Continue button. The
+      option lists below are placeholders and Continue has no destination yet —
+      wire both to the ASU Online request-info service.
+    -->
+    <form class="rfi__card" id="rfiForm" novalidate>
+      <div class="rfi__intro">
+        <p class="rfi__step">Step 1 of 2</p>
+        <h2 class="rfi__title" id="rfi-title">Get started today</h2>
+        <p class="rfi__lede">To learn more about ASU Online or a specific program, fill out the form below and check your email for information on next steps.</p>
+        <p class="rfi__required-note">* Indicates a required field</p>
+      </div>
+
+      <div class="rfi__fields">
+        <div class="rfi-field">
+          <label class="rfi-label" for="rfi-degree">Degree type</label>
+          <div class="rfi-select">
+            <select id="rfi-degree" name="rfi-degree">
+              <option value="" selected disabled hidden>Select a degree type</option>
+            <option value="undergraduate">Undergraduate degree</option>
+            <option value="graduate">Graduate degree</option>
+            <option value="undergraduate-certificate">Undergraduate certificate</option>
+            <option value="graduate-certificate">Graduate certificate</option>
+            </select>
+            <span class="rfi-select__chev" aria-hidden="true"><img src="assets/rfi/chevron-down.svg" alt="" width="10" height="6" /></span>
+          </div>
+        </div>
+        <div class="rfi-field">
+          <label class="rfi-label" for="rfi-interest">Area of interest</label>
+          <div class="rfi-select">
+            <select id="rfi-interest" name="rfi-interest">
+              <option value="" selected disabled hidden>Select interest area</option>
+            <option value="business">Business</option>
+            <option value="health">Health and wellness</option>
+            <option value="education">Education</option>
+            <option value="technology">Technology</option>
+            </select>
+            <span class="rfi-select__chev" aria-hidden="true"><img src="assets/rfi/chevron-down.svg" alt="" width="10" height="6" /></span>
+          </div>
+        </div>
+        <div class="rfi-field">
+          <label class="rfi-label" for="rfi-program">*Program</label>
+          <div class="rfi-select">
+            <select id="rfi-program" name="rfi-program" required>
+              <option value="" selected disabled hidden>Select program</option>
+            <option value="accountancy">Accountancy (BS)</option>
+            <option value="psychology">Psychology (BS)</option>
+            <option value="business-admin">Business Administration (MBA)</option>
+            </select>
+            <span class="rfi-select__chev" aria-hidden="true"><img src="assets/rfi/chevron-down.svg" alt="" width="10" height="6" /></span>
+          </div>
+        </div>
+
+        <fieldset class="rfi-radios">
+          <legend class="rfi-label">*Have you served in the U.S. military or are you a military dependent?</legend>
+          <div class="rfi-radios__row">
+            <label class="rfi-radio">
+              <input type="radio" name="military" value="yes" required />
+              <span class="rfi-radio__icon" aria-hidden="true"><img src="assets/rfi/radio.svg" alt="" width="22" height="22" /></span>
+              <span class="rfi-radio__text">Yes</span>
+            </label>
+            <label class="rfi-radio">
+              <input type="radio" name="military" value="no" required />
+              <span class="rfi-radio__icon" aria-hidden="true"><img src="assets/rfi/radio.svg" alt="" width="22" height="22" /></span>
+              <span class="rfi-radio__text">No</span>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <button class="rfi__continue" id="rfiContinue" type="submit" disabled>Continue</button>
+    </form>
+  </section>
+
+  <div class="photo-tag" id="photoTag" aria-hidden="true"></div>
+
 </main>
 
-<script type="module" src="js/main.js?v=7"></script>
+<footer class="site-footer">
+  <!-- TODO: link targets below (column links, social profiles, Manage my privacy settings) were not specified in Figma. -->
+  <div class="footer-brand">
+    <div class="grid-container footer-brand__inner">
+      <a class="footer-brand__logo" href="https://asuonline.asu.edu/" aria-label="ASU Online, Arizona State University">
+        <img src="assets/footer/asu-online-logo.png" alt="ASU Online, Arizona State University" width="254" height="78" />
+      </a>
+      <ul class="footer-social" aria-label="ASU Online on social media">
+        <li><a class="footer-social__link" href="#" aria-label="ASU Online on Facebook"><img src="assets/footer/facebook.svg" alt="" /></a></li>
+        <li><a class="footer-social__link" href="#" aria-label="ASU Online on LinkedIn"><img src="assets/footer/linkedin.svg" alt="" /></a></li>
+        <li><a class="footer-social__link" href="#" aria-label="ASU Online on Instagram"><img src="assets/footer/instagram.svg" alt="" /></a></li>
+        <li><a class="footer-social__link" href="#" aria-label="ASU Online on YouTube"><img src="assets/footer/youtube.svg" alt="" /></a></li>
+        <li><a class="footer-social__link footer-social__link--tiktok" href="#" aria-label="ASU Online on TikTok"><img src="assets/footer/tiktok.svg" alt="" /></a></li>
+        <li><a class="footer-social__link" href="#" aria-label="ASU Online on Pinterest"><img src="assets/footer/pinterest.svg" alt="" /></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-main">
+    <div class="grid-container footer-main__inner">
+      <div class="footer-about">
+        <p class="footer-about__blurb">ASU Online is dedicated to providing innovative, high-quality online education to students from across the country and around the world.</p>
+        <ul class="footer-contact">
+          <li><img src="assets/footer/icon-apply.svg" alt="" width="24" height="24" /><a href="https://webapp4.asu.edu/uga_admissionsapp/" target="_blank" rel="noopener">Apply now</a></li>
+          <li><img src="assets/footer/icon-helpdesk.svg" alt="" width="24" height="24" /><a href="tel:+18552785080">Help Desk 855.278.5080</a></li>
+          <li><img src="assets/footer/icon-phone.svg" alt="" width="24" height="24" /><a href="tel:+18662776589">Enrollment 866.277.6589</a></li>
+          <li><img src="assets/footer/icon-email.svg" alt="" width="24" height="24" /><a href="mailto:enrollmentonline@asu.edu">enrollmentonline@asu.edu</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+      <nav class="footer-col" aria-label="Online Degrees">
+        <h2 class="footer-col__title">Online Degrees</h2>
+        <ul>
+          <li><a href="#">All Online Programs</a></li>
+          <li><a href="#">Undergraduate Degrees</a></li>
+          <li><a href="#">Graduate Degrees</a></li>
+          <li><a href="#">Graduate Certificates</a></li>
+          <li><a href="#">Nondegree Programs</a></li>
+          <li><a href="#">Browse Interest Areas</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Tuition">
+        <h2 class="footer-col__title">Tuition</h2>
+        <ul>
+          <li><a href="#">Tuition Calculator</a></li>
+          <li><a href="#">Financial Aid</a></li>
+          <li><a href="#">Scholarships</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Admission">
+        <h2 class="footer-col__title">Admission</h2>
+        <ul>
+          <li><a href="#">First year</a></li>
+          <li><a href="#">Transfer</a></li>
+          <li><a href="#">Starbucks</a></li>
+          <li><a href="#">Home School</a></li>
+          <li><a href="#">International</a></li>
+          <li><a href="#">Graduate</a></li>
+          <li><a href="#">Military</a></li>
+          <li><a href="#">Nondegree</a></li>
+          <li><a href="#">Undecided</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Student Experience">
+        <h2 class="footer-col__title">Student Experience</h2>
+        <ul>
+          <li><a href="#">Online Learning</a></li>
+          <li><a href="#">Reviews</a></li>
+          <li><a href="#">Student Services</a></li>
+          <li><a href="#">Student Community</a></li>
+          <li><a href="#">Tutoring</a></li>
+          <li><a href="#">Study Abroad</a></li>
+          <li><a href="#">Graduation &amp; Careers</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="About">
+        <h2 class="footer-col__title">About</h2>
+        <ul>
+          <li><a href="#">Why ASU Online</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Rankings</a></li>
+          <li><a href="#">Faculty</a></li>
+          <li><a href="#">Accreditation</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Newsroom">
+        <h2 class="footer-col__title">Newsroom</h2>
+        <ul>
+          <li><a href="#">ASU Online News</a></li>
+          <li><a href="#">Leading Educators</a></li>
+          <li><a href="#">Online Learning Tips</a></li>
+          <li><a href="#">Sun Devil Life</a></li>
+        </ul>
+      </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-gold">
+    <div class="grid-container footer-gold__inner">
+      <ul class="footer-gold__links">
+        <li><a href="https://www.asu.edu/about/locations-maps">Maps and Locations</a></li>
+        <li><a href="https://www.asu.edu/about/jobs">Jobs</a></li>
+        <li><a href="https://isearch.asu.edu/">Directory</a></li>
+        <li><a href="https://www.asu.edu/about/contact">Contact ASU</a></li>
+        <li><a href="https://my.asu.edu/">My ASU</a></li>
+      </ul>
+      <img class="footer-gold__rankings" src="assets/footer/rankings.png" alt="Repeatedly ranked: number 1, 30+ lists in the last 3 years" width="321" height="54" />
+    </div>
+  </div>
+
+  <div class="footer-legal">
+    <div class="grid-container footer-legal__inner">
+      <ul>
+        <li><a href="https://www.asu.edu/about/copyright-and-trademark">Copyright and Trademark</a></li>
+        <li><a href="https://accessibility.asu.edu/report">Accessibility</a></li>
+        <li><a href="https://www.asu.edu/about/privacy">Privacy</a></li>
+        <li><a href="https://www.asu.edu/about/terms-of-use">Terms of Use</a></li>
+        <li><a href="https://www.asu.edu/emergency/">Emergency</a></li>
+        <li><a href="#">Manage my privacy settings</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script type="module" src="js/main.js?v=20"></script>
 </body>
 </html>

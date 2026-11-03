@@ -1,27 +1,49 @@
 /*
-  Header measurements below were pulled directly from asuonline.asu.edu at a
-  1920px viewport (computed styles + getBoundingClientRect), per an explicit
-  "match this exactly" request — not the earlier Figma-derived values, which
-  this supersedes for the header specifically. .hero__content (sections.css)
-  still uses the separate Figma-based .grid-container, unaffected.
+  Global header — Figma "global header" (1280px frame):
+    utility bar  38.8px  #f1f1f1, links 12/16.8, 30px search button
+    main row     116px   logo 93x72 + 36px "ASU Online" title + 36px nav row,
+                         Apply now / Request info pills on the right,
+                         1px #d0d0d0 bottom border, 8px gold bar under the
+                         current item that straddles that border.
+  Content inset is 60px (bar padding) + 15px (column padding) = 75px each side.
+  The header is sticky, so it stays at the top for the whole scroll; the fixed
+  graduation toggle (grad-toggle.css / header-height.js) measures its bottom
+  edge and always sits 32px below it.
 */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-white);
+}
+
+.header-inner {
+  width: 100%;
+  /* Same inset as the page grid, so the header content lines up with the sections below. */
+  padding-inline: max(var(--grid-min-margin), calc((100% - var(--grid-content)) / 2));
+}
+
+/* ---------- Utility bar ---------- */
 .utility-bar {
   background: var(--color-gray-100);
 }
 
-.utility-bar .header-container {
+.utility-bar__inner {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 0;
+  height: 38.8px;
+  padding-block: 3px;
 }
 
 .utility-bar a {
+  display: block;
+  padding: 7.5px 8px 8.3px 16px;
   font-size: 12px;
   line-height: 16.8px;
-  padding: 8px 8px 8px 16px;
   color: var(--color-near-black);
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .utility-bar a:hover {
@@ -29,143 +51,162 @@
 }
 
 .utility-bar__search {
-  background: none;
-  border: none;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  margin-left: 8px;
-  color: var(--color-near-black);
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
 }
 
-.site-header {
-  /* Positioned + stacked above .grad-toggle-bar (z-index: 90) so the header
-     always paints on top of the fixed toggle overlay in the (normally brief)
-     window before --header-height is measured, or if it's ever off — the
-     header's opaque background then fully hides any overlap instead of the
-     pill covering nav links/buttons underneath. */
+/* ---------- Main row ---------- */
+.main-nav-wrap {
   position: relative;
-  z-index: 100;
+  height: 116px;
+  padding-bottom: 1px;
+  border-bottom: 1px solid #d0d0d0;
   background: var(--color-white);
 }
 
 .main-nav {
-  /*
-    .header-container (base.css) gives this the same responsive max-width as
-    the utility bar above it — override just `display` back to a flex row.
-  */
   position: relative;
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--space-5);
-  border-bottom: 1px solid rgb(208, 208, 208);
-}
-
-.nav-brand-group {
-  display: flex;
-  align-items: flex-start;
-  min-width: 0;
+  height: 108px;
 }
 
 .nav-logo {
-  display: inline-flex;
-  padding-block: 16px;
+  display: block;
+  flex: 0 0 auto;
+  padding: 16px 16px 16px 0;
 }
 
 .nav-logo img {
+  display: block;
+  width: 93.22px;
   height: 72px;
-  width: auto;
 }
 
 .nav-text-stack {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 108px;
+  padding-top: 24px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding-top: 24px;
-  padding-bottom: 16px;
-  margin-left: 12px;
-  min-width: 0;
 }
 
 .nav-site-name {
-  font-family: var(--font-display);
-  font-weight: 700;
+  display: block;
+  height: 40px;
+  padding-bottom: 4px;
   font-size: 36px;
   line-height: 36px;
+  font-weight: bold;
   letter-spacing: -0.56px;
   color: var(--color-near-black);
+  text-decoration: none;
   white-space: nowrap;
 }
 
 .nav-links {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-end;
+  height: 44px;
+  margin: 0;
+  padding: 0;
   list-style: none;
-  flex-wrap: wrap;
+}
+
+.nav-links > li {
+  position: relative;
+  height: 36px;
+  padding-inline: 4px;
+}
+
+/* Home: 36px slot, icon nudged left like Figma. */
+.nav-links > .nav-home {
+  width: 36px;
+  padding: 0;
 }
 
 .nav-links__home {
-  display: inline-flex;
-  color: var(--color-near-black);
+  position: absolute;
+  left: -8px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-start;
+  padding: 11px 14px 17px 12px;
 }
 
-.nav-links__home svg {
+.nav-links__home img {
+  display: block;
   width: 18px;
   height: 16px;
 }
 
 .nav-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  color: var(--color-near-black);
-  text-decoration: none;
+  height: 36px;
+  padding: 8px 4px 4px;
   font-size: 16px;
   line-height: 24px;
-  padding-block: 0;
-  border-bottom: 3px solid transparent;
+  color: var(--color-near-black);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-.nav-link:hover {
-  border-bottom-color: var(--color-gray-300);
+.nav-link > span {
+  padding-right: 8px;
 }
 
-.nav-link[aria-current="page"] {
-  border-bottom-color: var(--color-gold);
-  font-weight: bold;
-}
-
-.nav-link svg {
+.nav-link img {
   width: 12px;
   height: 12px;
   transition: transform var(--duration-fast) var(--ease-standard);
 }
 
-.nav-link[aria-expanded="true"] svg {
+.nav-link[aria-expanded="true"] img {
   transform: rotate(180deg);
 }
 
-.nav-dropdown {
-  position: relative;
+/* Plain links (Admission, Newsroom) have 8px side padding. */
+.nav-link--plain {
+  padding-inline: 8px;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* Gold bar under the current page, straddling the row's bottom border. */
+.nav-item--current::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  bottom: -9.2px;
+  width: 164px;
+  height: 8px;
+  background: var(--color-gold);
+  pointer-events: none;
 }
 
 .nav-dropdown__panel {
   position: absolute;
-  top: calc(100% + var(--space-2));
+  top: calc(100% + 8px);
   left: 0;
+  z-index: 30;
+  min-width: 220px;
+  padding: var(--space-3);
   background: var(--color-white);
   border: 1px solid var(--color-gray-200);
   border-radius: var(--radius-md);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  min-width: 220px;
-  padding: var(--space-3);
-  z-index: 30;
 }
 
 .nav-dropdown__panel[hidden] {
@@ -175,43 +216,42 @@
 .nav-dropdown__panel a {
   display: block;
   padding: var(--space-2) var(--space-3);
-  color: var(--color-text);
-  text-decoration: none;
   border-radius: var(--radius-sm);
   font-size: 0.9375rem;
+  color: var(--color-text);
+  text-decoration: none;
 }
 
 .nav-dropdown__panel a:hover {
   background: var(--color-gray-100);
 }
 
+/* Apply now / Request info: 62.4px from the top of the row, right-aligned to the 75px inset. */
 .nav-actions {
-  /* Bottom-aligned with .main-nav's align-items:flex-start default, so the
-     buttons sit level with the nav-links row (home icon + labels) instead
-     of the logo/title at the top. margin-bottom cancels out
-     .nav-text-stack's own padding-bottom, which would otherwise sit below
-     the actual nav-links row's bottom edge. */
-  align-self: flex-end;
-  margin-bottom: 10px;
+  position: absolute;
+  right: max(var(--grid-min-margin), calc((100% - var(--grid-content)) / 2));
+  top: 62.4px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex-shrink: 0;
 }
 
 .nav-actions .btn {
-  padding: 8px 16px;
+  margin-left: 16px;
+  padding: 9px 17px;
+  border: 1px solid var(--color-gold);
+  border-radius: 804px;
   font-size: 14px;
-  color: var(--color-black);
+  line-height: 19.6px;
+  color: #000;
 }
 
 .nav-menu-toggle {
   display: none;
-  background: none;
-  border: none;
   padding: var(--space-2);
-  cursor: pointer;
+  border: 0;
+  background: none;
   color: var(--color-black);
+  cursor: pointer;
 }
 
 .nav-menu-toggle svg {
@@ -219,7 +259,8 @@
   height: 28px;
 }
 
-@media (max-width: 900px) {
+/* ---------- Narrow screens ---------- */
+@media (max-width: 1199px) {
   .nav-links,
   .nav-actions {
     display: none;
@@ -229,20 +270,38 @@
     display: inline-flex;
     position: absolute;
     top: var(--space-4);
-    right: 15px;
+    right: 12px;
   }
 
-  .utility-bar .header-container {
+  .utility-bar__inner {
     flex-wrap: nowrap;
     overflow-x: auto;
   }
 
-  .utility-bar a {
-    white-space: nowrap;
+  .main-nav-wrap {
+    height: auto;
+    min-height: 116px;
   }
 
   .main-nav {
+    height: auto;
     flex-wrap: wrap;
+    min-height: 108px;
+  }
+
+  .nav-text-stack {
+    height: auto;
+    padding-bottom: 8px;
+  }
+
+  .nav-site-name {
+    font-size: clamp(1.5rem, 7vw, 36px);
+    line-height: 1.1;
+    height: auto;
+  }
+
+  .nav-item--current::after {
+    display: none;
   }
 
   .site-header.is-menu-open .nav-links,
@@ -250,37 +309,62 @@
     display: flex;
   }
 
+  .site-header.is-menu-open {
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
   .site-header.is-menu-open .nav-links {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     width: 100%;
-    gap: 0;
+    height: auto;
+    margin-top: var(--space-3);
     border-top: 1px solid var(--color-gray-200);
-    margin-top: var(--space-4);
-    padding-top: var(--space-3);
+  }
+
+  .site-header.is-menu-open .nav-links > li,
+  .site-header.is-menu-open .nav-links > .nav-home {
+    width: 100%;
+    height: auto;
+    padding: 0;
+  }
+
+  .site-header.is-menu-open .nav-links__home {
+    position: static;
   }
 
   .site-header.is-menu-open .nav-link {
     width: 100%;
+    height: auto;
     padding: var(--space-3) 0;
     border-bottom: 1px solid var(--color-gray-100);
   }
 
   .site-header.is-menu-open .nav-dropdown__panel {
     position: static;
-    box-shadow: none;
-    border: none;
     padding-left: var(--space-4);
+    border: 0;
+    box-shadow: none;
   }
 
   .site-header.is-menu-open .nav-actions {
+    position: static;
     flex-direction: column;
     align-items: stretch;
     width: 100%;
     padding-block: var(--space-4);
+    gap: var(--space-3);
   }
 
   .site-header.is-menu-open .nav-actions .btn {
+    margin-left: 0;
     justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link img {
+    transition: none;
   }
 }

@@ -65,10 +65,46 @@ export function initModeToggle() {
     }, duration);
   }
 
-  pill.addEventListener("click", () => setState(!on));
+  // "Feeling festive?" nudge: draw the eye to the toggle on load with a
+  // single knob bounce (repeated once more if the user still hasn't
+  // touched it), then stop for good — never a looping/repeating animation.
+  let hasInteracted = false;
+  let nudgeCount = 0;
+  const MAX_NUDGES = 2;
+  const NUDGE_DURATION = 600;
+
+  function nudgeKnob() {
+    if (prefersReduced || hasInteracted || nudgeCount >= MAX_NUDGES) return;
+    nudgeCount++;
+    // Restart the animation even if a previous nudge's classes never got
+    // cleaned up (belt-and-suspenders, since a hidden/backgrounded tab can
+    // defer or drop the setTimeout cleanup below).
+    knob.classList.remove("nudge");
+    pill.classList.remove("nudge-ring");
+    // Force a reflow so re-adding the classes re-triggers the CSS animations
+    // instead of being a no-op mutation.
+    void knob.offsetWidth;
+    knob.classList.add("nudge");
+    pill.classList.add("nudge-ring");
+    setTimeout(() => {
+      knob.classList.remove("nudge");
+      pill.classList.remove("nudge-ring");
+    }, NUDGE_DURATION + 50);
+  }
+
+  if (!prefersReduced) {
+    setTimeout(nudgeKnob, 1200); // once content has settled
+    setTimeout(nudgeKnob, 5000); // one repeat if still untouched
+  }
+
+  pill.addEventListener("click", () => {
+    hasInteracted = true;
+    setState(!on);
+  });
   pill.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
+      hasInteracted = true;
       setState(!on);
     }
   });

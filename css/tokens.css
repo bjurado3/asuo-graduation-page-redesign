@@ -59,8 +59,11 @@
     the same 24px inset the rest of the site already uses on narrow
     viewports.
   */
-  --grid-margin: clamp(24px, 7vw, 135px);
-  --grid-gutter: var(--space-5);
+  /* Content width follows asuonline.asu.edu's container steps (container minus 15px side padding):
+     1290px at >=1400, 1110px at 1200-1399 (= Figma's 12 x 65px + 11 x 30px grid), 930px at 992-1199. */
+  --grid-content: 1110px;
+  --grid-gutter: 30px;
+  --grid-min-margin: 24px;
   --grid-max: 1920px;
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -73,8 +76,27 @@
   --duration-slow: 600ms;
 
   /* Focus */
-  --focus-ring: 3px solid var(--color-gold-dark);
+  --focus-ring: 3px solid var(--color-black);
+  --focus-ring-on-dark: 3px solid var(--color-white);
   --focus-ring-offset: 2px;
+}
+
+@media (min-width: 1400px) {
+  :root {
+    --grid-content: 1290px;
+  }
+}
+
+@media (max-width: 1199px) {
+  :root {
+    --grid-content: 930px;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --grid-gutter: 16px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
