@@ -136,10 +136,11 @@
 .could-be-you__highlight {
   display: inline-block;
   background: var(--color-gold);
-  height: 58px;
-  line-height: 58px;
-  padding-inline: 7px;
-  vertical-align: middle;
+  /* Tall enough to cover the whole word, including the descender of the y. */
+  height: auto;
+  line-height: 1.15;
+  padding-inline: 10px;
+  vertical-align: baseline;
 }
 
 .could-be-you__subhead {
@@ -317,7 +318,10 @@
 }
 
 .ready > * {
-  grid-column: 2 / 12;
+  /* Figma tab component is 961px wide, centered. */
+  grid-column: 1 / -1;
+  width: min(961px, 100%);
+  justify-self: center;
 }
 
 .ready__header {
@@ -340,7 +344,6 @@
   letter-spacing: -0.035em;
   font-weight: 900;
   color: var(--color-near-black);
-  margin-top: 8px;
 }
 
 .ready__subhead {
@@ -415,6 +418,7 @@
   letter-spacing: -0.035em;
   font-weight: bold;
   color: var(--color-black);
+  margin-bottom: 8px; /* 24px panel gap + 8 = Figma's 32px under the lead */
 }
 
 .ready__lead--box {
@@ -425,6 +429,7 @@
 }
 
 .ready__steps {
+  margin: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -460,7 +465,14 @@
   gap: 12px;
 }
 
+/* Step 1: the lead-in and the a./b. list sit flush. Step 2's body is 803px wide
+   in Figma; step 3's blocks are 16px apart. */
+.ready__step-body--tight { gap: 0; }
+.ready__step-body--narrow { max-width: 803px; }
+.ready__step-body--loose { gap: 16px; }
+
 .ready__alpha {
+  margin: 0;
   list-style: lower-alpha;
   padding-left: 48px;
 }
@@ -469,6 +481,10 @@
   background: #fafafa;
   padding: 24px 32px;
 }
+
+/* Fees list: 23px vertical padding, bullets indented 48px, no side padding. */
+.ready__callout--list { padding: 23px 0; }
+.ready__callout--list ul { padding-left: 48px; }
 
 .ready__callout-title {
   font-weight: bold;
@@ -499,6 +515,7 @@
 }
 
 .ready__bullets {
+  margin: 0;
   list-style: disc;
   display: flex;
   flex-direction: column;
@@ -2207,26 +2224,32 @@
   object-fit: contain !important;
 }
 
-/* Hand-drawn doodles that sit between the cards (static, as in Figma). */
-.alumni__decor {
+/*
+  Hand-drawn doodles ride on their photos (star: the two-women card, hand: the
+  older man's card). Offsets and tilts are Figma's absolute positions converted
+  into each card's own frame, so at rest they sit exactly as designed and they
+  turn and move with the card.
+*/
+.alumni-card__decor {
   position: absolute;
   max-width: none;
   pointer-events: none;
-  z-index: 60;
 }
 
-.alumni__decor--star {
-  left: calc(343px - 873.7px);
-  top: calc(414px - 348px);
+.alumni-card__decor--star {
+  left: calc(50% - 9.3px - 19.1px);
+  top: calc(50% - 153.9px - 18.7px);
   width: 38.21px;
   height: 37.34px;
+  transform: rotate(21.78deg);
 }
 
-.alumni__decor--hand {
-  left: calc(1402.7px - 873.7px);
-  top: calc(424px - 348px);
+.alumni-card__decor--hand {
+  left: calc(50% + 101.8px - 32.9px);
+  top: calc(50% - 136.4px - 40.8px);
   width: 65.8px;
   height: 81.61px;
+  transform: rotate(-16.87deg);
 }
 
 /* Prev / next */
@@ -2629,10 +2652,9 @@
 
 .modal-container {
   position: relative;
-  width: 70vw;
-  min-width: min(100% - 32px, 640px);
-  max-width: 1100px;
-  height: 600px;
+  width: 937px;
+  max-width: calc(100vw - 32px);
+  height: 559px;
   max-height: calc(100vh - 32px);
   padding: 32px;
   background: var(--color-white);
@@ -2647,14 +2669,14 @@
 
 .modal-content {
   display: flex;
-  gap: 32px;
+  gap: 48px;
   height: 100%;
 }
 
 .modal-media {
   position: relative;
-  flex: 0 0 458px;
-  max-width: 48%;
+  flex: 0 0 427px;
+  max-width: none;
   height: 100%;
   overflow: hidden;
   background: var(--color-near-black);
@@ -2670,7 +2692,7 @@
   flex: 1 1 0;
   min-width: 0;
   overflow-y: auto;
-  padding: 40px 56px 0 0;
+  padding: 0;
   color: var(--color-near-black);
 }
 
@@ -2697,15 +2719,16 @@
 }
 
 .modal-quote {
-  font-size: 17px;
-  line-height: 26px;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .modal-link {
   display: inline-block;
-  margin-top: 32px;
+  margin-top: 24px;
   font-size: 16px;
   line-height: 24px;
+  font-weight: bold;
   color: var(--color-maroon);
   text-decoration: underline;
 }

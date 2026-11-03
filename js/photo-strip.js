@@ -142,25 +142,40 @@ export function initPhotoStrip() {
   const fill = (item) => {
     const img = item.querySelector("img");
     const media = backdrop.querySelector(".modal-media img");
-    media.src = img.currentSrc || img.src;
-    media.alt = img.alt || "";
+    media.removeAttribute("style");
 
-    // Reuse the card's own crop of the photo (so Gary stays framed as on the card)
-    // as percentages of the modal's photo box.
-    const cs = getComputedStyle(img);
-    const w = item.offsetWidth;
-    const h = item.offsetHeight;
-    const pct = (value, base) => `${(parseFloat(value) / base) * 100}%`;
-    Object.assign(media.style, {
-      position: "absolute",
-      maxWidth: "none",
-      left: pct(cs.left, w),
-      top: pct(cs.top, h),
-      width: pct(cs.width, w),
-      height: pct(cs.height, h),
-      transform: item.matches(":nth-child(2)") ? "translate(-50%, -50%)" : "none",
-      objectPosition: "50% 50%",
-    });
+    if (item.dataset.modalImg) {
+      // Dedicated modal photo from Figma, with its crop as left,top,width,height (%).
+      media.src = item.dataset.modalImg;
+      const crop = (item.dataset.modalCrop || "0,0,100,100").split(",").map(Number);
+      Object.assign(media.style, {
+        position: "absolute",
+        maxWidth: "none",
+        left: `${crop[0]}%`,
+        top: `${crop[1]}%`,
+        width: `${crop[2]}%`,
+        height: `${crop[3]}%`,
+        objectFit: "cover",
+      });
+    } else {
+      // Reuse the card's own crop of the photo as percentages of the modal's photo box.
+      media.src = img.currentSrc || img.src;
+      const cs = getComputedStyle(img);
+      const w = item.offsetWidth;
+      const h = item.offsetHeight;
+      const pct = (value, base) => `${(parseFloat(value) / base) * 100}%`;
+      Object.assign(media.style, {
+        position: "absolute",
+        maxWidth: "none",
+        left: pct(cs.left, w),
+        top: pct(cs.top, h),
+        width: pct(cs.width, w),
+        height: pct(cs.height, h),
+        transform: item.matches(":nth-child(2)") ? "translate(-50%, -50%)" : "none",
+        objectPosition: "50% 50%",
+      });
+    }
+    media.alt = img.alt || "";
 
     backdrop.querySelector(".modal-title").textContent = item.dataset.name || "";
 
@@ -176,6 +191,8 @@ export function initPhotoStrip() {
     divider.hidden = !(item.dataset.program || item.dataset.quote);
     link.hidden = !item.dataset.videoUrl;
     if (item.dataset.videoUrl) link.href = item.dataset.videoUrl;
+    // Placeholder "#" targets should not jump the page.
+    link.onclick = item.dataset.videoUrl === "#" ? (e) => e.preventDefault() : null;
   };
 
   function openModal(item) {

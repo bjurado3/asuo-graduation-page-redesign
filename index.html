@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="css/base.css?v=5" />
 <link rel="stylesheet" href="css/components.css?v=4" />
 <link rel="stylesheet" href="css/nav.css?v=18" />
-<link rel="stylesheet" href="css/grad-toggle.css?v=42" />
-<link rel="stylesheet" href="css/sections.css?v=47" />
+<link rel="stylesheet" href="css/grad-toggle.css?v=43" />
+<link rel="stylesheet" href="css/sections.css?v=53" />
 <link rel="stylesheet" href="css/footer.css?v=4" />
 </head>
 <body>
@@ -179,28 +179,26 @@
       </p>
     </div>
 
-    <div class="photo-strip" role="group" aria-label="Recent ASU Online graduates">
+        <div class="photo-strip" role="group" aria-label="Recent ASU Online graduates">
       <!--
-        Hover and modal follow asuonline.asu.edu/students/community. TODO: only
-        Gary Legaspi's details come from the Figma file; the other four names are
-        carried over from the earlier placeholder build — add their program,
-        quote and video link (data-program / data-quote / data-video-url), and
-        the video itself (the modal shows the photo until a video source exists).
+        Modal content comes from Figma "Student testimonial modals". TODO: the
+        videos themselves (data-video-src, which also enables the pause button)
+        and each "See full video" link (data-video-url) were not provided.
       -->
-      <button class="photo-strip__item" type="button" data-name="Gary Legaspi" data-position="62% 35%" data-program="Master of Project Management &rsquo;24" data-quote="&ldquo;Being a working professional, the online option was very attractive for me. And as I went through the experience, the support was incredible. The feedback they offered me, I was able to apply it immediately to my current work.&rdquo;" data-video-url="#">
+      <button class="photo-strip__item" type="button" data-name="Gary&#10;Legaspi" data-program="Master of Project Management &rsquo;24" data-quote="&ldquo;Being a working professional, the online option was very attractive for me. And as I went through the experience, the support was incredible. The feedback they offered me, I was able to apply it immediately to my current work.&rdquo;" data-video-url="#">
         <img src="assets/images/grad-gary.jpg" alt="Gary Legaspi, smiling in a maroon cap and gown with a gold stole and flower lei." />
       </button>
-      <button class="photo-strip__item" type="button" data-name="Vanessa Zupancic" data-position="50% 45%">
-        <img src="assets/images/grad-family.jpg" alt="Vanessa Zupancic and family, with a young girl holding a diploma folder." />
+      <button class="photo-strip__item" type="button" data-name="Nataly and Victor Cruz" data-program="MS in Family and Human Development &rsquo;24 and Master of Social Work &rsquo;24" data-quote="&ldquo;My main motivation was also my daughter and my little family, because we just want to be those generational starters. We don&rsquo;t come from generational wealth, and we want to build that generational wealth for our daughter.&rdquo;" data-video-url="#" data-modal-img="assets/modals/cruz.jpg">
+        <img src="assets/images/grad-family.jpg" alt="Nataly and Victor Cruz in graduation regalia with their young daughter, who holds a diploma folder." />
       </button>
-      <button class="photo-strip__item" type="button" data-name="Priya Anand" data-position="50% 40%">
-        <img src="assets/images/grad-still.jpg" alt="A graduate in a maroon cap and gown with a gold stole, smiling." />
+      <button class="photo-strip__item" type="button" data-name="Vanessa Zupancic" data-program="BS in Health Education and Health Promotion &rsquo;25" data-quote="&ldquo;20 years after graduating high school, I finally earned my bachelor&rsquo;s degree. The biggest challenge for myself is self-doubt. There have been many times on family vacations, sitting in the car doing homework, or it&rsquo;s my anniversary weekend and I&rsquo;m sitting at a table doing homework before we celebrate. And my family being completely supportive, that&rsquo;s what really helped me overcome that self-doubt.&rdquo;" data-video-url="#" data-modal-img="assets/modals/vanessa.jpg">
+        <img src="assets/images/grad-still.jpg" alt="Vanessa Zupancic in a maroon cap and gown with a gold stole, smiling." />
       </button>
-      <button class="photo-strip__item" type="button" data-name="James Whitfield" data-position="50% 40%">
-        <img src="assets/images/grad-4.jpg" alt="A graduate in cap and gown hugging a child who holds a diploma folder." />
+      <button class="photo-strip__item" type="button" data-name="Evelyn Maldonado" data-program="Bachelor of Science in Speech and Hearing Science" data-quote="&ldquo;20 years after graduating high school, I finally earned my bachelor&rsquo;s degree. The biggest challenge for myself is self-doubt. There have been many times on family vacations, sitting in the car doing homework, or it&rsquo;s my anniversary weekend and I&rsquo;m sitting at a table doing homework before we celebrate. And my family being completely supportive, that&rsquo;s what really helped me overcome that self-doubt.&rdquo;" data-video-url="#" data-modal-img="assets/modals/evelyn.jpg" data-modal-crop="-51.5,-19.07,269.31,154.95">
+        <img src="assets/images/grad-4.jpg" alt="Evelyn Maldonado in cap and gown hugging a child who holds a diploma folder." />
       </button>
-      <button class="photo-strip__item" type="button" data-name="Amara Okafor" data-position="70% 40%">
-        <img src="assets/images/grad-5.jpg" alt="A graduate in cap and gown and gold stole standing with arms outstretched." />
+      <button class="photo-strip__item" type="button" data-name="David&#10;Shifflett" data-program="Bachelor of Science in Information Technology &rsquo;25" data-quote="&ldquo;20 years after graduating high school, I finally earned my bachelor&rsquo;s degree. The biggest challenge for myself is self-doubt. There have been many times on family vacations, sitting in the car doing homework, or it&rsquo;s my anniversary weekend and I&rsquo;m sitting at a table doing homework before we celebrate. And my family being completely supportive, that&rsquo;s what really helped me overcome that self-doubt.&rdquo;" data-video-url="#" data-modal-img="assets/modals/david.jpg" data-modal-crop="-110.35,-27.56,269.31,154.95">
+        <img src="assets/images/grad-5.jpg" alt="David Shifflett in cap and gown and gold stole, standing with arms outstretched." />
       </button>
     </div>
 
@@ -230,7 +228,7 @@
       <ol class="ready__steps">
         <li class="ready__step">
           <span class="ready__num" aria-hidden="true">1</span>
-          <div class="ready__step-body">
+          <div class="ready__step-body ready__step-body--tight">
             <p><strong>Verify you&rsquo;re ready to graduate.</strong> You can check with your academic advisor to confirm you&rsquo;ve met your program&rsquo;s requirements to graduate. You can also verify online:</p>
             <ol class="ready__alpha">
               <li>Undergraduate students use the <a href="https://provost.asu.edu/curriculum-development/dars" target="_blank" rel="noopener">Degree Audit Reporting System (DARS)</a>.</li>
@@ -240,7 +238,7 @@
         </li>
         <li class="ready__step">
           <span class="ready__num" aria-hidden="true">2</span>
-          <div class="ready__step-body">
+          <div class="ready__step-body ready__step-body--narrow">
             <p><strong>Apply on My ASU.</strong> When you&rsquo;re in <a href="https://webapp4.asu.edu/myasu/" target="_blank" rel="noopener">My ASU</a>, select Apply for Graduation within the My Programs box. Turn off any pop-up blockers before starting the process.</p>
             <div class="ready__callout">
               <p class="ready__callout-title">Make sure to apply before these deadlines:</p>
@@ -254,9 +252,9 @@
         </li>
         <li class="ready__step">
           <span class="ready__num" aria-hidden="true">3</span>
-          <div class="ready__step-body">
+          <div class="ready__step-body ready__step-body--loose">
             <p><strong>Pay the fees.</strong></p>
-            <div class="ready__callout">
+            <div class="ready__callout ready__callout--list">
               <ul>
                 <li>Application fee: $100</li>
                 <li>Each additional, concurrent degree: $25</li>
@@ -773,8 +771,6 @@
     </div>
 
     <div class="alumni__carousel" role="region" aria-roledescription="carousel" aria-label="ASU alumni photos">
-      <img class="alumni__decor alumni__decor--star" src="assets/alumni/decor-star.svg" alt="" aria-hidden="true" />
-      <img class="alumni__decor alumni__decor--hand" src="assets/alumni/decor-hand.svg" alt="" aria-hidden="true" />
       <div class="alumni__orbit" id="alumniOrbit">
         <div class="alumni-card alumni-card--b" data-angle="-49" aria-hidden="true" style="z-index:1;transform:translate(-943.39px,579.93px) translate(-50%,-50%) rotate(-49deg)">
           <div class="alumni-card__photo"><img src="assets/alumni/tucson.jpg" alt="" style="left:-23.54px;top:-58.13px;width:264.199px;height:399.916px" loading="lazy" /></div>
@@ -784,6 +780,7 @@
         </div>
         <div class="alumni-card alumni-card--b" data-angle="-21.78" data-cx="427.908" data-cy="224.163" style="z-index:3;transform:translate(-445.79px,224.16px) translate(-50%,-50%) rotate(-21.78deg)">
           <div class="alumni-card__photo"><img src="assets/alumni/thrive.jpg" alt="Two women laughing together at an ASU alumni event." style="left:-201.12px;top:-34.7px;width:526.145px;height:350.935px" loading="lazy" /><img class="alumni-card__star" src="assets/alumni/card-star.svg" alt="" /></div>
+          <img class="alumni-card__decor alumni-card__decor--star" src="assets/alumni/decor-star.svg" alt="" aria-hidden="true" />
         </div>
         <div class="alumni-card alumni-card--b" data-angle="-4.8" data-cx="724.823" data-cy="154.325" style="z-index:4;transform:translate(-148.88px,154.32px) translate(-50%,-50%) rotate(-4.8deg)">
           <div class="alumni-card__photo"><img src="assets/alumni/dsc4012.jpg" alt="An alumna in a yellow ASU shirt and sunglasses smiles while painting a wooden bench." style="left:-113.41px;top:-2.01px;width:433.447px;height:289px" loading="lazy" /></div>
@@ -793,6 +790,7 @@
         </div>
         <div class="alumni-card alumni-card--b" data-angle="16.87" data-cx="1298.557" data-cy="217.762" style="z-index:6;transform:translate(424.86px,217.76px) translate(-50%,-50%) rotate(16.87deg)">
           <div class="alumni-card__photo"><img src="assets/alumni/dsc3975.jpg" alt="An older alumnus in an ASU cap flashes a pitchfork sign while painting." style="left:-157.54px;top:-10.13px;width:476.242px;height:317.533px" loading="lazy" /></div>
+          <img class="alumni-card__decor alumni-card__decor--hand" src="assets/alumni/decor-hand.svg" alt="" aria-hidden="true" />
         </div>
         <div class="alumni-card alumni-card--b" data-angle="32.69" data-cx="1570.172" data-cy="356.394" style="z-index:7;transform:translate(696.47px,356.39px) translate(-50%,-50%) rotate(32.69deg)">
           <div class="alumni-card__photo"><img src="assets/alumni/tucson.jpg" alt="A framed ASU Alumni Association graduation celebration photo with people in the background." style="left:-23.54px;top:-58.13px;width:264.199px;height:399.916px" loading="lazy" /></div>
@@ -1027,6 +1025,6 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script type="module" src="js/main.js?v=20"></script>
+<script type="module" src="js/main.js?v=21"></script>
 </body>
 </html>
