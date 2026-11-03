@@ -1,5 +1,5 @@
 import { initNav } from "./nav.js";
-import { initPhotoStrip } from "./photo-strip.js?v=4";
+import { initPhotoStrip } from "./photo-strip.js?v=6";
 import { initModeToggle } from "./mode-toggle.js?v=11";
 import { initHeaderHeightVar, initToggleBarScrollOffset } from "./header-height.js?v=4";
 import { autoStartGraduationEffectsOnMobile } from "./graduation-effects.js?v=9";
@@ -9,6 +9,7 @@ import { initTasselChat } from "./tassel-chat.js";
 import { initFaq } from "./faq.js";
 import { initAlumniOrbit } from "./alumni-orbit.js?v=2";
 import { initRfiForm } from "./rfi-form.js";
+import { initVideoModal } from "./video-modal.js?v=3";
 
 initNav();
 initPhotoStrip();
@@ -22,3 +23,4 @@ initTasselChat();
 initFaq();
 initAlumniOrbit();
 initRfiForm();
+initVideoModal();

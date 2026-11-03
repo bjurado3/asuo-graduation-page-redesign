@@ -134,13 +134,21 @@
 }
 
 .could-be-you__highlight {
+  position: relative;
+  z-index: 0;
   display: inline-block;
-  background: var(--color-gold);
-  /* Tall enough to cover the whole word, including the descender of the y. */
-  height: auto;
   line-height: 1.15;
   padding-inline: 10px;
   vertical-align: baseline;
+}
+
+/* The gold box is drawn separately so it can sit a touch lower than the text. */
+.could-be-you__highlight::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0.1em 0 -0.1em;
+  background: var(--color-gold);
 }
 
 .could-be-you__subhead {
@@ -153,13 +161,15 @@
 }
 
 .could-be-you__cta {
-  /* Figma Buttons-v3: 16px bold, 16/32 padding, 25px radius, no border. */
+  /* Figma Buttons-v3: 16px bold, 8/16 padding, pill, no border. */
   justify-self: center;
   grid-column: 2 / 12;
-  padding: 16px 32px;
+  padding: 8px 16px; /* Figma: Spacing/xxs-8 top+bottom, xs-16 left+right */
+  gap: 10px;
+  line-height: 24px;
   font-size: 16px;
   border: 0;
-  border-radius: 25px;
+  border-radius: 999px;
   color: var(--color-near-black);
 }
 
@@ -1273,12 +1283,13 @@
   100% { translate: 0 0; }
 }
 
-/* Reply: stays visible to the end of the loop (Figma has no fade-out for it). */
+/* Reply: pops in at 4.7s and fades out with the other bubbles at the end of the loop. */
 @keyframes tassel-reply-opacity {
   0% { opacity: 0; }
   55.412% { animation-timing-function: cubic-bezier(0.05, 0.7, 0.1, 1); opacity: 0; }
   58.824% { opacity: 1; }
-  100% { opacity: 1; }
+  94.118% { animation-timing-function: cubic-bezier(0.4, 0, 0.7, 0.4); opacity: 1; }
+  100% { opacity: 0; }
 }
 @keyframes tassel-reply-move {
   0% { translate: -80.226px 21.607px; }
@@ -1411,8 +1422,12 @@
   font-weight: 900;
 }
 
+.laptop__copy {
+  max-width: 541px; /* Figma copy block is 541px wide */
+}
+
 .laptop__copy p {
-  max-width: 573px;
+  max-width: 541px;
   font-size: 16px;
   line-height: 24px;
 }
@@ -1426,6 +1441,8 @@
   padding: 8px 8px 8px 16px;
   background: #747474;
   color: #fafafa;
+  border: 0;
+  cursor: pointer;
   border-radius: 100px;
   font-size: 14px;
   line-height: 21px;
@@ -2814,3 +2831,100 @@
     transition: none;
   }
 }
+
+/* ---------- Video modal (YouTube) ---------- */
+.video-modal {
+  position: relative;
+  width: min(960px, calc(100vw - 32px));
+  aspect-ratio: 16 / 9;
+  max-height: calc(100vh - 96px);
+  background: #000;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: modal-drop-in 0.25s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+.video-modal:focus { outline: none; }
+
+.video-modal iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-modal__close {
+  /* Figma: the circle X sits just outside the video's top-right corner. */
+  position: absolute;
+  top: 12px;
+  left: calc(100% + 16px);
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.video-modal__close img { width: 24px; height: 24px; display: block; }
+
+/* No room beside the video on narrow screens: sit above its corner instead. */
+@media (max-width: 1040px) {
+  .video-modal__close {
+    top: -36px;
+    left: auto;
+    right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-modal { animation: none; }
+}
+
+/* Testimonial video inside the graduate modal (Gary): fills the 427x495 photo box. */
+.modal-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--color-near-black);
+  cursor: pointer;
+}
+
+.modal-video[hidden],
+.modal-video-big[hidden],
+.modal-video-toggle[hidden],
+.modal-media img[hidden] {
+  display: none;
+}
+
+.modal-video-big {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 96px;
+  height: 96px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.modal-video-toggle {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+}
+
+.modal-video-toggle .icon-play { display: none; }
+.modal-video-toggle.is-paused .icon-play { display: block; }
+.modal-video-toggle.is-paused .icon-pause { display: none; }

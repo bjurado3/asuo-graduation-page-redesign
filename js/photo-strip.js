@@ -93,7 +93,16 @@ export function initPhotoStrip() {
     backdrop.innerHTML = `
       <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
         <div class="modal-content">
-          <div class="modal-media"><img alt="" /></div>
+          <div class="modal-media">
+            <img alt="" />
+            <video class="modal-video" playsinline preload="metadata" hidden></video>
+            <button class="modal-video-big" type="button" aria-label="Play video" hidden>
+              <svg width="96" height="96" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="48" fill="rgba(25,25,25,.85)"/><path d="M39 30v36l30-18z" fill="#fff"/></svg>
+            </button>
+            <button class="modal-video-toggle" type="button" aria-label="Pause video" hidden>
+              <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#fff" stroke="#191919" stroke-width="2"/><g class="icon-pause" fill="#191919"><rect x="15" y="14" width="3.5" height="12" rx="1"/><rect x="21.5" y="14" width="3.5" height="12" rx="1"/></g><path class="icon-play" d="M16.5 13.5v13l10.5-6.5z" fill="#191919"/></svg>
+            </button>
+          </div>
           <div class="modal-info">
             <h2 class="modal-title" id="modalTitle"></h2>
             <p class="modal-program" hidden></p>
@@ -103,7 +112,7 @@ export function initPhotoStrip() {
           </div>
         </div>
         <button class="modal-close-btn" type="button" aria-label="Close modal">
-          <img src="assets/icons/modal-close.svg" alt="" width="24" height="24" />
+          <img src="assets/icons/modal-x.svg" alt="" width="24" height="24" />
         </button>
       </div>`;
     document.body.appendChild(backdrop);
@@ -112,6 +121,25 @@ export function initPhotoStrip() {
       if (e.target === backdrop) closeModal();
     });
     backdrop.querySelector(".modal-close-btn").addEventListener("click", closeModal);
+
+    // Optional testimonial video (data-video-src): play/pause by the big button,
+    // the small round button (bottom-left) or a click on the video.
+    const video = backdrop.querySelector(".modal-video");
+    const big = backdrop.querySelector(".modal-video-big");
+    const toggle = backdrop.querySelector(".modal-video-toggle");
+    const sync = () => {
+      const paused = video.paused;
+      big.hidden = !paused || video.hidden;
+      toggle.classList.toggle("is-paused", paused);
+      toggle.setAttribute("aria-label", paused ? "Play video" : "Pause video");
+    };
+    const playPause = () => (video.paused ? video.play().catch(() => {}) : video.pause());
+    video.addEventListener("play", sync);
+    video.addEventListener("pause", sync);
+    video.addEventListener("ended", sync);
+    video.addEventListener("click", playPause);
+    big.addEventListener("click", playPause);
+    toggle.addEventListener("click", playPause);
     backdrop.addEventListener("keydown", onModalKey);
   };
 
@@ -177,6 +205,26 @@ export function initPhotoStrip() {
     }
     media.alt = img.alt || "";
 
+    // Video (only for graduates with a data-video-src).
+    const video = backdrop.querySelector(".modal-video");
+    const toggle = backdrop.querySelector(".modal-video-toggle");
+    const big = backdrop.querySelector(".modal-video-big");
+    video.pause();
+    if (item.dataset.videoSrc) {
+      video.src = item.dataset.videoSrc;
+      video.poster = item.dataset.videoPoster || "";
+      video.hidden = false;
+      toggle.hidden = false;
+      media.hidden = true;
+    } else {
+      video.removeAttribute("src");
+      video.load();
+      video.hidden = true;
+      toggle.hidden = true;
+      big.hidden = true;
+      media.hidden = false;
+    }
+
     backdrop.querySelector(".modal-title").textContent = item.dataset.name || "";
 
     const program = backdrop.querySelector(".modal-program");
@@ -216,10 +264,16 @@ export function initPhotoStrip() {
     container.style.animation = "";
     backdrop.style.animation = "";
     container.focus();
+    const video = backdrop.querySelector(".modal-video");
+    if (!video.hidden) {
+      video.currentTime = 0;
+      video.play().catch(() => {}); // blocked autoplay just leaves the big play button
+    }
   }
 
   function closeModal() {
     if (!backdrop || backdrop.hidden) return;
+    backdrop.querySelector(".modal-video").pause();
     const done = () => {
       backdrop.hidden = true;
       backdrop.classList.remove("is-closing");

@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="css/components.css?v=4" />
 <link rel="stylesheet" href="css/nav.css?v=18" />
 <link rel="stylesheet" href="css/grad-toggle.css?v=43" />
-<link rel="stylesheet" href="css/sections.css?v=53" />
+<link rel="stylesheet" href="css/sections.css?v=61" />
 <link rel="stylesheet" href="css/footer.css?v=4" />
 </head>
 <body>
@@ -181,11 +181,12 @@
 
         <div class="photo-strip" role="group" aria-label="Recent ASU Online graduates">
       <!--
-        Modal content comes from Figma "Student testimonial modals". TODO: the
-        videos themselves (data-video-src, which also enables the pause button)
-        and each "See full video" link (data-video-url) were not provided.
+        Modal content comes from Figma "Student testimonial modals". Gary's
+        modal plays assets/modals/gary.mp4 (data-video-src, which also enables the
+        pause button). TODO: the other four graduates' videos and every "See full
+        video" link (data-video-url) were not provided.
       -->
-      <button class="photo-strip__item" type="button" data-name="Gary&#10;Legaspi" data-program="Master of Project Management &rsquo;24" data-quote="&ldquo;Being a working professional, the online option was very attractive for me. And as I went through the experience, the support was incredible. The feedback they offered me, I was able to apply it immediately to my current work.&rdquo;" data-video-url="#">
+      <button class="photo-strip__item" type="button" data-name="Gary&#10;Legaspi" data-program="Master of Project Management &rsquo;24" data-quote="&ldquo;Being a working professional, the online option was very attractive for me. And as I went through the experience, the support was incredible. The feedback they offered me, I was able to apply it immediately to my current work.&rdquo;" data-video-src="assets/modals/gary.mp4" data-video-poster="assets/modals/gary-poster.jpg" data-video-url="#">
         <img src="assets/images/grad-gary.jpg" alt="Gary Legaspi, smiling in a maroon cap and gown with a gold stole and flower lei." />
       </button>
       <button class="photo-strip__item" type="button" data-name="Nataly and Victor Cruz" data-program="MS in Family and Human Development &rsquo;24 and Master of Social Work &rsquo;24" data-quote="&ldquo;My main motivation was also my daughter and my little family, because we just want to be those generational starters. We don&rsquo;t come from generational wealth, and we want to build that generational wealth for our daughter.&rdquo;" data-video-url="#" data-modal-img="assets/modals/cruz.jpg">
@@ -202,8 +203,7 @@
       </button>
     </div>
 
-    <!-- TODO: point at the "Ready to graduate?" section once it's built. -->
-    <a class="btn btn-gold could-be-you__cta" href="#ready-to-graduate">Start your journey</a>
+    <a class="btn btn-gold could-be-you__cta" href="#request-info">Start your journey</a>
   </section>
 
   <section class="ready grid-container" id="ready-to-graduate" aria-labelledby="ready-title">
@@ -452,11 +452,11 @@
         <h2 class="laptop__title" id="laptop-title">From the laptop to graduation</h2>
         <p>Each graduation season, online students celebrate their accomplishments with friends, family and their community. It is time to reflect on your achievements and your next steps. Get a behind-the-scenes look at the event for online students.</p>
       </div>
-      <a class="laptop__watch" href="https://www.youtube.com/watch?v=Pw_2skUu2LE" target="_blank" rel="noopener">
+      <button class="laptop__watch" type="button" data-video-id="Pw_2skUu2LE" data-video-title="From the laptop to graduation">
         Watch video
         <img src="assets/icons/play-circle.svg" alt="" width="24" height="24" />
-        <span class="visually-hidden">(opens YouTube in a new tab)</span>
-      </a>
+        <span class="visually-hidden">(opens a video player)</span>
+      </button>
     </div>
   </section>
 
@@ -1025,6 +1025,6 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script type="module" src="js/main.js?v=21"></script>
+<script type="module" src="js/main.js?v=26"></script>
 </body>
 </html>
