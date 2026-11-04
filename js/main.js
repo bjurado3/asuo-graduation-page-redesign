@@ -14,7 +14,8 @@ import { initVideoModal } from "./video-modal.js?v=3";
 initNav();
 initPhotoStrip();
 initHeaderHeightVar();
-initToggleBarScrollOffset();
+// Toggle is pinned bottom-center (CSS); no scroll tracking needed.
+
 initModeToggle();
 autoStartGraduationEffectsOnMobile();
 initReadyTabs();

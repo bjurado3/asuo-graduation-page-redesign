@@ -18,7 +18,8 @@
     tracking --header-height for its vertical position on every scroll.
   */
   position: fixed;
-  top: var(--header-height, 0px);
+  top: auto;
+  bottom: 0;
   /* js/header-height.js overrides this with an inline style on every scroll
      tick, tracking the header's live bottom edge (min 36px once it's fully
      scrolled away) — no CSS transition here, since one would lag behind fast
@@ -35,17 +36,13 @@
   /* Right-aligned to match the page's grid — same max-width/padding as
      .container (base.css), so the pill lines up with the nav's right edge
      ("Request info") instead of centering across the full viewport. */
-  align-items: flex-end;
-  max-width: var(--container-max);
-  margin-inline: auto;
-  padding-inline: var(--container-pad);
+  align-items: center;
   gap: var(--space-1);
   /* Gap between the global header and the toggle — fixed at 20px in every
      state (previously shrank to 16px on hover, but that shift read as
      another kind of "lift" alongside the pill's own hover effects, so it's
      no longer state-dependent here). */
-  padding-top: 20px;
-  padding-bottom: var(--space-3);
+  padding: 0 0 32px;
   /* Transparent strip spans the full width, but only the pill itself (and
      nothing in the empty space around it) should intercept clicks. */
   pointer-events: none;
