@@ -2718,6 +2718,7 @@
   line-height: 57.6px;
   letter-spacing: -0.035em;
   font-weight: 900;
+  padding-right: 40px; /* keep long names clear of the close button */
 }
 
 .modal-program {
