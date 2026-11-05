@@ -164,6 +164,8 @@
   /* Figma Buttons-v3: 16px bold, 8/16 padding, pill, no border. */
   justify-self: center;
   grid-column: 2 / 12;
+  /* 32px row gap + 16px = 48px between the photo cards and the button. */
+  margin-top: 16px;
   padding: 8px 16px; /* Figma: Spacing/xxs-8 top+bottom, xs-16 left+right */
   gap: 10px;
   line-height: 24px;
