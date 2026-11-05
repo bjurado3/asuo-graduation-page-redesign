@@ -91,10 +91,10 @@
   /* Sized to fit "Congrats graduate!" (measured ~147.6px at 16px bold) plus
      the 24px gap, the new 58px track, and this padding — that's ~255.6px;
      rounded up just enough to land on a whole pixel. */
-  width: 244px;
+  width: 246px;
   /* Right padding matches the Pressed state.svg measurement (~6px from the
      track's right edge to the pill's). */
-  padding: 8px 6px 8px 14px;
+  padding: 8px 6px 8px 16px;
   box-sizing: border-box;
   border-radius: 999px;
   background: var(--color-white);
